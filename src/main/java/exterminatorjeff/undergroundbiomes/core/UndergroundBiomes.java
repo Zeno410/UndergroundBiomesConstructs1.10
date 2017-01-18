@@ -69,7 +69,7 @@ public class UndergroundBiomes {
         @EventHandler
         public void serverStopped(FMLServerStoppedEvent event) {
             PROXY.onServerStopped(event);
-	    LOGGER.info("Server Loaded");
+	    LOGGER.info("Server Stopped");
         }
 
 }
