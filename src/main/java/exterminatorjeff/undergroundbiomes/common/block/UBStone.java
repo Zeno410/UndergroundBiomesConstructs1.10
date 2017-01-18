@@ -122,7 +122,7 @@ public abstract class UBStone extends Block implements UBBlock {
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(this, 1, getMetaFromState(world.getBlockState(pos)));
+		return new ItemStack(this.itemBlock, 1, getMetaFromState(world.getBlockState(pos)));
 	}
 
 	@Override
