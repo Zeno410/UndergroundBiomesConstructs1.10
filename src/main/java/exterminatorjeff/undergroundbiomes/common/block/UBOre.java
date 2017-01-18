@@ -47,6 +47,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
 	public final Block baseOre;
 	/** {@value #NO_METADATA} if the base ore do not have metadata */
 	public final int baseOreMeta;
+        public final IBlockState baseOreState;
 	protected final ItemBlock itemBlock;
 
 	public UBOre(Block baseOre, int baseOreMeta) {
@@ -56,6 +57,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
 		this.itemBlock = new UBItemOre(this);
 		this.baseOre = baseOre;
 		this.baseOreMeta = baseOreMeta;
+                this.baseOreState = baseOre.getStateFromMeta(baseOreMeta);
 	}
 
 	@Override
@@ -87,7 +89,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
 
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
-		return baseOre.quantityDropped(state, fortune, random);
+                return baseOre.quantityDropped(state, fortune, random);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -101,14 +103,19 @@ public abstract class UBOre extends Block implements UBSubBlock {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		Item item = Item.getItemFromBlock(baseOre);
 		Item drop = baseOre.getItemDropped(state, rand, fortune);
-		if (drop != item)
-			return drop;
-		else
-			return itemBlock;
+		if (drop != item){
+                    return drop;
+                } else {
+                    return drop;
+}
 	}
+        
+        
 
 	@Override
 	public int damageDropped(IBlockState state) {
+            int test = this.baseOre.damageDropped(state);
+            if (test>0) return test;
 		if (baseOreMeta == NO_METADATA)
 			return 0;
 		else
@@ -125,7 +132,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
 			Item itemDropped = getItemDropped(state, rand, fortune);
 			if (itemDropped != null) {
 				// The ore block do not drop the block item (like diamond)
-				if (itemDropped != itemBlock)
+				if (itemDropped != itemBlock )
 					drops.add(new ItemStack(itemDropped, 1, damageDropped(state)));
 				else
 					drops.add(new ItemStack(itemDropped, 1, getMetaFromState(state)));
@@ -201,7 +208,11 @@ public abstract class UBOre extends Block implements UBSubBlock {
 			// Works for English but maybe not all languages. Some may have to
 			// use the lang file to override this behavior
 			// TODO Find a cleaner way to do this
+                        try {
 			return I18n.format(baseStone().getItemBlock().getUnlocalizedName(stack) + ".name") + " " + I18n.format(baseOre.getUnlocalizedName() + ".name");
+                        } catch (Error error) {
+                            return baseStone().getItemBlock().getUnlocalizedName(stack) + ".name" + " " + baseOre.getUnlocalizedName() + ".name";
+                        }
 		}
 
 	}
