@@ -39,7 +39,10 @@ public final class ButtonRecipe implements SettingTracker<Integer> {
 			if ( //
 			(block != null && (block == Blocks.STONE_BUTTON || block == Blocks.WOODEN_BUTTON)) || //
 			(StonesRegistry.INSTANCE.allButtons().contains(item)) || //
-			(item!=null&&item.getRegistryName().getResourcePath().contains("button")) //
+			(item!=null&&
+                                item.getRegistryName()!=null&&
+                                item.getRegistryName().getResourcePath()!=null&&
+                                item.getRegistryName().getResourcePath().contains("button")) //
 			) {
 				recipe.getRecipeOutput().stackSize = n;
 				LOGGER.debug(String.format("%s for '%s' modified", recipe.getClass().getSimpleName(), recipe.getRecipeOutput().getItem().getRegistryName()));
