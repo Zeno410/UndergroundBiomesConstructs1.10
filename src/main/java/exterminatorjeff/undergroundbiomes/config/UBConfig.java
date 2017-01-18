@@ -69,7 +69,7 @@ public class UBConfig implements UBSettings {
 	public final BooleanSetting ubifyVillages = new BooleanSetting(CATEGORY_GENERATION, "UBifyVillages");
 
 	private static final String CATEGORY_VISUAL = "Visual";
-	public final BooleanSetting alternativeSlabTextures = new BooleanSetting(CATEGORY_VISUAL, "AlternativeSlabTextures");
+	public final BooleanSetting plainSlabTextures = new BooleanSetting(CATEGORY_VISUAL, "PlainSlabTextures");
 
 	private static final String CATEGORY_SPECIFIC = "Specific";
 	public final BooleanSetting buttonsOn = new BooleanSetting(CATEGORY_SPECIFIC, "UndergroundBiomesButtons");
@@ -151,7 +151,7 @@ public class UBConfig implements UBSettings {
 		dimensionSpecificSeeds.initProperty(configuration, false, "Use a different seed for each dimensions");
 		ubifyVillages.initProperty(configuration, true, "Use UB stones in villages structures");
 
-		alternativeSlabTextures.initProperty(configuration, false, "Use normal stone textures for slabs");
+		plainSlabTextures.initProperty(configuration, false, "Use normal stone textures for slabs");
 
 		buttonsOn.initProperty(configuration, true, "Provide buttons for Underground Biomes blocks");
 		buttonsTypes.initProperty(configuration, 7, "What types of stone for buttons : +1 for igneous, +2 for metamorphic and +4 for sedimentary\n" + "Default: 7 -> all");
@@ -220,7 +220,7 @@ public class UBConfig implements UBSettings {
 		dimensionSpecificSeeds.setValue(copied.dimensionSpecificSeeds());
 		ubifyVillages.setValue(copied.ubifyVillages());
 
-		alternativeSlabTextures.setValue(copied.alternativeSlabTextures());
+		plainSlabTextures.setValue(copied.alternativeSlabTextures());
 
 		buttonsOn.setValue(copied.buttonsOn());
 		buttonsTypes.setValue(copied.buttonsTypes.getValue());
@@ -382,8 +382,8 @@ public class UBConfig implements UBSettings {
 	 */
 
 	@Override
-	public boolean alternativeSlabTextures() {
-		return alternativeSlabTextures.getValue();
+	public boolean plainSlabTextures() {
+		return plainSlabTextures.getValue();
 	}
 
 	/*
@@ -548,5 +548,10 @@ public class UBConfig implements UBSettings {
         }
         throw new RuntimeException();
         //return true;// not found in list so default to allowed.
+    }
+
+    @Override
+    public boolean alternativeSlabTextures() {
+        return plainSlabTextures();
     }
 }

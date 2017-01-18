@@ -97,7 +97,9 @@ public interface UBSettings {
 	 * Client
 	 */
 
-	boolean alternativeSlabTextures();
+	boolean plainSlabTextures();
+        
+        boolean alternativeSlabTextures();
         
         boolean generationAllowed(IBlockState block);
 
