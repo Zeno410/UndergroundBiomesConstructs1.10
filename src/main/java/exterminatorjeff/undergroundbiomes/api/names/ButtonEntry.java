@@ -1,11 +1,14 @@
 package exterminatorjeff.undergroundbiomes.api.names;
 
+import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.common.UBButton;
+import exterminatorjeff.undergroundbiomes.core.UndergroundBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -36,7 +39,14 @@ public final class ButtonEntry extends Entry<UBButton> {
 	@Override
 	protected void doRegister() {
 		getItemBlock().setUnlocalizedName(internalName);
-		GameRegistry.register(getItemBlock().setRegistryName(internalName));
+                getItemBlock().setRegistryName(internalName);
+                //String problem = "";
+            //problem += " " + API.IGNEOUS_STONE.getBlock().getDrops(null, BlockPos.ORIGIN, API.IGNEOUS_COBBLE.getBlock().getDefaultState(), 0).get(0).getUnlocalizedName();
+		
+            //problem += " " + API.IGNEOUS_COBBLE.getItemBlock().getUnlocalizedName()+ " " + API.IGNEOUS_COBBLE.getBlock().getMetaFromState(API.IGNEOUS_COBBLE.getBlock().getDefaultState());
+            GameRegistry.register(getItemBlock());
+            //problem += " " + API.IGNEOUS_STONE.getBlock().getDrops(null, BlockPos.ORIGIN, API.IGNEOUS_COBBLE.getBlock().getDefaultState(), 0).get(0).getUnlocalizedName();
+            //problem += " " + API.IGNEOUS_COBBLE.getItemBlock().getUnlocalizedName()+ " " + API.IGNEOUS_COBBLE.getBlock().getMetaFromState(API.IGNEOUS_COBBLE.getBlock().getDefaultState());
 		for (EnumFacing facing : EnumFacing.VALUES) {
 			String name = internalName + "_" + facing;
 			Block block = getBlock(facing);

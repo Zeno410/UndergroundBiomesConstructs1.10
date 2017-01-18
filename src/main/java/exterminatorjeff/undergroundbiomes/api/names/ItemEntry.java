@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  *
  */
 public class ItemEntry extends Entry<UBItem> {
-
+    private boolean registered;
 	public ItemEntry(String internalName) {
 		super(internalName);
 	}
@@ -25,8 +25,10 @@ public class ItemEntry extends Entry<UBItem> {
 
 	@Override
 	protected void doRegister() {
+            if (registered) throw new RuntimeException();
 		getItem().setUnlocalizedName(internalName);
 		GameRegistry.register(getItem().setRegistryName(internalName));
+                registered = true;
 	}
 
 	public void registerModel() {
