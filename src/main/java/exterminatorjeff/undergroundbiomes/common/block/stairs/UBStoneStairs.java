@@ -10,12 +10,15 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -65,6 +68,19 @@ public abstract class UBStoneStairs extends BlockStairs implements UBSubBlock {
 		return state;
 	}
 
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        IBlockState result = super.getActualState(state, worldIn, pos);
+        return result;
+    }
+    
+
+
+    @Override
+    public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        IBlockState result =  super.getExtendedState(state, world, pos);
+        return result;
+    }
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int i = baseStone().getMetaFromState(state);
@@ -95,5 +111,34 @@ public abstract class UBStoneStairs extends BlockStairs implements UBSubBlock {
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(itemBlock, 1, getMetaFromState(state));
 	}
+            /**
+     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
+     * IBlockstate
+     * @param worldIn
+     * @param pos
+     * @param facing
+     * @param hitX
+     * @param hitY
+     * @param hitZ
+     * @param meta
+     * @param placer
+     * @return 
+     */
+        @Override
+    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        IBlockState iblockstate = super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
+        iblockstate = iblockstate.withProperty(FACING, placer.getHorizontalFacing());//.withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT);
+        //iblockstate = iblockstate.withProperty(FACING, placer.getHorizontalFacing()).withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT);
+        //if ((double) hitY <= 0.5D) throw new RuntimeException();
+        //if (1>0) throw new RuntimeException(facing.getName() + " " + iblockstate.getValue(FACING).getName() + " " + this.facing.getName());
+        return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate.withProperty(HALF, BlockStairs.EnumHalf.BOTTOM) : iblockstate.withProperty(HALF, BlockStairs.EnumHalf.TOP);
+    }
+    
 
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack); //To change body of generated methods, choose Tools | Templates.
+
+    }
 }
