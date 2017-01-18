@@ -63,6 +63,7 @@ import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
 import java.io.File;
+import java.util.ArrayList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -76,7 +77,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
+import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.util.math.BlockPos;
 /**
  * 
  * @author CurtisA, LouisDB
@@ -106,6 +112,7 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent e) {
+            addOreDicts();
 		createRecipes();
 		GameRegistry.registerFuelHandler(UBFuelHandler.INSTANCE);
 	}
@@ -140,9 +147,29 @@ public class CommonProxy {
         public void onServerStopped(FMLServerStoppedEvent event) {
             // for some reason onWorldLoad is running before any of the ServerStartxxx events
             // so I'm having to use a clunky workaround.
-            dimensionManager.clearWorldManagers();
+            dimensionManager.clearWorldManagers();   
+            OresRegistry.INSTANCE.recheckPile();     
+            for (Runnable action: serverCloseActions) {
+                action.run();
+            }
+            for (Runnable action: oneShotServerCloseActions) {
+                action.run();
+            }
+            oneShotServerCloseActions.clear();
+
         }
         
+    public void runOnServerClose(Runnable action) {
+        serverCloseActions.add(action);
+    }
+
+    public void runOnNextServerCloseOnly(Runnable action) {
+        serverCloseActions.add(action);
+    }
+
+    private ArrayList<Runnable> oneShotServerCloseActions = new ArrayList<Runnable>();
+    private ArrayList<Runnable> serverCloseActions = new ArrayList<Runnable>();
+
 	private final void createBlocks() {
 		/*
 		 * Blocks
@@ -174,10 +201,12 @@ public class CommonProxy {
 
 		if (UBConfig.SPECIFIC.buttonsOn()) {
 			if (UBConfig.SPECIFIC.igneousButtonsOn()) {
-				if (UBConfig.SPECIFIC.stoneButtonsOn())
+				if (UBConfig.SPECIFIC.stoneButtonsOn()) {
 					API.IGNEOUS_STONE_BUTTON.register(new ButtonItemBlock(API.IGNEOUS_STONE, UBButtonIgneous.class));
-				if (UBConfig.SPECIFIC.cobbleButtonsOn())
+                                }
+				if (UBConfig.SPECIFIC.cobbleButtonsOn()) {
 					API.IGNEOUS_COBBLE_BUTTON.register(new ButtonItemBlock(API.IGNEOUS_COBBLE, UBButtonIgneousCobble.class));
+                                }
 				if (UBConfig.SPECIFIC.brickButtonsOn())
 					API.IGNEOUS_BRICK_BUTTON.register(new ButtonItemBlock(API.IGNEOUS_BRICK, UBButtonIgneousBrick.class));
 			}
@@ -192,6 +221,7 @@ public class CommonProxy {
 			if (UBConfig.SPECIFIC.sedimentaryButtonsOn())
 				API.SEDIMENTARY_STONE_BUTTON.register(new ButtonItemBlock(API.SEDIMENTARY_STONE, UBButtonSedimentary.class));
 		}
+
 
 		/*
 		 * Walls
@@ -241,9 +271,12 @@ public class CommonProxy {
 			}
 			if (UBConfig.SPECIFIC.sedimentaryStairsOn())
 				API.SEDIMENTARY_STONE_STAIRS.register(new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
-		}
+		
+                        
+                
+                }  
 	}
-
+        
 	private final void createItems() {
 		API.LIGNITE_COAL.register(new ItemLigniteCoal());
 		API.FOSSIL_PIECE.register(new ItemFossilPiece());
@@ -258,7 +291,21 @@ public class CommonProxy {
 		OresRegistry.INSTANCE.requestOreSetup(Blocks.REDSTONE_ORE);
 		OresRegistry.INSTANCE.requestOreSetup(Blocks.LAPIS_ORE);
 	}
-
+        
+    public void addOreDicts() {
+        // wildcarding is not working
+        for (int i = 0; i<8 ; i++) {
+            OreDictionary.registerOre("stone", new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
+            OreDictionary.registerOre("stone", new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
+            OreDictionary.registerOre("stone", new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
+            OreDictionary.registerOre("cobblestone", new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
+            OreDictionary.registerOre("cobblestone", new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
+            OreDictionary.registerOre("stoneBricks", new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
+            OreDictionary.registerOre("stoneBricks", new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
+        }
+        //OreDictionary.registerOre(textures, ore);
+        //this.oreUBifier.registerOres();
+    }
 	private final void createRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(Items.COAL), "XXX", "XXX", "XXX", 'X', API.LIGNITE_COAL.getItem());
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE, 1, 15), new ItemStack(API.FOSSIL_PIECE.getItem(), 1, WILDCARD_VALUE));
@@ -327,24 +374,24 @@ public class CommonProxy {
 			if (UBConfig.SPECIFIC.igneousWallsOn())
 				for (int i = 0; i < IgneousVariant.NB_VARIANTS; ++i) {
 					if (UBConfig.SPECIFIC.stoneWallsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_STONE_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_STONE_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.cobbleWallsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_COBBLE_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_COBBLE_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.brickWallsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_BRICK_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_BRICK_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
 				}
 			if (UBConfig.SPECIFIC.metamorphicWallsOn())
 				for (int i = 0; i < MetamorphicVariant.NB_VARIANTS; ++i) {
 					if (UBConfig.SPECIFIC.stoneWallsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_STONE_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_STONE_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.cobbleWallsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_COBBLE_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_COBBLE_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.brickWallsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_BRICK_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_BRICK_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
 				}
 			if (UBConfig.SPECIFIC.sedimentaryWallsOn())
 				for (int i = 0; i < SedimentaryVariant.NB_VARIANTS; ++i)
-					GameRegistry.addShapedRecipe(new ItemStack(API.SEDIMENTARY_STONE_WALL.getItemBlock(), 1, i), "XXX", "XXX", 'X', new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
+					GameRegistry.addShapedRecipe(new ItemStack(API.SEDIMENTARY_STONE_WALL.getItemBlock(), 6, i), "XXX", "XXX", 'X', new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
 		}
 
 		/*
@@ -355,24 +402,24 @@ public class CommonProxy {
 			if (UBConfig.SPECIFIC.igneousStairsOn())
 				for (int i = 0; i < IgneousVariant.NB_VARIANTS; ++i) {
 					if (UBConfig.SPECIFIC.stoneStairsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_STONE_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_STONE_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.cobbleStairsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_COBBLE_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_COBBLE_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.brickStairsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_BRICK_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.IGNEOUS_BRICK_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
 				}
 			if (UBConfig.SPECIFIC.metamorphicStairsOn())
 				for (int i = 0; i < MetamorphicVariant.NB_VARIANTS; ++i) {
 					if (UBConfig.SPECIFIC.stoneStairsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_STONE_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_STONE_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.cobbleStairsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_COBBLE_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_COBBLE_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
 					if (UBConfig.SPECIFIC.brickStairsOn())
-						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_BRICK_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
+						GameRegistry.addShapedRecipe(new ItemStack(API.METAMORPHIC_BRICK_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
 				}
 			if (UBConfig.SPECIFIC.sedimentaryStairsOn())
 				for (int i = 0; i < SedimentaryVariant.NB_VARIANTS; ++i)
-					GameRegistry.addShapedRecipe(new ItemStack(API.SEDIMENTARY_STONE_STAIRS.getItemBlock(), 1, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
+					GameRegistry.addShapedRecipe(new ItemStack(API.SEDIMENTARY_STONE_STAIRS.getItemBlock(), 4, i), "X  ", "XX ", "XXX", 'X', new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
 		}
 
 		/*
