@@ -68,6 +68,7 @@ public class DimensionManager implements UBDimensionalStrataColumnProvider {
     }
     
        public void serverLoad(MinecraftServer server) {
+           if (server ==  null) return;
             //logger.info("server starting");
             File worldSaveDirectory = null;
             String worldName = server.getFolderName();
