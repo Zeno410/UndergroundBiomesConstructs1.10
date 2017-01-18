@@ -56,7 +56,7 @@ public final class ClientProxy extends CommonProxy {
 		API.METAMORPHIC_BRICK.registerModel();
 		API.SEDIMENTARY_STONE.registerModel();
 		// Slabs
-		if (UBConfig.SPECIFIC.alternativeSlabTextures()) {
+		if (!UBConfig.SPECIFIC.alternativeSlabTextures()) {
 			API.IGNEOUS_STONE_SLAB.registerModel(UBStateMappers.UBSLAB_STATE_MAPPER);
 			API.METAMORPHIC_STONE_SLAB.registerModel(UBStateMappers.UBSLAB_STATE_MAPPER);
 		} else {
