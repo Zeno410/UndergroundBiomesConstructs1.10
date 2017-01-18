@@ -100,6 +100,7 @@ public abstract class UBStoneWall extends BlockWall implements UBSubBlock {
 		boolean east = canConnectTo(worldIn, pos.east());
 		boolean south = canConnectTo(worldIn, pos.south());
 		boolean west = canConnectTo(worldIn, pos.west());
+                
 		boolean straight = north && !east && south && !west || !north && east && !south && west;
 		return state.withProperty(UP, !straight || !worldIn.isAirBlock(pos.up())) //
 				.withProperty(NORTH, north) //
@@ -108,6 +109,11 @@ public abstract class UBStoneWall extends BlockWall implements UBSubBlock {
 				.withProperty(WEST, west);
 	}
 
+
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true; //To change body of generated methods, choose Tools | Templates.
+    }
 	/**
 	 * 
 	 * @author CurtisA, LouisDB
