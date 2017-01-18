@@ -1,17 +1,21 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
+import com.google.common.base.Predicate;
 import exterminatorjeff.undergroundbiomes.api.API;
 import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.*;
 
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
 import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
+import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -66,7 +70,7 @@ public class IgneousStone extends UBStone {
 
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        Block cobbleBlock = API.IGNEOUS_COBBLE.getBlock();
+        Item cobbleBlock = API.IGNEOUS_COBBLE.getItemBlock();
         int meta = state.getBlock().getMetaFromState(state);
         ItemStack itemStack = new ItemStack(cobbleBlock,1,meta);
         List<ItemStack> result = new ArrayList();
@@ -89,5 +93,11 @@ public class IgneousStone extends UBStone {
 	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
 		return getBaseResistance() * world.getBlockState(pos).getValue(IGNEOUS_VARIANT_PROPERTY).getResistance();
 	}
+
+    @Override
+    public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target) {
+        OresRegistry.INSTANCE.setRecheck(world, pos);
+        return super.isReplaceableOreGen(state, world, pos, target); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
