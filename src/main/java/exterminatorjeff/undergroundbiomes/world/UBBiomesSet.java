@@ -9,6 +9,7 @@ import exterminatorjeff.undergroundbiomes.api.StrataLayer;
 import exterminatorjeff.undergroundbiomes.api.UndergroundBiomeSet;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
 /**
@@ -17,10 +18,12 @@ import net.minecraft.init.Blocks;
  * @author CurtisA, LouisDB
  */
 public final class UBBiomesSet extends UndergroundBiomeSet {
-
-	public final UBBiome[] biomes;
+    
+    private final UBSettings settings;
+	private final UBBiome[] biomes;
         private final List<UBBiome> biomesBuilder = new ArrayList<>();
         private int ID = 0;
+    private UBBiome[] allowedBiomes;
 
 	public UBBiomesSet( UBSettings settings) {
 		super(new StrataLayers(settings).layers);
@@ -71,6 +74,8 @@ public final class UBBiomesSet extends UndergroundBiomeSet {
 		this.biomes = new UBBiome[biomesBuilder.size()];
 		biomesBuilder.toArray(this.biomes);
                 if (biomes[20].ID == 0) throw new RuntimeException();
+                this.settings = settings;
+        allowedBiomes = generatable(biomes);
 	}
 
         private void add(UBBiome biome, StrataLayer [] layers) {
@@ -81,9 +86,19 @@ public final class UBBiomesSet extends UndergroundBiomeSet {
             }
             
         }
+        
+    public UBBiome [] generatable(UBBiome[] possible) {
+        ArrayList<UBBiome> accepted = new ArrayList<UBBiome>();
+        for (int i = 0; i < possible.length; i++) {
+            IBlockState block = possible[i].filler;
+            if (settings.generationAllowed(block)) accepted.add(possible[i]);
+        }
+        UBBiome[] result = new UBBiome[accepted.size()];
+        return accepted.toArray(result);
+    }
     @Override
     public UBBiome[] allowedBiomes() {
-        return biomes;
+        return allowedBiomes;
     }
 
 }
