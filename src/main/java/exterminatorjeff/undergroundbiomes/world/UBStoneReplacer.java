@@ -5,6 +5,7 @@ package exterminatorjeff.undergroundbiomes.world;
 
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.StrataLayer;
+import exterminatorjeff.undergroundbiomes.api.TimeTracker;
 import exterminatorjeff.undergroundbiomes.api.UBBiome;
 import exterminatorjeff.undergroundbiomes.api.UBStrataColumn;
 import exterminatorjeff.undergroundbiomes.api.UBStrataColumnProvider;
@@ -12,9 +13,15 @@ import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
 import exterminatorjeff.undergroundbiomes.world.noise.NoiseGenerator;
+import java.util.ArrayList;
+import java.util.HashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -36,6 +43,7 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
             int[] biomeValues = getBiomeValues(chunk);
             int xPos = chunk.xPosition * 16;
             int zPos = chunk.zPosition * 16;
+            //TimeTracker.manager.start("overall");
 
 		// For each storage array
 		for (ExtendedBlockStorage storage : chunk.getBlockStorageArray()) {
@@ -76,6 +84,7 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
 								/*
 								 * Ore
 								 */
+                                                                //TimeTracker.manager.start("ore");
 									IBlockState strata = currentBiome.getStrataBlockAtLayer(yPos + y + variation);
 								if (OresRegistry.INSTANCE.isUBified(strata.getBlock(),currentBlockState)) {
 									if (strata.getBlock() instanceof UBStone) {
@@ -84,15 +93,39 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
 										storage.set(x, y, z, ore);
 									}
 								} 
+                                                                //TimeTracker.manager.stop("ore");
 							}
 						}
 					}
 				}
 			}
 		}
+            //TimeTracker.manager.stop("overall");
 	}
 
     abstract public UBBiome UBBiomeAt(int x, int z);
+    
+    public void redoOres(World world) {
+        HashMap<ChunkPos,ArrayList<BlockPos>> toRedo = OresRegistry.INSTANCE.forRedo(world);
+        for (ChunkPos chunkID: toRedo.keySet()) {
+            ArrayList<BlockPos> locations = toRedo.get(chunkID);
+            Chunk chunk = world.getChunkFromChunkCoords(chunkID.chunkXPos, chunkID.chunkZPos);
+            int[] biomeValues = getBiomeValues(chunk);
+            for (BlockPos location: locations) {
+                IBlockState currentBlockState = chunk.getBlockState(location);	
+		UBBiome currentBiome = biomeList[biomeValues[(location.getX()&15)*16 + location.getZ()&15]];	
+		int variation = (int) (noiseGenerator.noise((location.getX()) / 55.533, (location.getZ()) / 55.533, 3, 1, 0.5) * 10 - 5);							
+                IBlockState strata = currentBiome.getStrataBlockAtLayer(location.getY() + variation);
+                if (OresRegistry.INSTANCE.isUBified(strata.getBlock(),currentBlockState)) {
+                    if (strata.getBlock() instanceof UBStone) {
+                            UBStone stone = ((UBStone) strata.getBlock());
+                            IBlockState ore = OresRegistry.INSTANCE.getUBifiedOre(strata.getBlock(), stone.getMetaFromState(strata),currentBlockState);
+                            chunk.setBlockState(location, ore);
+                    }
+                } 
+            }
+        }
+    }
     
     private UBStrataColumn strataColumn(
             final StrataLayer[] strata,

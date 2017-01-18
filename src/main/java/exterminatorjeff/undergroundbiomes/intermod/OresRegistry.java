@@ -17,7 +17,9 @@ import exterminatorjeff.undergroundbiomes.common.block.UBOre;
 import exterminatorjeff.undergroundbiomes.common.block.UBOreIgneous;
 import exterminatorjeff.undergroundbiomes.common.block.UBOreMetamorphic;
 import exterminatorjeff.undergroundbiomes.common.block.UBOreSedimentary;
+import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.core.UndergroundBiomes;
+import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -25,6 +27,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -79,6 +85,7 @@ public enum OresRegistry implements UBOresRegistry {
 	 * @param baseOreState
 	 */
 	public boolean isUBified(Block baseStone, IBlockState baseOreState) {
+            if (UBConfig.SPECIFIC.ubifyOres() == false) return false;
 		Block baseOre = baseOreState.getBlock();
 		int baseOreMeta = baseOre.getMetaFromState(baseOreState);
 		return ubifiedOres.containsKey(toKey(baseOre, baseOreMeta, baseStone));
@@ -289,4 +296,55 @@ public enum OresRegistry implements UBOresRegistry {
 		oresToOverlays.values().forEach((overlayLocation) -> e.getMap().registerSprite(overlayLocation));
 	}
 
+        private int dimension(IBlockAccess access) {
+            return ((World)access).provider.getDimension();
+        }
+        private final HashMap<Integer,HashMap<ChunkPos,ArrayList<BlockPos>>> storedLocations = new HashMap();
+        
+        private final ArrayList<BlockPos> blockPosList(IBlockAccess world, ChunkPos chunkID) {
+            int dimension = dimension(world);
+            HashMap<ChunkPos,ArrayList<BlockPos>> worldMap = storedLocations.get(dimension);
+            if (worldMap == null) {
+                worldMap = new HashMap();
+                storedLocations.put(dimension, worldMap);
+            }
+            ArrayList<BlockPos> result = worldMap.get(chunkID);
+            if (result == null) {
+                result = new ArrayList();
+                worldMap.put(chunkID, result);
+            }
+            return result;
+        }
+        
+        public void setRecheck(IBlockAccess world, BlockPos pos) {
+            synchronized(storedLocations) {
+                ChunkPos chunkID = new ChunkPos(pos);
+                blockPosList(world, chunkID).add(pos);
+            }
+        }
+        
+        public HashMap<ChunkPos,ArrayList<BlockPos>> forRedo(IBlockAccess world) {
+            HashMap<ChunkPos,ArrayList<BlockPos>> result = null;
+            synchronized(storedLocations) {
+                int dimension = dimension(world);
+                result = storedLocations.get(dimension);
+                if (result == null) result = new HashMap();
+                storedLocations.remove(dimension);
+            }
+            return result;
+        }
+        
+        public void recheckPile() {
+            int result = 0;
+            for (Integer world: this.storedLocations.keySet()) {
+                int worldResult = 0;
+                HashMap<ChunkPos,ArrayList<BlockPos>> chunkPosMap = storedLocations.get(world);
+                for (ChunkPos chunkPos: chunkPosMap.keySet()) {
+                    worldResult += chunkPosMap.get(chunkPos).size();
+                }
+                result += worldResult;
+                System.out.println("" + worldResult + " Blocks in World : "+world.toString());
+            }
+            System.out.println("Blocks queued for redo: "+result);
+        }
 }

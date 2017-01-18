@@ -14,6 +14,7 @@ import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.common.block.slab.UBStoneSlab;
 import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStoneStairs;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
+import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
 import exterminatorjeff.undergroundbiomes.world.noise.SimplexNoiseGenerator;
 import exterminatorjeff.undergroundbiomes.world.noise.Voronoi;
@@ -118,6 +119,7 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 		if (event.getWorld().provider.getDimension() == dimensionID && worldLoaded) {
 			Chunk chunk = event.getWorld().getChunkFromChunkCoords(event.getChunkX(), event.getChunkZ());
                         this.stoneReplacer.replaceStoneInChunk(chunk);
+                        stoneReplacer.redoOres(event.getWorld());
 		}
 	}
 
@@ -130,7 +132,7 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 			case ANDESITE:
 				event.setResult(Result.DENY);
 				break;
-			default:
+                        default:
 				break;
 			}
 		}
