@@ -20,6 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -35,12 +36,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author LouisDB
  *
  */
-abstract class RotatingItemBlock extends Item implements UBItem, Variable {
+abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
 
 	public final UBStone baseStone;
-	protected final Map<EnumFacing, Block> blocks = new HashMap<>();
+	protected Map<EnumFacing, Block> blocks = new HashMap<>();
 
 	public RotatingItemBlock(BlockEntry baseStoneEntry) {
+            super((UBStone) baseStoneEntry.getBlock());
+		baseStone = (UBStone) baseStoneEntry.getBlock();
+		setMaxDamage(0);
+		setHasSubtypes(true);
+		setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
+	}
+        
+       public RotatingItemBlock(BlockEntry baseStoneEntry, Block block) {
+            super(block);
 		baseStone = (UBStone) baseStoneEntry.getBlock();
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -106,7 +116,8 @@ abstract class RotatingItemBlock extends Item implements UBItem, Variable {
 			return EnumActionResult.FAIL;
 	}
 
-	private boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState newState) {
+        @Override
+	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, IBlockState newState) {
 		if (!world.setBlockState(pos, newState, 3))
 			return false;
 
