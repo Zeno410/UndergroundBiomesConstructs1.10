@@ -25,7 +25,7 @@ public final class ButtonEntry extends Entry<UBButton> {
 	}
 
 	public Item getItemBlock() {
-		return getThing().toItem();
+		return (Item)getThing();
 	}
 
 	public Block getBlock(EnumFacing facing) {
@@ -40,13 +40,7 @@ public final class ButtonEntry extends Entry<UBButton> {
 	protected void doRegister() {
 		getItemBlock().setUnlocalizedName(internalName);
                 getItemBlock().setRegistryName(internalName);
-                //String problem = "";
-            //problem += " " + API.IGNEOUS_STONE.getBlock().getDrops(null, BlockPos.ORIGIN, API.IGNEOUS_COBBLE.getBlock().getDefaultState(), 0).get(0).getUnlocalizedName();
-		
-            //problem += " " + API.IGNEOUS_COBBLE.getItemBlock().getUnlocalizedName()+ " " + API.IGNEOUS_COBBLE.getBlock().getMetaFromState(API.IGNEOUS_COBBLE.getBlock().getDefaultState());
-            GameRegistry.register(getItemBlock());
-            //problem += " " + API.IGNEOUS_STONE.getBlock().getDrops(null, BlockPos.ORIGIN, API.IGNEOUS_COBBLE.getBlock().getDefaultState(), 0).get(0).getUnlocalizedName();
-            //problem += " " + API.IGNEOUS_COBBLE.getItemBlock().getUnlocalizedName()+ " " + API.IGNEOUS_COBBLE.getBlock().getMetaFromState(API.IGNEOUS_COBBLE.getBlock().getDefaultState());
+                GameRegistry.register(getItemBlock());
 		for (EnumFacing facing : EnumFacing.VALUES) {
 			String name = internalName + "_" + facing;
 			Block block = getBlock(facing);
