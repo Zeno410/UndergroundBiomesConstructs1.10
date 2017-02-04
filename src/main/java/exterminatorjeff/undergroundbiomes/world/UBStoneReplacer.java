@@ -135,6 +135,7 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
 
 
             public IBlockState stone(int y){
+                if (y >= UBConfig.SPECIFIC.generationHeight()) return Blocks.STONE.getDefaultState();
                 for(int i = 0; i < strata.length; i++){
                     if(strata[i].heightInLayer(y+variation) == true){
                         return strata[i].filler;
@@ -144,6 +145,7 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
             }
 
             public IBlockState cobblestone(int height){
+                if (height >= UBConfig.SPECIFIC.generationHeight()) return Blocks.COBBLESTONE.getDefaultState();
                 IBlockState stone = stone(height);
                 if (stone.getBlock() == API.IGNEOUS_STONE.getBlock() ) {
                     return API.IGNEOUS_COBBLE.getBlock().getStateFromMeta(stone.getBlock().getMetaFromState(stone));
