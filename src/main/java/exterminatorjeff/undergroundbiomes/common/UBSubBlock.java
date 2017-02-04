@@ -13,8 +13,6 @@ import exterminatorjeff.undergroundbiomes.common.block.UBStone;
  */
 public interface UBSubBlock extends UBBlock {
 
-	UBStone baseStone();
-
 	default UBStoneType getStoneType() {
 		return baseStone().getStoneType();
 	}

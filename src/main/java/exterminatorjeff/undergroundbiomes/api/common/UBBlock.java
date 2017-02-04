@@ -2,6 +2,7 @@ package exterminatorjeff.undergroundbiomes.api.common;
 
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
+import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
@@ -21,5 +22,7 @@ public interface UBBlock extends IForgeRegistryEntry<Block>, Variable {
 	UBStoneType getStoneType();
 
 	UBStoneStyle getStoneStyle();
+        
+	UBStone baseStone();
 
 }

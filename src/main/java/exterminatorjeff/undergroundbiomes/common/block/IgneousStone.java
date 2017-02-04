@@ -100,4 +100,9 @@ public class IgneousStone extends UBStone {
         return super.isReplaceableOreGen(state, world, pos, target); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public UBStone baseStone() {
+        return this;
+    }
+
 }

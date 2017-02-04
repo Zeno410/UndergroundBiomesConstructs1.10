@@ -1,5 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.block.button;
 
+import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import java.util.List;
 import java.util.Random;
 
@@ -34,7 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlock {
 
 	public final EnumFacing facing;
-	private final ButtonItemBlock itemBlock;
+	private ButtonItemBlock itemBlock;
 
 	public UBStoneButton(EnumFacing facing, ButtonItemBlock itemBlock) {
 		this.facing = facing;
@@ -42,16 +43,40 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
 		setTickRandomly(true);
 	}
 
+    @Override
+    public String getLocalizedName() {
+        return "improper localized name";
+    }
+    
+    @Override
+    protected ItemStack createStackedBlock(IBlockState state) {
+        return super.createStackedBlock(state); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 	@Override
 	public Block toBlock() {
 		return this;
 	}
 
+        public void setItemBlock(ButtonItemBlock itemBlock) {
+            this.itemBlock = itemBlock;
+        }
+        
 	@Override
 	public ButtonItemBlock getItemBlock() {
 		return itemBlock;
 	}
 
+    @Override
+    public ItemStack getItem(World world, BlockPos bp, IBlockState ibs) {
+        int meta = getMetaFromState(ibs);
+        return new ItemStack(itemBlock,1,meta);
+    }
+
+    @Override
+    public CreativeTabs getCreativeTabToDisplayOn() {
+        return UBCreativeTab.UB_BLOCKS_TAB; //To change body of generated methods, choose Tools | Templates.
+    }
 	@Override
 	protected abstract BlockStateContainer createBlockState();
 
@@ -76,7 +101,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
 	@Override
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
 		for (int i = 0; i < getNbVariants(); ++i)
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(itemBlock, 1, i));
 	}
 
 	@Override
@@ -92,7 +117,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return new ItemStack(itemBlock, 1, state.getBlock().getMetaFromState(state));
+            return new ItemStack(itemBlock, 1, state.getBlock().getMetaFromState(state));
 	}
 
 	@Override

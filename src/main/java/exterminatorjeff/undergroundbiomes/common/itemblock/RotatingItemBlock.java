@@ -1,5 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.itemblock;
 
+import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import exterminatorjeff.undergroundbiomes.api.common.Variable;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
+import exterminatorjeff.undergroundbiomes.common.block.button.UBStoneButton;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
@@ -42,7 +44,7 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
 	protected Map<EnumFacing, Block> blocks = new HashMap<>();
 
 	public RotatingItemBlock(BlockEntry baseStoneEntry) {
-            super((UBStone) baseStoneEntry.getBlock());
+            super(((UBBlock) baseStoneEntry.getBlock()).baseStone());
 		baseStone = (UBStone) baseStoneEntry.getBlock();
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -56,6 +58,14 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
 		setHasSubtypes(true);
 		setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
 	}
+       
+       public RotatingItemBlock(UBStoneButton button) {
+            super(button);
+		baseStone = button.baseStone();
+		setMaxDamage(0);
+		setHasSubtypes(true);
+		setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
+       }
 
 	@Override
 	public Item toItem() {
@@ -76,7 +86,7 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
 	public int getMetadata(int damage) {
 		return damage;
 	}
-
+        
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return StringUtils.substringBeforeLast(blocks.get(EnumFacing.NORTH).getUnlocalizedName(), "_") + "." + getVariantName(stack.getMetadata());
