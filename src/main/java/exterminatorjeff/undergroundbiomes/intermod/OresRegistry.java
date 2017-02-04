@@ -34,6 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 
 /**
@@ -133,6 +134,30 @@ public enum OresRegistry implements UBOresRegistry {
 		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), sedimentaryOre);
 		//
 		applyBaseOreSmelting(baseOre, igneousOre, metamorphicOre, sedimentaryOre);
+                ItemStack stack = null;
+                if (baseOreMeta == UBOre.NO_METADATA) {
+                    stack =new ItemStack(baseOre,1);
+                } else {
+                    stack =new ItemStack(baseOre,1,baseOreMeta);
+                }
+            int [] registrationIDs = OreDictionary.getOreIDs(stack); 
+            for (int i = 0; i < registrationIDs.length; i++) {
+                String registrationName = OreDictionary.getOreName(i);
+                for (int j = 0; j < 8; j++) {
+                    ItemStack igneousStack = new ItemStack(API.IGNEOUS_STONE.getBlock(),1,j);
+                    OreDictionary.registerOre(registrationName, API.IGNEOUS_STONE.getBlock());
+                    OreDictionary.registerOre(registrationName, API.IGNEOUS_STONE.getItemBlock());
+                    OreDictionary.registerOre(registrationName, igneousStack);
+                    ItemStack metamorphicStack = new ItemStack(API.METAMORPHIC_STONE.getBlock(),1,j);
+                    OreDictionary.registerOre(registrationName, API.METAMORPHIC_STONE.getBlock());
+                    OreDictionary.registerOre(registrationName, API.METAMORPHIC_STONE.getItemBlock());
+                    OreDictionary.registerOre(registrationName, metamorphicStack);
+                    ItemStack sedimentaryStack = new ItemStack(API.SEDIMENTARY_STONE.getBlock(),1,j);
+                    OreDictionary.registerOre(registrationName, API.SEDIMENTARY_STONE.getBlock());
+                    OreDictionary.registerOre(registrationName, API.SEDIMENTARY_STONE.getItemBlock());
+                    OreDictionary.registerOre(registrationName, sedimentaryStack);
+                }
+            }
 	}
 
 	@Override
