@@ -39,18 +39,20 @@ public class StairsEntry extends Entry<UBStairs> {
 	protected void doRegister() {
 		getItemBlock().setUnlocalizedName(internalName);
 		GameRegistry.register(getItemBlock().setRegistryName(internalName));
-		for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                for (EnumFacing facing : EnumFacing.HORIZONTALS) {
 			String name = internalName + "_" + facing;
 			Block block = getBlock(facing);
 			block.setUnlocalizedName(name);
-			GameRegistry.register(block.setRegistryName(name));
+                        GameRegistry.register(block.setRegistryName(name));
 		}
 	}
 
 	@Override
 	protected void doRegisterModel(IStateMapper stateMapper) {
 		for (EnumFacing facing : EnumFacing.HORIZONTALS)
+                    for (int i = 0; i < 8; i++) {
 			ModelLoader.setCustomStateMapper(getBlock(facing), stateMapper);
+                    }
 		for (int meta = 0; meta < stairs().getNbVariants(); ++meta) {
 			ModelResourceLocation location = new ModelResourceLocation(externalName(internalName), stairs().getVariantName(meta));
 			ModelLoader.setCustomModelResourceLocation(getItemBlock(), meta, location);
