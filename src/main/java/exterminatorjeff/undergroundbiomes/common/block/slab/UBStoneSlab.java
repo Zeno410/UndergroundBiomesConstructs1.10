@@ -6,6 +6,7 @@ import java.util.Random;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.UBSubBlock;
 import exterminatorjeff.undergroundbiomes.common.itemblock.SlabItemBlock;
+import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -20,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,6 +55,16 @@ public abstract class UBStoneSlab extends BlockSlab implements UBSubBlock {
 		return this;
 	}
 
+
+
+    @Override
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        int numberDropped = isDouble() ? 2 : 1;
+        ItemStack dropped = new ItemStack(itemBlock,numberDropped,damageDropped(state));
+        List<ItemStack> result = new ArrayList(1);
+        result.add(dropped);
+        return result;
+    }
 	@Override
 	public final ItemBlock getItemBlock() {
 		return itemBlock;
@@ -91,7 +103,9 @@ public abstract class UBStoneSlab extends BlockSlab implements UBSubBlock {
 
 	@Override
 	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
+		int result = getMetaFromState(state);
+                if (result >8 ) result -=8;
+                return result;
 	}
 
 	@SideOnly(Side.CLIENT)
