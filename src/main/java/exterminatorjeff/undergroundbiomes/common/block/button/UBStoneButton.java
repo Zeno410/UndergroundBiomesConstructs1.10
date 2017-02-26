@@ -45,7 +45,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
 
     @Override
     public String getLocalizedName() {
-        return "improper localized name";
+        return "UB Button";
     }
     
     @Override
