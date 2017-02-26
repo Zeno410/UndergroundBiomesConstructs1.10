@@ -85,13 +85,18 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
 								 * Ore
 								 */
                                                                 //TimeTracker.manager.start("ore");
-									IBlockState strata = currentBiome.getStrataBlockAtLayer(yPos + y + variation);
-								if (OresRegistry.INSTANCE.isUBified(strata.getBlock(),currentBlockState)) {
-									if (strata.getBlock() instanceof UBStone) {
-										UBStone stone = ((UBStone) strata.getBlock());
-										IBlockState ore = OresRegistry.INSTANCE.getUBifiedOre(strata.getBlock(), stone.getMetaFromState(strata),currentBlockState);
+								IBlockState strata = currentBiome.getStrataBlockAtLayer(yPos + y + variation);
+                                                                Block strataBlock = strata.getBlock();
+                                                                if (!(strataBlock instanceof UBStone)) {
+                                                                    strata = currentBiome.filler;
+                                                                    strataBlock = strata.getBlock();
+                                                                }
+								if (OresRegistry.INSTANCE.isUBified(strataBlock,currentBlockState)) {
+                                                                    if (strataBlock instanceof UBStone) {
+										UBStone stone = ((UBStone) strataBlock);
+										IBlockState ore = OresRegistry.INSTANCE.getUBifiedOre(stone, stone.getMetaFromState(strata),currentBlockState);
 										storage.set(x, y, z, ore);
-									}
+                                                                    }
 								} 
                                                                 //TimeTracker.manager.stop("ore");
 							}
@@ -116,10 +121,15 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
 		UBBiome currentBiome = biomeList[biomeValues[(location.getX()&15)*16 + location.getZ()&15]];	
 		int variation = (int) (noiseGenerator.noise((location.getX()) / 55.533, (location.getZ()) / 55.533, 3, 1, 0.5) * 10 - 5);							
                 IBlockState strata = currentBiome.getStrataBlockAtLayer(location.getY() + variation);
-                if (OresRegistry.INSTANCE.isUBified(strata.getBlock(),currentBlockState)) {
-                    if (strata.getBlock() instanceof UBStone) {
-                            UBStone stone = ((UBStone) strata.getBlock());
-                            IBlockState ore = OresRegistry.INSTANCE.getUBifiedOre(strata.getBlock(), stone.getMetaFromState(strata),currentBlockState);
+                Block strataBlock = strata.getBlock();
+                if (!(strataBlock instanceof UBStone)) {
+                    strata = currentBiome.filler;
+                    strataBlock = strata.getBlock();
+                }
+                if (OresRegistry.INSTANCE.isUBified(strataBlock,currentBlockState)) {
+                    if (strataBlock instanceof UBStone) {
+                            UBStone stone = (UBStone) strataBlock;
+                            IBlockState ore = OresRegistry.INSTANCE.getUBifiedOre(stone, stone.getMetaFromState(strata),currentBlockState);
                             chunk.setBlockState(location, ore);
                     }
                 } 
