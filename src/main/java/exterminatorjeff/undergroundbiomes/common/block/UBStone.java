@@ -46,6 +46,7 @@ public abstract class UBStone extends Block implements UBBlock {
 		setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
 		setHardness(UBConfig.SPECIFIC.hardnessModifier());
 		setResistance(UBConfig.SPECIFIC.resistanceModifier());
+                setHarvestLevel("pickaxe",0);
 		((UBConfig)(UBConfig.SPECIFIC)).hardnessModifier.addTracker(hardness -> setHardness(hardness));
 		((UBConfig)(UBConfig.SPECIFIC)).resistanceModifier.addTracker(resistance -> setResistance(resistance));
 	}
@@ -124,7 +125,7 @@ public abstract class UBStone extends Block implements UBBlock {
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
             Block targetBlock = state.getBlock();
             if (targetBlock instanceof UBStone) {
-		return new ItemStack(this.itemBlock, 1, getMetaFromState(world.getBlockState(pos)));
+		return new ItemStack(this.itemBlock, 1, getMetaFromState(state));
             }
             return targetBlock.getPickBlock(state, target, world, pos, player);
 	}
