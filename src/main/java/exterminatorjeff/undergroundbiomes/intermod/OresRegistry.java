@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
+import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.common.UBOresRegistry;
 import exterminatorjeff.undergroundbiomes.client.UBStateMappers;
@@ -17,6 +18,7 @@ import exterminatorjeff.undergroundbiomes.common.block.UBOre;
 import exterminatorjeff.undergroundbiomes.common.block.UBOreIgneous;
 import exterminatorjeff.undergroundbiomes.common.block.UBOreMetamorphic;
 import exterminatorjeff.undergroundbiomes.common.block.UBOreSedimentary;
+import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.core.UndergroundBiomes;
 import java.util.ArrayList;
@@ -89,7 +91,13 @@ public enum OresRegistry implements UBOresRegistry {
             if (UBConfig.SPECIFIC.ubifyOres() == false) return false;
 		Block baseOre = baseOreState.getBlock();
 		int baseOreMeta = baseOre.getMetaFromState(baseOreState);
-		return ubifiedOres.containsKey(toKey(baseOre, baseOreMeta, baseStone));
+		boolean result = ubifiedOres.containsKey(toKey(baseOre, baseOreMeta, baseStone));
+                if (!result) {
+                    if (baseOre.getUnlocalizedName().contains("ic2")) {
+                        throw new RuntimeException(toKey(baseOre, baseOreMeta, baseStone)+ " " + keyName);
+                    }
+                }
+                return result;
 	}
 
 	/**
@@ -100,7 +108,7 @@ public enum OresRegistry implements UBOresRegistry {
 	 * @param baseStoneMeta
 	 * @param baseOreState
 	 */
-	public IBlockState getUBifiedOre(Block baseStone, int baseStoneMeta, IBlockState baseOreState) {
+	public IBlockState getUBifiedOre(UBStone baseStone, int baseStoneMeta, IBlockState baseOreState) {
 		Block baseOre = baseOreState.getBlock();
 		int baseOreMeta = baseOre.getMetaFromState(baseOreState);
 		return ubifiedOres.get(toKey(baseOre, baseOreMeta, baseStone)).ore().getStateFromMeta(baseStoneMeta);
@@ -123,9 +131,10 @@ public enum OresRegistry implements UBOresRegistry {
 	}
 
 	private void createOre(Block baseOre, int baseOreMeta) {
-		OreEntry igneousOre = new OreEntry(API.IGNEOUS_STONE.getBlock(), baseOre);
-		OreEntry metamorphicOre = new OreEntry(API.METAMORPHIC_STONE.getBlock(), baseOre);
-		OreEntry sedimentaryOre = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre);
+            if (baseOre == null) throw new RuntimeException();
+		OreEntry igneousOre = new OreEntry(API.IGNEOUS_STONE.getBlock(), baseOre, baseOreMeta);
+		OreEntry metamorphicOre = new OreEntry(API.METAMORPHIC_STONE.getBlock(), baseOre, baseOreMeta);
+		OreEntry sedimentaryOre = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
 		igneousOre.register(new UBOreIgneous(baseOre, baseOreMeta));
 		metamorphicOre.register(new UBOreMetamorphic(baseOre, baseOreMeta));
 		sedimentaryOre.register(new UBOreSedimentary(baseOre, baseOreMeta));
@@ -134,30 +143,6 @@ public enum OresRegistry implements UBOresRegistry {
 		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), sedimentaryOre);
 		//
 		applyBaseOreSmelting(baseOre, igneousOre, metamorphicOre, sedimentaryOre);
-                ItemStack stack = null;
-                if (baseOreMeta == UBOre.NO_METADATA) {
-                    stack =new ItemStack(baseOre,1);
-                } else {
-                    stack =new ItemStack(baseOre,1,baseOreMeta);
-                }
-            int [] registrationIDs = OreDictionary.getOreIDs(stack); 
-            for (int i = 0; i < registrationIDs.length; i++) {
-                String registrationName = OreDictionary.getOreName(i);
-                for (int j = 0; j < 8; j++) {
-                    ItemStack igneousStack = new ItemStack(API.IGNEOUS_STONE.getBlock(),1,j);
-                    OreDictionary.registerOre(registrationName, API.IGNEOUS_STONE.getBlock());
-                    OreDictionary.registerOre(registrationName, API.IGNEOUS_STONE.getItemBlock());
-                    OreDictionary.registerOre(registrationName, igneousStack);
-                    ItemStack metamorphicStack = new ItemStack(API.METAMORPHIC_STONE.getBlock(),1,j);
-                    OreDictionary.registerOre(registrationName, API.METAMORPHIC_STONE.getBlock());
-                    OreDictionary.registerOre(registrationName, API.METAMORPHIC_STONE.getItemBlock());
-                    OreDictionary.registerOre(registrationName, metamorphicStack);
-                    ItemStack sedimentaryStack = new ItemStack(API.SEDIMENTARY_STONE.getBlock(),1,j);
-                    OreDictionary.registerOre(registrationName, API.SEDIMENTARY_STONE.getBlock());
-                    OreDictionary.registerOre(registrationName, API.SEDIMENTARY_STONE.getItemBlock());
-                    OreDictionary.registerOre(registrationName, sedimentaryStack);
-                }
-            }
 	}
 
 	@Override
@@ -223,6 +208,8 @@ public enum OresRegistry implements UBOresRegistry {
 		}
 	}
 
+        private static String keyName;
+        
 	private class UBifyRequestMeta extends UBifyRequest {
 		protected final int baseOreMeta;
 
@@ -234,6 +221,9 @@ public enum OresRegistry implements UBOresRegistry {
 		@Override
 		void fulfill() {
 			createOre(baseOre, baseOreMeta);
+                        if (baseOre.getUnlocalizedName().contains("ic2")&&baseOreMeta == 2) {
+                            keyName = toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock());
+                        }
 			LOGGER.debug(format(SETUP_INFO_MSG, baseOre, baseOreMeta));
 		}
 	}
@@ -258,7 +248,7 @@ public enum OresRegistry implements UBOresRegistry {
 	private String toKey(Block baseOre, int baseOreMeta) {
 		if (baseOreMeta == UBOre.NO_METADATA)
 			baseOreMeta = 0;
-		return baseOre.getRegistryName() + ":" + baseOreMeta;
+		return baseOre.getRegistryName() + "." + baseOreMeta;
 	}
 
 	private ResourceLocation getOverlayFor(String key) {
@@ -316,6 +306,32 @@ public enum OresRegistry implements UBOresRegistry {
 		ubifiedOres.values().forEach((oreEntry) -> oreEntry.registerModel(UBStateMappers.UBORE_STATE_MAPPER));
 	}
 
+        public void copyOreDictionaries() {
+            for (OreEntry oreEntry: ubifiedOres.values()) {
+                copyOreDictionary(oreEntry);
+            }
+        }
+        
+        private void copyOreDictionary(OreEntry oreEntry) {
+            Block block = oreEntry.getBlock();
+            Block baseOre = oreEntry.ore().baseOre;
+            int baseOreMeta = oreEntry.ore().baseOreMeta;
+            ItemStack baseOreStack = null;
+            if (baseOreMeta == UBOre.NO_METADATA) {
+                baseOreStack =new ItemStack(baseOre,1);
+            } else {
+                baseOreStack =new ItemStack(baseOre,1,baseOreMeta);
+            }
+            int [] registrationIDs = OreDictionary.getOreIDs(baseOreStack); 
+            for (int i = 0; i < registrationIDs.length; i++) {
+                String registrationName = OreDictionary.getOreName(i);
+                for (int j = 0; j < 8; j++) {
+                    ItemStack stack = new ItemStack(block,1,j);
+                    OreDictionary.registerOre(registrationName, stack);
+                }
+            }
+        }
+        
 	@SubscribeEvent
 	public void registerOverlayTextures(TextureStitchEvent.Pre e) {
 		oresToOverlays.values().forEach((overlayLocation) -> e.getMap().registerSprite(overlayLocation));

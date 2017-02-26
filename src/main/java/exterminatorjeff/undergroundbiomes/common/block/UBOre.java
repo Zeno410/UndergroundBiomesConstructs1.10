@@ -96,7 +96,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
 	@Override
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
 		for (int i = 0; i < getNbVariants(); ++i)
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
@@ -203,15 +203,28 @@ public abstract class UBOre extends Block implements UBSubBlock {
 			return damage;
 		}
 
+        @Override
+        public int getDamage(ItemStack stack) {
+            return stack.getMetadata();
+        }
 		@Override
 		public String getItemStackDisplayName(ItemStack stack) {
 			// Works for English but maybe not all languages. Some may have to
 			// use the lang file to override this behavior
 			// TODO Find a cleaner way to do this
                         try {
-			return I18n.format(baseStone().getItemBlock().getUnlocalizedName(stack) + ".name") + " " + I18n.format(baseOre.getUnlocalizedName() + ".name");
+                            
+                            if (baseOreMeta == NO_METADATA) {
+			        return I18n.format(baseStone().getItemBlock().getUnlocalizedName(stack) + ".name") + " " + I18n.format(baseOre.getUnlocalizedName() + ".name");
+                            }
+                            ItemStack baseStack = new ItemStack(baseOre,1,baseOreMeta);
+			    return I18n.format(baseStone().getItemBlock().getUnlocalizedName(stack) + ".name") + " " + baseStack.getDisplayName();
                         } catch (Error error) {
-                            return baseStone().getItemBlock().getUnlocalizedName(stack) + ".name" + " " + baseOre.getUnlocalizedName() + ".name";
+                            if (baseOreMeta == NO_METADATA) {
+                                 return baseStone().getItemBlock().getUnlocalizedName(stack) + ".name" + " " + baseOre.getUnlocalizedName() + ".name";
+                            }
+                            ItemStack baseStack = new ItemStack(baseOre,1,baseOreMeta);
+                                 return baseStone().getItemBlock().getUnlocalizedName(stack) + ".name" + " " + baseStack.getDisplayName();
                         }
 		}
 

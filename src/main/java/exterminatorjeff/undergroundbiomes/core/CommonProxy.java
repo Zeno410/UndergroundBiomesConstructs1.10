@@ -79,10 +79,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.util.math.BlockPos;
+import exterminatorjeff.undergroundbiomes.intermod.IC2Registrar;
 /**
  * 
  * @author CurtisA, LouisDB
@@ -105,6 +102,13 @@ public class CommonProxy {
 		createBlocks();
 		createItems();
 		createOres();
+                
+                try {
+                    new IC2Registrar().register();
+                } catch (java.lang.NoClassDefFoundError ignored) {
+                    throw new RuntimeException();
+                    // IC2 not installed;
+                }
 
 		DropsRegistry.INSTANCE.init();
 
@@ -303,8 +307,7 @@ public class CommonProxy {
             OreDictionary.registerOre("stoneBricks", new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
             OreDictionary.registerOre("stoneBricks", new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
         }
-        //OreDictionary.registerOre(textures, ore);
-        //this.oreUBifier.registerOres();
+        OresRegistry.INSTANCE.copyOreDictionaries();
     }
 	private final void createRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(Items.COAL), "XXX", "XXX", "XXX", 'X', API.LIGNITE_COAL.getItem());
