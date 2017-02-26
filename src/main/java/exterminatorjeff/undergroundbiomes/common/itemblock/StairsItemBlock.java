@@ -13,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -41,7 +40,6 @@ public class StairsItemBlock extends RotatingItemBlock implements UBStairs {
 			}
 			blocks.put(facing, block);
 		}
-                ItemBlock test;
 	}
         
         public StairsItemBlock(BlockEntry baseStoneEntry,HashMap<EnumFacing,Block> blocks) {
