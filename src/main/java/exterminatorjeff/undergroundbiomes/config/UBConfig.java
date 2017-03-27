@@ -282,11 +282,14 @@ public class UBConfig implements UBSettings {
 	 */
 	public List<Integer> getUBifiedDimensions() {
 		List<Integer> ubifiedDims = new ArrayList<>();
-		ubifiedDims.addAll(includedDimensionsSet);
-		int[] allDims = DimensionManager.getDimensions(DimensionType.OVERWORLD);
-		for (int dim : allDims)
+                if (includedDimensionsSet.size() > 0) {
+		     ubifiedDims.addAll(includedDimensionsSet);
+                } else {
+		    Integer [] allDims = DimensionManager.getIDs();//.getDimensions(DimensionType.OVERWORLD);
+		    for (int dim : allDims)
 			ubifiedDims.add(dim);
-		ubifiedDims.removeAll(excludedDimensionsSet);
+		    ubifiedDims.removeAll(excludedDimensionsSet);
+                }
 		return ubifiedDims;
 	}
 
