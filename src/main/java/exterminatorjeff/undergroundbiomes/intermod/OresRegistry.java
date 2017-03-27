@@ -92,11 +92,6 @@ public enum OresRegistry implements UBOresRegistry {
 		Block baseOre = baseOreState.getBlock();
 		int baseOreMeta = baseOre.getMetaFromState(baseOreState);
 		boolean result = ubifiedOres.containsKey(toKey(baseOre, baseOreMeta, baseStone));
-                if (!result) {
-                    if (baseOre.getUnlocalizedName().contains("ic2")) {
-                        throw new RuntimeException(toKey(baseOre, baseOreMeta, baseStone)+ " " + keyName);
-                    }
-                }
                 return result;
 	}
 
@@ -308,6 +303,7 @@ public enum OresRegistry implements UBOresRegistry {
 
         public void copyOreDictionaries() {
             for (OreEntry oreEntry: ubifiedOres.values()) {
+                LOGGER.info("Copying ore dictionaries");
                 copyOreDictionary(oreEntry);
             }
         }
@@ -324,7 +320,8 @@ public enum OresRegistry implements UBOresRegistry {
             }
             int [] registrationIDs = OreDictionary.getOreIDs(baseOreStack); 
             for (int i = 0; i < registrationIDs.length; i++) {
-                String registrationName = OreDictionary.getOreName(i);
+                String registrationName = OreDictionary.getOreName(registrationIDs[i]);
+                LOGGER.info(baseOre.getLocalizedName()+ " " + registrationName + " " +block.getLocalizedName());
                 for (int j = 0; j < 8; j++) {
                     ItemStack stack = new ItemStack(block,1,j);
                     OreDictionary.registerOre(registrationName, stack);
