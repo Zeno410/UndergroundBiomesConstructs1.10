@@ -1,0 +1,16 @@
+[
+{
+  "modid": "undergroundbiomes",
+  "name": "Underground Biomes",
+  "description": "24 different kinds of stones with slabs, stairs, walls, and buttons",
+  "version": "0.9.beta.17",
+  "mcversion": "1.10.2",
+  "url": "",
+  "updateUrl": "",
+  "authors": "exterminatorJeff, Zeno410, Spooky4672",
+  "credits": "exterminatorJeff, Zeno410, Spooky4672",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
