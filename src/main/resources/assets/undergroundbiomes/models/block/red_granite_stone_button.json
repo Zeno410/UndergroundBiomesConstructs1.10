@@ -1,0 +1,6 @@
+{
+	"parent":"block/button",
+	"textures":{
+		"texture":"undergroundbiomes:blocks/red_granite"
+	}
+}

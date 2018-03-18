@@ -1,0 +1,9 @@
+{
+    "parent":"block/outer_stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/basalt_cobble",
+        "top": "undergroundbiomes:blocks/basalt_cobble",
+        "side": "undergroundbiomes:blocks/basalt_cobble"
+    }
+}
+

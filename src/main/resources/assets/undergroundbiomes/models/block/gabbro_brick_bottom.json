@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/gabbro_brick",
+        "top": "undergroundbiomes:blocks/gabbro_brick",
+        "side": "undergroundbiomes:blocks/gabbro_brick"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "parent":"block/outer_stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/eclogite",
+        "top": "undergroundbiomes:blocks/eclogite",
+        "side": "undergroundbiomes:blocks/eclogite"
+    }
+}
+

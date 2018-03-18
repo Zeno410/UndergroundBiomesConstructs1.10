@@ -1,0 +1,59 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_column",
+		"uvlock": true
+	},
+	"variants": {
+		"type": {
+			"red_granite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/red_granite_slab_top",
+					"side": "undergroundbiomes:blocks/red_granite_slab_side"
+				}
+			},
+			"black_granite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/black_granite_slab_top",
+					"side": "undergroundbiomes:blocks/black_granite_slab_side"
+				}
+			},
+			"rhyolite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/rhyolite_slab_top",
+					"side": "undergroundbiomes:blocks/rhyolite_slab_side"
+				}
+			},
+			"andesite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/andesite_slab_top",
+					"side": "undergroundbiomes:blocks/andesite_slab_side"
+				}
+			},
+			"gabbro": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/gabbro_slab_top",
+					"side": "undergroundbiomes:blocks/gabbro_slab_side"
+				}
+			},
+			"basalt": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/basalt_slab_top",
+					"side": "undergroundbiomes:blocks/basalt_slab_side"
+				}
+			},
+			"komatiite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/komatiite_slab_top",
+					"side": "undergroundbiomes:blocks/komatiite_slab_side"
+				}
+			},
+			"dacite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/dacite_slab_top",
+					"side": "undergroundbiomes:blocks/dacite_slab_side"
+				}
+			}
+		}
+	}
+}

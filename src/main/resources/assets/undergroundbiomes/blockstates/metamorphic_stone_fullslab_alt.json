@@ -1,0 +1,59 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_column",
+		"uvlock": true
+	},
+	"variants": {
+		"type": {
+			"gneiss": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/gneiss_slab_top",
+					"side": "undergroundbiomes:blocks/gneiss_slab_side"
+				}
+			},
+			"eclogite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/eclogite_slab_top",
+					"side": "undergroundbiomes:blocks/eclogite_slab_side"
+				}
+			},
+			"marble": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/marble_slab_top",
+					"side": "undergroundbiomes:blocks/marble_slab_side"
+				}
+			},
+			"quartzite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/quartzite_slab_top",
+					"side": "undergroundbiomes:blocks/quartzite_slab_side"
+				}
+			},
+			"blueschist": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/blueschist_slab_top",
+					"side": "undergroundbiomes:blocks/blueschist_slab_side"
+				}
+			},
+			"greenschist": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/greenschist_slab_top",
+					"side": "undergroundbiomes:blocks/greenschist_slab_side"
+				}
+			},
+			"soapstone": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/soapstone_slab_top",
+					"side": "undergroundbiomes:blocks/soapstone_slab_side"
+				}
+			},
+			"migmatite": {
+				"textures": {
+					"end": "undergroundbiomes:blocks/migmatite_slab_top",
+					"side": "undergroundbiomes:blocks/migmatite_slab_side"
+				}
+			}
+		}
+	}
+}

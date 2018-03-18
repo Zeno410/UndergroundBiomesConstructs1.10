@@ -1,0 +1,8 @@
+{
+	"parent":"block/upper_slab",
+	"textures":{
+		"bottom":"undergroundbiomes:blocks/dolomite",
+		"top":"undergroundbiomes:blocks/dolomite",
+		"side":"undergroundbiomes:blocks/dolomite"
+	}
+}

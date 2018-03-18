@@ -1,0 +1,8 @@
+{
+	"parent":"block/half_slab",
+	"textures":{
+		"bottom":"undergroundbiomes:blocks/migmatite_brick",
+		"top":"undergroundbiomes:blocks/migmatite_brick",
+		"side":"undergroundbiomes:blocks/migmatite_brick"
+	}
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_nse",
+    "textures": {
+        "wall": "undergroundbiomes:blocks/red_granite_brick"
+    }
+}

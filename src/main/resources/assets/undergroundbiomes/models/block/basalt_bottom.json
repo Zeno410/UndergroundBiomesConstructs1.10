@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/basalt",
+        "top": "undergroundbiomes:blocks/basalt",
+        "side": "undergroundbiomes:blocks/basalt"
+    }
+}

@@ -1,0 +1,88 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "builtin/generated"
+	},
+	"variants": {
+		"up": {
+			"true": {
+				"submodel": { "wall_up": { "model": "wall_post" } }
+			},
+			"false": {}
+		},
+		"north": {
+			"true": {
+				"submodel": { "wall_north": { "model": "wall_side", "uvlock": true } }
+			},
+			"false": {}
+		},
+		"east": {
+			"true": {
+				"submodel": { "wall_east": { "model": "wall_side", "y": 90, "uvlock": true } }
+			},
+			"false": {}
+		},
+		"south": {
+			"true": {
+				"submodel": { "wall_south": { "model": "wall_side", "y": 180, "uvlock": true } }
+			},
+			"false": {}
+		},
+		"west": {
+			"true": {
+				"submodel": { "wall_west": { "model": "wall_side", "y": 270, "uvlock": true } }
+			},
+			"false": {}
+		},
+		"type": {
+			"gneiss": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/gneiss"
+				}
+			},
+			"eclogite": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/eclogite"
+				}
+			},
+			"marble": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/marble"
+				}
+			},
+			"quartzite": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/quartzite"
+				}
+			},
+			"blueschist": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/blueschist"
+				}
+			},
+			"greenschist": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/greenschist"
+				}
+			},
+			"soapstone": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/soapstone"
+				}
+			},
+			"migmatite": {
+				"textures": {
+					"wall": "undergroundbiomes:blocks/migmatite"
+				}
+			}
+		},
+		"type=gneiss": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/gneiss" } }],
+		"type=eclogite": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/eclogite" } }],
+		"type=marble": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/marble" } }],
+		"type=quartzite": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/quartzite" } }],
+		"type=blueschist": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/blueschist" } }],
+		"type=greenschist": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/greenschist" } }],
+		"type=soapstone": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/soapstone" } }],
+		"type=migmatite": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/migmatite" } }]
+	}
+}

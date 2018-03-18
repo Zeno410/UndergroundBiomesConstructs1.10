@@ -1,0 +1,9 @@
+{
+    "parent":"block/inner_stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/migmatite_cobble",
+        "top": "undergroundbiomes:blocks/migmatite_cobble",
+        "side": "undergroundbiomes:blocks/migmatite_cobble"
+    }
+}
+

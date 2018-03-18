@@ -1,0 +1,8 @@
+{
+	"parent":"block/half_slab",
+	"textures":{
+		"bottom":"undergroundbiomes:blocks/blueschist",
+		"top":"undergroundbiomes:blocks/blueschist",
+		"side":"undergroundbiomes:blocks/blueschist"
+	}
+}

@@ -1,0 +1,9 @@
+{
+    "parent":"block/stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/quartzite_cobble",
+        "top": "undergroundbiomes:blocks/quartzite_cobble",
+        "side": "undergroundbiomes:blocks/quartzite_cobble"
+    }
+}
+

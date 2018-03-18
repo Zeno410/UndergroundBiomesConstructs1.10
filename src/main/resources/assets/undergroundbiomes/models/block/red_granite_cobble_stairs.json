@@ -1,0 +1,9 @@
+{
+    "parent":"block/stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/red_granite_cobble",
+        "top": "undergroundbiomes:blocks/red_granite_cobble",
+        "side": "undergroundbiomes:blocks/red_granite_cobble"
+    }
+}
+

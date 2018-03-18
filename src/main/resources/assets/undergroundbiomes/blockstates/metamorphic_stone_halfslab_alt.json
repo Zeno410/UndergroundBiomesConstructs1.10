@@ -1,0 +1,67 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"half": {
+			"bottom": { "model": "half_slab" },
+			"top": { "model": "upper_slab" }
+		},
+		"type": {
+			"gneiss": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/gneiss_slab_top",
+					"top": "undergroundbiomes:blocks/gneiss_slab_top",
+					"side": "undergroundbiomes:blocks/gneiss_slab_side"
+				}
+			},
+			"eclogite": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/eclogite_slab_top",
+					"top": "undergroundbiomes:blocks/eclogite_slab_top",
+					"side": "undergroundbiomes:blocks/eclogite_slab_side"
+				}
+			},
+			"marble": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/marble_slab_top",
+					"top": "undergroundbiomes:blocks/marble_slab_top",
+					"side": "undergroundbiomes:blocks/marble_slab_side"
+				}
+			},
+			"quartzite": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/quartzite_slab_top",
+					"top": "undergroundbiomes:blocks/quartzite_slab_top",
+					"side": "undergroundbiomes:blocks/quartzite_slab_side"
+				}
+			},
+			"blueschist": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/blueschist_slab_top",
+					"top": "undergroundbiomes:blocks/blueschist_slab_top",
+					"side": "undergroundbiomes:blocks/blueschist_slab_side"
+				}
+			},
+			"greenschist": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/greenschist_slab_top",
+					"top": "undergroundbiomes:blocks/greenschist_slab_top",
+					"side": "undergroundbiomes:blocks/greenschist_slab_side"
+				}
+			},
+			"soapstone": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/soapstone_slab_top",
+					"top": "undergroundbiomes:blocks/soapstone_slab_top",
+					"side": "undergroundbiomes:blocks/soapstone_slab_side"
+				}
+			},
+			"migmatite": {
+				"textures": {
+					"bottom": "undergroundbiomes:blocks/migmatite_slab_top",
+					"top": "undergroundbiomes:blocks/migmatite_slab_top",
+					"side": "undergroundbiomes:blocks/migmatite_slab_side"
+				}
+			}
+		}
+	}
+}

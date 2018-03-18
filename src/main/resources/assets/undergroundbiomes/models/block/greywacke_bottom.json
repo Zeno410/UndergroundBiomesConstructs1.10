@@ -1,0 +1,8 @@
+{
+	"parent":"block/half_slab",
+	"textures":{
+		"bottom":"undergroundbiomes:blocks/greywacke",
+		"top":"undergroundbiomes:blocks/greywacke",
+		"side":"undergroundbiomes:blocks/greywacke"
+	}
+}

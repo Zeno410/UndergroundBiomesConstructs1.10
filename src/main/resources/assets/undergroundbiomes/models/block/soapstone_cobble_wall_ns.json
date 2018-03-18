@@ -1,0 +1,7 @@
+
+{
+    "parent": "block/wall_ns",
+    "textures": {
+        "wall": "undergroundbiomes:blocks/soapstone_cobble"
+    }
+}

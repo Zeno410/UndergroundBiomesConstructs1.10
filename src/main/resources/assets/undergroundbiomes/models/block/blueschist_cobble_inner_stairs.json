@@ -1,0 +1,9 @@
+{
+    "parent":"block/inner_stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/blueschist_cobble",
+        "top": "undergroundbiomes:blocks/blueschist_cobble",
+        "side": "undergroundbiomes:blocks/blueschist_cobble"
+    }
+}
+

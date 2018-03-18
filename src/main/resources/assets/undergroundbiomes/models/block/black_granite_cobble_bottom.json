@@ -1,0 +1,8 @@
+{
+	"parent":"block/half_slab",
+	"textures":{
+		"bottom":"undergroundbiomes:blocks/black_granite_cobble",
+		"top":"undergroundbiomes:blocks/black_granite_cobble",
+		"side":"undergroundbiomes:blocks/black_granite_cobble"
+	}
+}

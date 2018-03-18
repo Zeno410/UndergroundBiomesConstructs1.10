@@ -1,0 +1,9 @@
+{
+    "parent":"block/inner_stairs",
+    "textures": {
+        "bottom": "undergroundbiomes:blocks/gabbro_cobble",
+        "top": "undergroundbiomes:blocks/gabbro_cobble",
+        "side": "undergroundbiomes:blocks/gabbro_cobble"
+    }
+}
+
