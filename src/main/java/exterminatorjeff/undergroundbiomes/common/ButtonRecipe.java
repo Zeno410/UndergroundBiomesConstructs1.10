@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
 /**
- * 
+ *
  * @author LouisDB
  *
  */
@@ -21,7 +21,7 @@ public final class ButtonRecipe implements SettingTracker<Integer> {
 	private static final UBLogger LOGGER = new UBLogger(ButtonRecipe.class, Level.INFO);
 
 	/*
-	 * 
+	 *
 	 */
 
 	@Override
@@ -44,7 +44,7 @@ public final class ButtonRecipe implements SettingTracker<Integer> {
                                 item.getRegistryName().getResourcePath()!=null&&
                                 item.getRegistryName().getResourcePath().contains("button")) //
 			) {
-				recipe.getRecipeOutput().stackSize = n;
+				recipe.getRecipeOutput().setCount(n);
 				LOGGER.debug(String.format("%s for '%s' modified", recipe.getClass().getSimpleName(), recipe.getRecipeOutput().getItem().getRegistryName()));
 			}
 		});

@@ -9,9 +9,10 @@ import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -29,7 +30,7 @@ public class ItemFossilPiece extends Item implements UBItem, Variable {
 	}
 
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tabs, List<ItemStack> list) {
+	public void getSubItems(Item itemIn, CreativeTabs tabs, NonNullList<ItemStack> list) {
 		for (int i = 0; i < FossilVariant.NB_VARIANTS; ++i)
 			list.add(new ItemStack(itemIn, 1, i));
 	}

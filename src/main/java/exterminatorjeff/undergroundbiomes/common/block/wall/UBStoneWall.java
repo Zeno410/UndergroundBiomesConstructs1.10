@@ -17,13 +17,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -63,7 +64,7 @@ public abstract class UBStoneWall extends BlockWall implements UBSubBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (int i = 0; i < getNbVariants(); ++i)
 			list.add(new ItemStack(itemIn, 1, i));
 	}
@@ -100,7 +101,7 @@ public abstract class UBStoneWall extends BlockWall implements UBSubBlock {
 		boolean east = canConnectTo(worldIn, pos.east());
 		boolean south = canConnectTo(worldIn, pos.south());
 		boolean west = canConnectTo(worldIn, pos.west());
-                
+
 		boolean straight = north && !east && south && !west || !north && east && !south && west;
 		return state.withProperty(UP, !straight || !worldIn.isAirBlock(pos.up())) //
 				.withProperty(NORTH, north) //
@@ -115,7 +116,7 @@ public abstract class UBStoneWall extends BlockWall implements UBSubBlock {
         return true; //To change body of generated methods, choose Tools | Templates.
     }
 	/**
-	 * 
+	 *
 	 * @author CurtisA, LouisDB
 	 *
 	 */

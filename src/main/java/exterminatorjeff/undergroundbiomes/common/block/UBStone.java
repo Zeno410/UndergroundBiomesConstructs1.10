@@ -19,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
@@ -28,7 +29,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -95,7 +96,7 @@ public abstract class UBStone extends Block implements UBBlock {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (int i = 0; i < getNbVariants(); ++i)
 			list.add(new ItemStack(itemIn, 1, i));
 	}
@@ -138,7 +139,7 @@ public abstract class UBStone extends Block implements UBBlock {
 	public abstract boolean isFortuneAffected(IBlockState state);
 
 	/**
-	 * 
+	 *
 	 * @author CurtisA, LouisDB
 	 *
 	 */
