@@ -1,9 +1,0 @@
-{
-    "parent":"block/inner_stairs",
-    "textures": {
-        "bottom": "undergroundbiomes:blocks/red_granite",
-        "top": "undergroundbiomes:blocks/red_granite",
-        "side": "undergroundbiomes:blocks/red_granite"
-    }
-}
-

@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/migmatite_cobble",
-		"top":"undergroundbiomes:blocks/migmatite_cobble",
-		"side":"undergroundbiomes:blocks/migmatite_cobble"
-	}
-}

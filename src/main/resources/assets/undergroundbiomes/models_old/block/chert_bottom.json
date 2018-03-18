@@ -1,8 +1,0 @@
-{
-	"parent":"block/half_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/chert",
-		"top":"undergroundbiomes:blocks/chert",
-		"side":"undergroundbiomes:blocks/chert"
-	}
-}

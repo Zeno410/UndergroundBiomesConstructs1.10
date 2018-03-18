@@ -1,9 +1,0 @@
-{
-    "parent":"block/stairs",
-    "textures": {
-        "bottom": "undergroundbiomes:blocks/greenschist",
-        "top": "undergroundbiomes:blocks/greenschist",
-        "side": "undergroundbiomes:blocks/greenschist"
-    }
-}
-

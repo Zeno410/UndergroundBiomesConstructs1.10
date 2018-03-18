@@ -1,9 +1,0 @@
-{
-    "parent":"block/inner_stairs",
-    "textures": {
-        "bottom": "undergroundbiomes:blocks/eclogite_cobble",
-        "top": "undergroundbiomes:blocks/eclogite_cobble",
-        "side": "undergroundbiomes:blocks/eclogite_cobble"
-    }
-}
-

@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/greenschist",
-		"top":"undergroundbiomes:blocks/greenschist",
-		"side":"undergroundbiomes:blocks/greenschist"
-	}
-}

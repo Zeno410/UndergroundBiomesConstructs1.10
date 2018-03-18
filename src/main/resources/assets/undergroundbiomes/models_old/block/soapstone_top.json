@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/soapstone",
-		"top":"undergroundbiomes:blocks/soapstone",
-		"side":"undergroundbiomes:blocks/soapstone"
-	}
-}

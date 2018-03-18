@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/shale",
-		"top":"undergroundbiomes:blocks/shale",
-		"side":"undergroundbiomes:blocks/shale"
-	}
-}

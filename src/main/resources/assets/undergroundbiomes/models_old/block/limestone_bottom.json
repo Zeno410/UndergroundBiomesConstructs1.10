@@ -1,8 +1,0 @@
-{
-	"parent":"block/half_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/limestone",
-		"top":"undergroundbiomes:blocks/limestone",
-		"side":"undergroundbiomes:blocks/limestone"
-	}
-}

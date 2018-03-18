@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/eclogite",
-		"top":"undergroundbiomes:blocks/eclogite",
-		"side":"undergroundbiomes:blocks/eclogite"
-	}
-}

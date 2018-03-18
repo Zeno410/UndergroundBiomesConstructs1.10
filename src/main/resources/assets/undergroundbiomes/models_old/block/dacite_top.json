@@ -1,8 +1,0 @@
-{
-    "parent": "block/upper_slab",
-    "textures": {
-        "bottom": "undergroundbiomes:blocks/dacite",
-        "top": "undergroundbiomes:blocks/dacite",
-        "side": "undergroundbiomes:blocks/dacite"
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "parent": "block/upper_slab",
-    "textures": {
-        "bottom": "undergroundbiomes:blocks/gabbro_cobble",
-        "top": "undergroundbiomes:blocks/gabbro_cobble",
-        "side": "undergroundbiomes:blocks/gabbro_cobble"
-    }
-}

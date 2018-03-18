@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/lignite",
-		"top":"undergroundbiomes:blocks/lignite",
-		"side":"undergroundbiomes:blocks/lignite"
-	}
-}

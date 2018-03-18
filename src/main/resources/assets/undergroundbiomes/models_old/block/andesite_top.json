@@ -1,8 +1,0 @@
-{
-	"parent":"block/upper_slab",
-	"textures":{
-		"bottom":"undergroundbiomes:blocks/andesite",
-		"top":"undergroundbiomes:blocks/andesite",
-		"side":"undergroundbiomes:blocks/andesite"
-	}
-}
