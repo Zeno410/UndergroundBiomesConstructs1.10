@@ -1,19 +1,12 @@
 package exterminatorjeff.undergroundbiomes.common.itemblock;
 
-import java.lang.reflect.InvocationTargetException;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBStairs;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStoneStairs;
-
-import java.util.HashMap;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -22,6 +15,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 
 /**
  * @author LouisDB

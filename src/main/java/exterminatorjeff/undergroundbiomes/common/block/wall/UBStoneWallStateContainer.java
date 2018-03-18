@@ -2,7 +2,6 @@ package exterminatorjeff.undergroundbiomes.common.block.wall;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.properties.IProperty;
@@ -12,7 +11,7 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 
 /**
  * To not add the VARIANT property from BlockWall
- * 
+ *
  * @author LouisDB
  *
  */

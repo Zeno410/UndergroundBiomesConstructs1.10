@@ -1,15 +1,16 @@
 package exterminatorjeff.undergroundbiomes.common.block.wall;
 
-import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.*;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
+import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.IGNEOUS_VARIANTS;
+import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.IGNEOUS_VARIANT_PROPERTY;
+
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

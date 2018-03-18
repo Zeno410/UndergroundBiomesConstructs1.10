@@ -2,8 +2,6 @@
  */
 package exterminatorjeff.undergroundbiomes.api;
 
-import net.minecraft.world.chunk.IChunkProvider;
-
 /**
  *
  * @author curtisadams

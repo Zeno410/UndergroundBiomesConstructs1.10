@@ -1,11 +1,5 @@
 package exterminatorjeff.undergroundbiomes.intermod;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.common.DropSource;
 import exterminatorjeff.undergroundbiomes.api.common.UBDropsRegistry;
@@ -20,9 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.*;
+
 /**
  * Rare drops for {@link UBStone}s.
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -31,7 +27,7 @@ public enum DropsRegistry implements UBDropsRegistry {
 
 	/**
 	 * Should not be accessed directly.
-	 * 
+	 *
 	 * @see #addSourceFor(Block, DropSource)
 	 * @see #getSourcesFor(Block)
 	 */
@@ -100,7 +96,7 @@ public enum DropsRegistry implements UBDropsRegistry {
 
 	/**
 	 * Add random drops for the given stone into the {@code drops} list.
-	 * 
+	 *
 	 * @param drops
 	 * @param stone
 	 * @param world

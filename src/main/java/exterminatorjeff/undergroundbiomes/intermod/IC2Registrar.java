@@ -5,13 +5,7 @@ package exterminatorjeff.undergroundbiomes.intermod;
 
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
-import java.util.ArrayList;
-import java.util.List;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 

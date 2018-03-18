@@ -1,14 +1,12 @@
 package exterminatorjeff.undergroundbiomes.api;
 
-import exterminatorjeff.undergroundbiomes.api.StrataLayer;
 import com.google.common.base.Preconditions;
-
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

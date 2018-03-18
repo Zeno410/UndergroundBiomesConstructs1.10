@@ -1,14 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.itemblock;
 
 import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.minecraft.util.*;
-import org.apache.commons.lang3.StringUtils;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBItem;
 import exterminatorjeff.undergroundbiomes.api.common.Variable;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
@@ -26,10 +18,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author LouisDB

@@ -1,6 +1,6 @@
 /*
  * This file is part of Bukkit, licensed under the GPLv3 License
- * 
+ *
  * Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,9 +18,9 @@
  */
 package exterminatorjeff.undergroundbiomes.world.noise;
 
-import java.util.Random;
-
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 /**
  * Generates simplex-based noise.

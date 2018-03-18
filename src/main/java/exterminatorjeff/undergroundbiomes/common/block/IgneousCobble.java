@@ -1,7 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
 import com.google.common.base.Predicate;
-
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

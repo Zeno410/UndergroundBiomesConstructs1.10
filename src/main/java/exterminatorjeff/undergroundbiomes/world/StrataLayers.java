@@ -1,14 +1,15 @@
 package exterminatorjeff.undergroundbiomes.world;
 
-import exterminatorjeff.undergroundbiomes.api.StrataLayer;
 import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.api.StrataLayer;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
-import java.util.ArrayList;
 import net.minecraft.init.Blocks;
 
+import java.util.ArrayList;
+
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -56,13 +57,13 @@ final class StrataLayers {
 		layers[11] = new StrataLayer[] { new StrataLayer(API.IGNEOUS_STONE, 5, 13, 22), new StrataLayer(API.METAMORPHIC_STONE, 6, 29, 36), new StrataLayer(API.METAMORPHIC_STONE, 3, 80, 128) };
 
 	}
-        
+
         private void cleanup() {
             for (int i = 0 ; i < 12; i ++) {
                 layers [i] = cleanedLayers(layers[i]);
             }
         }
-        
+
         private StrataLayer [] cleanedLayers(StrataLayer [] toClean) {
             // removes disallowed layers
             ArrayList<StrataLayer> kept = new ArrayList();

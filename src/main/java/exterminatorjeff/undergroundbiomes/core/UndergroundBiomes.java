@@ -1,8 +1,6 @@
 package exterminatorjeff.undergroundbiomes.core;
 
 import exterminatorjeff.undergroundbiomes.api.API;
-import org.apache.logging.log4j.Level;
-
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import net.minecraftforge.fml.common.Mod;
@@ -12,12 +10,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import org.apache.logging.log4j.Level;
 
 /**
  * The main class
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -34,7 +32,7 @@ public class UndergroundBiomes {
 	}
 
 	/*
-	 * 
+	 *
 	 */
 
 	private static final UBLogger LOGGER = new UBLogger(UndergroundBiomes.class, Level.INFO);
@@ -65,7 +63,7 @@ public class UndergroundBiomes {
 
 		LOGGER.info("Post-init done!");
 	}
-        
+
         @EventHandler
         public void serverStopped(FMLServerStoppedEvent event) {
             PROXY.onServerStopped(event);

@@ -1,13 +1,13 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
-import java.util.Set;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+
+import java.util.Set;
 
 /**
  * Underground Biomes settings.<br>
  * See the UB configuration file for more information.
- * 
+ *
  * @author LouisDB
  *
  */
@@ -98,9 +98,9 @@ public interface UBSettings {
 	 */
 
 	boolean plainSlabTextures();
-        
+
         boolean alternativeSlabTextures();
-        
+
         boolean generationAllowed(IBlockState block);
 
 }

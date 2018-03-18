@@ -5,7 +5,7 @@ package exterminatorjeff.undergroundbiomes.world;
 
 import exterminatorjeff.undergroundbiomes.api.UBBiome;
 import exterminatorjeff.undergroundbiomes.api.UndergroundBiomeSet;
-import net.minecraft.world.gen.layer.*;
+import net.minecraft.world.gen.layer.GenLayer;
 
 public class GenLayerUndergroundBiomes extends GenLayer{
     /** this sets all the biomes that are allowed to appear in the overworld */
@@ -36,7 +36,7 @@ public class GenLayerUndergroundBiomes extends GenLayer{
                     for (int i = 0; i < this.allowedBiomes.length; i++) {
                         result += " " + allowedBiomes[i].ID;
                     }
-                    if (result.length()>0) throw new RuntimeException(result);                    
+                    if (result.length()>0) throw new RuntimeException(result);
                 }
             }
         }

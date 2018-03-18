@@ -1,17 +1,17 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
-import java.util.List;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 /**
  * A {@link FunctionalInterface} used to get the drops of an UB stone.
- * 
+ *
  * @author LouisDB
- * 
+ *
  * @see UBDropsRegistry
  *
  */
@@ -21,7 +21,7 @@ public interface DropSource {
 	/**
 	 * Add drops to the list based on coordinates (usually height), state,
 	 * fortune level and randomness.
-	 * 
+	 *
 	 * @param drops
 	 * @param world
 	 * @param pos

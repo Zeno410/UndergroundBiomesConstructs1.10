@@ -1,21 +1,16 @@
 package exterminatorjeff.undergroundbiomes.intermod;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.common.UBStonesRegistry;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
-import exterminatorjeff.undergroundbiomes.api.names.ButtonEntry;
-import exterminatorjeff.undergroundbiomes.api.names.Entry;
-import exterminatorjeff.undergroundbiomes.api.names.SlabEntry;
-import exterminatorjeff.undergroundbiomes.api.names.StairsEntry;
-import exterminatorjeff.undergroundbiomes.api.names.StoneEntry;
-import exterminatorjeff.undergroundbiomes.api.names.WallEntry;
+import exterminatorjeff.undergroundbiomes.api.names.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 
+ *
  * @author LouisDB
  *
  */

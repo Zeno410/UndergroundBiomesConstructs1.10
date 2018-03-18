@@ -1,15 +1,16 @@
 package exterminatorjeff.undergroundbiomes.common.block.slab;
 
-import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.*;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 
+import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.SEDIMENTARY_VARIANTS;
+import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.SEDIMENTARY_VARIANT_PROPERTY;
+
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

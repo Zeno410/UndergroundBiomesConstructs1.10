@@ -1,10 +1,10 @@
 package exterminatorjeff.undergroundbiomes.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Common superclass for all type of settings.
@@ -28,7 +28,7 @@ abstract class Setting<T> {
 
 	/**
 	 * Initialize the property.
-	 * 
+	 *
 	 * @param configuration
 	 * @param defaultValue
 	 * @param comment
@@ -57,7 +57,7 @@ abstract class Setting<T> {
 	protected abstract void setValue(T value);
 
 	/**
-	 * 
+	 *
 	 * @return The value of the property
 	 */
 	public abstract T getValue();
@@ -74,7 +74,7 @@ abstract class Setting<T> {
 
 	/**
 	 * Add a tracker and update it right away.
-	 * 
+	 *
 	 * @param tracker
 	 */
 	public final void addTrackerAndUpdate(SettingTracker<T> tracker) {

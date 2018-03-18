@@ -2,9 +2,10 @@ package exterminatorjeff.undergroundbiomes.config;
 /*
  */
 
-import java.io.File;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import java.io.File;
 
 /**
  * This class manages overall and world-specific configs
@@ -18,7 +19,7 @@ public class ConfigManager {
     private UBConfig generalSettings;
     private File worldConfigFile;
     private UBConfig worldSpecific;
-    
+
     public ConfigManager(FMLPreInitializationEvent event) {
         this(new UBConfig(),
                 event.getSuggestedConfigurationFile());
@@ -46,7 +47,7 @@ public class ConfigManager {
         // refresh general for hot changes
         generalSettings = new UBConfig();
         generalSettings.init(generalConfigFile);
-        
+
         if ((worldConfigFile== null)||(!newFile.getAbsolutePath().equals(worldConfigFile.getAbsolutePath()))) {
             worldConfigFile = newFile;
             if (usable(worldConfigFile)) {
@@ -92,5 +93,5 @@ public class ConfigManager {
     public void setWorldFile(WorldServer server) {
         setWorldFile(server.getChunkSaveLocation());
     }
-    
+
 }

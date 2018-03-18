@@ -1,7 +1,5 @@
 package exterminatorjeff.undergroundbiomes.core;
 
-import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant;
 import exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant;
@@ -10,48 +8,11 @@ import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.common.ButtonRecipe;
 import exterminatorjeff.undergroundbiomes.common.RegularStoneRecipe;
 import exterminatorjeff.undergroundbiomes.common.UBFuelHandler;
-import exterminatorjeff.undergroundbiomes.common.block.IgneousBrick;
-import exterminatorjeff.undergroundbiomes.common.block.IgneousCobble;
-import exterminatorjeff.undergroundbiomes.common.block.IgneousStone;
-import exterminatorjeff.undergroundbiomes.common.block.MetamorphicBrick;
-import exterminatorjeff.undergroundbiomes.common.block.MetamorphicCobble;
-import exterminatorjeff.undergroundbiomes.common.block.MetamorphicStone;
-import exterminatorjeff.undergroundbiomes.common.block.SedimentaryStone;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonIgneous;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonIgneousBrick;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonIgneousCobble;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonMetamorphic;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonMetamorphicBrick;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonMetamorphicCobble;
-import exterminatorjeff.undergroundbiomes.common.block.button.UBButtonSedimentary;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBIgneousBrickSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBIgneousBrickSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBIgneousCobbleSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBIgneousCobbleSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBIgneousStoneSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBIgneousStoneSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBMetamorphicBrickSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBMetamorphicBrickSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBMetamorphicCobbleSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBMetamorphicCobbleSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBMetamorphicStoneSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBMetamorphicStoneSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBSedimentaryStoneSlabDouble;
-import exterminatorjeff.undergroundbiomes.common.block.slab.UBSedimentaryStoneSlabHalf;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsIgneous;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsIgneousBrick;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsIgneousCobble;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsMetamorphic;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsMetamorphicBrick;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsMetamorphicCobble;
-import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStairsSedimentary;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallIgneous;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallIgneousBrick;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallIgneousCobble;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallMetamorphic;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallMetamorphicBrick;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallMetamorphicCobble;
-import exterminatorjeff.undergroundbiomes.common.block.wall.UBWallSedimentary;
+import exterminatorjeff.undergroundbiomes.common.block.*;
+import exterminatorjeff.undergroundbiomes.common.block.button.*;
+import exterminatorjeff.undergroundbiomes.common.block.slab.*;
+import exterminatorjeff.undergroundbiomes.common.block.stairs.*;
+import exterminatorjeff.undergroundbiomes.common.block.wall.*;
 import exterminatorjeff.undergroundbiomes.common.item.ItemFossilPiece;
 import exterminatorjeff.undergroundbiomes.common.item.ItemLigniteCoal;
 import exterminatorjeff.undergroundbiomes.common.itemblock.ButtonItemBlock;
@@ -60,10 +21,9 @@ import exterminatorjeff.undergroundbiomes.common.itemblock.StairsItemBlock;
 import exterminatorjeff.undergroundbiomes.config.ConfigManager;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
+import exterminatorjeff.undergroundbiomes.intermod.IC2Registrar;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
-import java.io.File;
-import java.util.ArrayList;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -71,24 +31,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import exterminatorjeff.undergroundbiomes.intermod.IC2Registrar;
+import java.io.File;
+import java.util.ArrayList;
+
+import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
 public class CommonProxy {
     private ConfigManager configManager;
     private DimensionManager dimensionManager;
-        
+
 	public void preInit(FMLPreInitializationEvent event) {
 		API.STONES_REGISTRY = StonesRegistry.INSTANCE;
 		API.ORES_REGISTRY = OresRegistry.INSTANCE;
@@ -102,7 +61,7 @@ public class CommonProxy {
 		createBlocks();
 		createItems();
 		createOres();
-                
+
                 try {
                     new IC2Registrar().register();
                 } catch (java.lang.NoClassDefFoundError ignored) {
@@ -124,7 +83,7 @@ public class CommonProxy {
 	public void postInit(FMLPostInitializationEvent e) {
 		MinecraftForge.EVENT_BUS.register(dimensionManager);
 	}
-        
+
         public void serverLoad(FMLServerAboutToStartEvent event) {
             //logger.info("server starting");
             File worldSaveDirectory = null;
@@ -144,15 +103,15 @@ public class CommonProxy {
                 configManager.setWorldFile(worldLocation);
             } catch (NullPointerException e) {
                 throw e;
-            }    
+            }
             dimensionManager.refreshManagers();
         }
-        
+
         public void onServerStopped(FMLServerStoppedEvent event) {
             // for some reason onWorldLoad is running before any of the ServerStartxxx events
             // so I'm having to use a clunky workaround.
-            dimensionManager.clearWorldManagers();   
-            OresRegistry.INSTANCE.recheckPile();     
+            dimensionManager.clearWorldManagers();
+            OresRegistry.INSTANCE.recheckPile();
             for (Runnable action: serverCloseActions) {
                 action.run();
             }
@@ -162,7 +121,7 @@ public class CommonProxy {
             oneShotServerCloseActions.clear();
 
         }
-        
+
     public void runOnServerClose(Runnable action) {
         serverCloseActions.add(action);
     }
@@ -275,12 +234,12 @@ public class CommonProxy {
 			}
 			if (UBConfig.SPECIFIC.sedimentaryStairsOn())
 				API.SEDIMENTARY_STONE_STAIRS.register(new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
-		
-                        
-                
-                }  
+
+
+
+                }
 	}
-        
+
 	private final void createItems() {
 		API.LIGNITE_COAL.register(new ItemLigniteCoal());
 		API.FOSSIL_PIECE.register(new ItemFossilPiece());
@@ -295,7 +254,7 @@ public class CommonProxy {
 		OresRegistry.INSTANCE.requestOreSetup(Blocks.REDSTONE_ORE);
 		OresRegistry.INSTANCE.requestOreSetup(Blocks.LAPIS_ORE);
 	}
-        
+
     public void addOreDicts() {
         // wildcarding is not working
         for (int i = 0; i<8 ; i++) {
@@ -426,7 +385,7 @@ public class CommonProxy {
 		}
 
 		/*
-		 * 
+		 *
 		 */
 
 		if (UBConfig.SPECIFIC.ubifyRecipes()) {

@@ -1,10 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.block.button;
 
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
-
-import java.util.List;
-import java.util.Random;
-
 import exterminatorjeff.undergroundbiomes.common.UBSubBlock;
 import exterminatorjeff.undergroundbiomes.common.itemblock.ButtonItemBlock;
 import net.minecraft.block.Block;
@@ -23,6 +19,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 /**
  * 1 instance = 8 variants + powered -> fill 16 metadatas<br>

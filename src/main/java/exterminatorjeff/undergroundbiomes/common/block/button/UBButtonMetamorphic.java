@@ -1,17 +1,17 @@
 package exterminatorjeff.undergroundbiomes.common.block.button;
 
+import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.common.block.UBStone;
+import exterminatorjeff.undergroundbiomes.common.itemblock.ButtonItemBlock;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 
-import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.*;
-
-import exterminatorjeff.undergroundbiomes.api.API;
-import exterminatorjeff.undergroundbiomes.common.block.UBStone;
-import exterminatorjeff.undergroundbiomes.common.itemblock.ButtonItemBlock;
+import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.METAMORPHIC_VARIANTS;
+import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.METAMORPHIC_VARIANT_PROPERTY;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

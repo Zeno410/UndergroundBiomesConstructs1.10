@@ -1,24 +1,24 @@
 package exterminatorjeff.undergroundbiomes.world;
 
-import exterminatorjeff.undergroundbiomes.api.UBBiome;
-import java.util.ArrayList;
-import java.util.List;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.StrataLayer;
+import exterminatorjeff.undergroundbiomes.api.UBBiome;
 import exterminatorjeff.undergroundbiomes.api.UndergroundBiomeSet;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * All underground biomes
- * 
+ *
  * @author CurtisA, LouisDB
  */
 public final class UBBiomesSet extends UndergroundBiomeSet {
-    
+
     private final UBSettings settings;
 	private final UBBiome[] biomes;
         private final List<UBBiome> biomesBuilder = new ArrayList<>();
@@ -84,9 +84,9 @@ public final class UBBiomesSet extends UndergroundBiomeSet {
                 biomesBuilder.add(biome);
                 ID++;
             }
-            
+
         }
-        
+
     public UBBiome [] generatable(UBBiome[] possible) {
         ArrayList<UBBiome> accepted = new ArrayList<UBBiome>();
         for (int i = 0; i < possible.length; i++) {

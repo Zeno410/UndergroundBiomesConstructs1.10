@@ -1,24 +1,18 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
-import static org.apache.logging.log4j.Level.FATAL;
-import static org.apache.logging.log4j.Level.ERROR;
-import static org.apache.logging.log4j.Level.WARN;
-import static org.apache.logging.log4j.Level.INFO;
-import static org.apache.logging.log4j.Level.DEBUG;
-import static org.apache.logging.log4j.Level.TRACE;
-
+import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import exterminatorjeff.undergroundbiomes.api.API;
-import exterminatorjeff.undergroundbiomes.api.ModInfo;
+import static org.apache.logging.log4j.Level.*;
 
 /**
  * Logger for UB, useful for debugging.<br>
  * <br>
  * For this to work properly, you must edit the Forge Log4j configuration file:
- * 
+ *
  * <pre>
  * {@code
  * <Logger level="all" name="Underground Biomes" additivity="false">
@@ -26,15 +20,15 @@ import exterminatorjeff.undergroundbiomes.api.ModInfo;
  * </Logger>
  * }
  * </pre>
- * 
+ *
  * And put it in the working directory.<br>
  * <br>
  * Also you must add this VM argument :
- * 
+ *
  * <pre>
  * -Dlog4j.configurationFile=path/to/log4j2.xml
  * </pre>
- * 
+ *
  * @author LouisDB
  *
  */

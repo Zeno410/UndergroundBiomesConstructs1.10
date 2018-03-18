@@ -1,12 +1,8 @@
 package exterminatorjeff.undergroundbiomes.common.block.slab;
 
-import java.util.List;
-import java.util.Random;
-
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.UBSubBlock;
 import exterminatorjeff.undergroundbiomes.common.itemblock.SlabItemBlock;
-import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -26,6 +22,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  *

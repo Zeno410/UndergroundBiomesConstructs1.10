@@ -1,7 +1,5 @@
 package exterminatorjeff.undergroundbiomes.common.block.wall;
 
-import java.util.List;
-
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.UBSubBlock;

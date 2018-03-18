@@ -1,29 +1,19 @@
 package exterminatorjeff.undergroundbiomes.world;
 
-import exterminatorjeff.undergroundbiomes.api.API;
-import exterminatorjeff.undergroundbiomes.api.StrataLayer;
 import exterminatorjeff.undergroundbiomes.api.UBBiome;
 import exterminatorjeff.undergroundbiomes.api.UBStrataColumn;
 import exterminatorjeff.undergroundbiomes.api.UBStrataColumnProvider;
 import exterminatorjeff.undergroundbiomes.api.UndergroundBiomeSet;
-import org.apache.logging.log4j.Level;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.common.block.slab.UBStoneSlab;
 import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStoneStairs;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
-import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
 import exterminatorjeff.undergroundbiomes.world.noise.SimplexNoiseGenerator;
 import exterminatorjeff.undergroundbiomes.world.noise.Voronoi;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockDynamicLiquid;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
+import net.minecraft.block.*;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -33,17 +23,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraft.world.gen.structure.StructureStart;
-import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
-import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID;
+import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
+import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.Level;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -82,7 +73,7 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 
 		if (world.provider.getDimension() == dimensionID && !worldLoaded) {
 			LOGGER.debug("Dimension " + dimensionID + " loaded");
-                        
+
 			worldLoaded = true;
 
 			seed = (int) world.getSeed();
@@ -149,9 +140,9 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 	/**
 	 * Currently this event is not fired for every village structures block. It
 	 * will probably be fixed by Forge or Mojang.
-	 * 
+	 *
 	 * @param event
-	 * 
+	 *
 	 * @see MinecraftForge/MinecraftForge#3257
 	 */
 	@SubscribeEvent
@@ -186,7 +177,7 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 			// More ?
                         if (event.getReplacement() == null) {
                             //event.setReplacement(Blocks.END_STONE.getDefaultState());
-                            
+
                         }
                         if (event.getReplacement()!=null &&event.getReplacement().getBlock().equals(Blocks.COBBLESTONE)) {
                             throw new RuntimeException();
@@ -195,25 +186,25 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 			if (event.getReplacement() != null) {
 				event.setResult(Result.DENY);
 				LOGGER.trace("Replaced village block " + originalBlock.getRegistryName() + " with " + event.getReplacement().getBlock().getRegistryName());
-			} else {        
+			} else {
                             if (event.getOriginal().getBlock() == Blocks.WOODEN_SLAB) {
             return;
         }
         if (event.getOriginal().getBlock() == Blocks.LOG) {
             return;
-        } 
+        }
         if (event.getOriginal().getBlock() == Blocks.PLANKS) {
             return;
-        } 
+        }
         if (event.getOriginal().getBlock() == Blocks.STONE_SLAB) {
             return;
-        }   
+        }
         if (event.getOriginal().getBlock() == Blocks.DOUBLE_STONE_SLAB) {
             return;
-        } 
+        }
         if (event.getOriginal().getBlock() == Blocks.GLASS_PANE) {
             return;
-        }   
+        }
         if (event.getOriginal().getBlock() == Blocks.AIR) {
             return;
         }
@@ -283,11 +274,11 @@ public final class WorldGenManager implements UBStrataColumnProvider {
         if (event.getOriginal().getBlock() == Blocks.GRASS_PATH) {
             return;
         }
-        
+
         if (event.getOriginal().getBlock() == Blocks.GRAVEL) {
             return;
         }
-        
+
         if (originalBlock instanceof UBStone) {
             return;
         }
@@ -316,6 +307,6 @@ public final class WorldGenManager implements UBStrataColumnProvider {
     public UBStrataColumn strataColumn(int x, int z) {
         return this.stoneReplacer.strataColumn(x, z);
     }
-        
+
 
 }

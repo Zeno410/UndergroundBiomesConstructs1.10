@@ -1,14 +1,7 @@
 package exterminatorjeff.undergroundbiomes.config;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.logging.log4j.Level;
-
 import com.google.common.collect.ImmutableSet;
 import exterminatorjeff.undergroundbiomes.api.API;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant;
@@ -17,18 +10,22 @@ import exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant;
 import exterminatorjeff.undergroundbiomes.api.names.BlockAccess;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import exterminatorjeff.undergroundbiomes.api.names.VanillaBlockAccess;
-import java.io.File;
-import java.util.HashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.Level;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -37,7 +34,7 @@ public class UBConfig implements UBSettings {
 
 	static final UBLogger LOGGER = new UBLogger(UBConfig.class, Level.DEBUG);
 
-	private Configuration configuration;    
+	private Configuration configuration;
         private final HashMap<BlockAccess,HashMap<Integer,BooleanSetting>> stoneGenerationSettings =
             new HashMap();
 
@@ -87,19 +84,19 @@ public class UBConfig implements UBSettings {
 	public final BooleanSetting disableVanillaStoneVariants = new BooleanSetting(CATEGORY_MISCELLANEOUS, "DisableVanillaStoneVariants");
 
 	/*
-	 * 
+	 *
 	 */
 
-        public UBConfig() {        
+        public UBConfig() {
              setActivations(API.IGNEOUS_STONE,"igneous stone",IgneousVariant.values());
              setActivations(API.METAMORPHIC_STONE,"metamorphic stone",MetamorphicVariant.values());
              setActivations(API.SEDIMENTARY_STONE,"sedimentary stone",SedimentaryVariant.values());
              setActivation(Blocks.SAND,0);
              setActivation(Blocks.SANDSTONE,0);
              setActivation(Blocks.STONE,0);
-            
+
         }
-        
+
         private void setActivations(BlockEntry block, String type, IStringSerializable [] names) {
              HashMap<Integer,BooleanSetting> blockActivations = new HashMap();
              this.stoneGenerationSettings.put(block, blockActivations);
@@ -109,18 +106,18 @@ public class UBConfig implements UBSettings {
                  blockActivations.put(i, generationConfig);
              }
         }
-        
+
         private void setActivation(Block block, int metadata) {
             HashMap<Integer,BooleanSetting> blockActivations = new HashMap();
             this.stoneGenerationSettings.put(new VanillaBlockAccess(block), blockActivations);
             BooleanSetting generationConfig = new BooleanSetting(CATEGORY_GENERATION, "Generate "+ block.getUnlocalizedName() +", metadata " + metadata);
             blockActivations.put(metadata, generationConfig);
         }
-        
+
 	/**
 	 * Must be called be called in pre-init and before any blocks or items are
 	 * created.
-	 * 
+	 *
 	 * @param event
 	 */
 	public void init(File file) {
@@ -130,7 +127,7 @@ public class UBConfig implements UBSettings {
 		configuration.load();
 
 		/*
-		 *  
+		 *
 		 */
 
 		crashOnProblems.initProperty(configuration, false, "Crash rather than try to get by when encountering problems");
@@ -165,7 +162,7 @@ public class UBConfig implements UBSettings {
 
 		changeButtonRecipe.initProperty(configuration, 8, "Change the result of the button recipe\n" + "Default: 8");
 		disableVanillaStoneVariants.initProperty(configuration, false, "Remove vanilla andesite, diorite, and granite");
-                
+
                 for (HashMap<Integer,BooleanSetting> blockActivations: stoneGenerationSettings.values()) {
                     for (BooleanSetting setting: blockActivations.values()) {
                         setting.initProperty(configuration, Boolean.TRUE, "");
@@ -173,7 +170,7 @@ public class UBConfig implements UBSettings {
                 }
 
 		/*
-		 * 
+		 *
 		 */
 
 		realistic.addOverride(true, wallsStyles, 2).addOverride(true, buttonsStyles, 1).addOverride(true, stairsStyles, 6) //
@@ -199,7 +196,7 @@ public class UBConfig implements UBSettings {
         public void copy(UBConfig copied) {
 
 		/*
-		 *  
+		 *
 		 */
 
 		crashOnProblems.setValue(copied.crashOnProblems.getValue());
@@ -231,17 +228,17 @@ public class UBConfig implements UBSettings {
 		wallsOn.setValue(copied.wallsOn());
 		wallsTypes.setValue(copied.wallsTypes.getValue());
 		wallsStyles.setValue(copied.wallsStyles.getValue());
-		
+
 		changeButtonRecipe.setValue(copied.changeButtonRecipe.getValue());
                 disableVanillaStoneVariants.setValue(copied.disableVanillaStoneVariants());
 
 		/*
-		 * 
+		 *
 		 */
 
 		realistic.addOverride(true, wallsStyles, 2).addOverride(true, buttonsStyles, 1).addOverride(true, stairsStyles, 6) //
 				.addOverride(true, disableVanillaStoneVariants, true);
-                
+
                 // copy block generation settings
                 for (BlockAccess blockAccess: copied.stoneGenerationSettings.keySet()) {
                     Block block = blockAccess.getBlock();
@@ -249,7 +246,7 @@ public class UBConfig implements UBSettings {
                         if (localAccess.getBlock().equals(block)) {
                             HashMap<Integer,BooleanSetting> copiedSettings = copied.stoneGenerationSettings.get(blockAccess);
                             HashMap<Integer,BooleanSetting> thisSettings = this.stoneGenerationSettings.get(localAccess);
-                            
+
                             copiedSettings.keySet().stream().forEach((metadata) -> {
                                 thisSettings.get(metadata).setValue(copiedSettings.get(metadata).getValue());
                             });
@@ -271,13 +268,13 @@ public class UBConfig implements UBSettings {
 			excludedDimensionsSet = ImmutableSet.of();
 		}
 	}
-        
+
         public void save() {
             configuration.save();
         }
 	/**
 	 * Get the dimensions to generate UB stones into.
-	 * 
+	 *
 	 * @return A list of dimension ID
 	 */
 	public List<Integer> getUBifiedDimensions() {
@@ -534,13 +531,13 @@ public class UBConfig implements UBSettings {
             int metadata = block.getBlock().getMetaFromState(block);
             return generationAllowed(block.getBlock(),metadata);
         }
-        
+
     public final boolean generationAllowed(BlockEntry block, int metadata) {
         HashMap<Integer,BooleanSetting> info = stoneGenerationSettings.get(block);
         if (info == null) return true;
         return info.get(metadata).getValue();
     }
-    
+
     public final boolean generationAllowed(Block block, int metadata) {
         for (BlockAccess access: stoneGenerationSettings.keySet()) {
             if (access.getBlock().equals(block)) {

@@ -1,12 +1,12 @@
 package exterminatorjeff.undergroundbiomes.common.block.button;
 
-import net.minecraft.util.EnumFacing;
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.common.itemblock.ButtonItemBlock;
+import net.minecraft.util.EnumFacing;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

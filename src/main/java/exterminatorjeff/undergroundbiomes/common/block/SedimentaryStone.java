@@ -1,10 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
 import com.google.common.base.Predicate;
-import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.*;
-
-import java.util.Random;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
@@ -13,14 +9,17 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
+import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.*;
+
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -73,14 +72,14 @@ public class SedimentaryStone extends UBStone {
 		else
 			return super.getItemDropped(state, rand, fortune);
 	}
-        
+
 	@Override
 	public int damageDropped(IBlockState state) {
 		if (state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE) {
                     return 0;
                 }
 		return super.damageDropped(state);
-	}        
+	}
 
 	@Override
 	public boolean isFortuneAffected(IBlockState state) {
@@ -96,13 +95,13 @@ public class SedimentaryStone extends UBStone {
 	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
 		return getBaseResistance() * world.getBlockState(pos).getValue(SEDIMENTARY_VARIANT_PROPERTY).getResistance();
 	}
-        
+
     @Override
     public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target) {
         OresRegistry.INSTANCE.setRecheck(world, pos);
         return super.isReplaceableOreGen(state, world, pos, target); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public UBStone baseStone() {
         return this;

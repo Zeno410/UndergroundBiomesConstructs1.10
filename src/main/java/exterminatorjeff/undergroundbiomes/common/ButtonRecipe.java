@@ -1,7 +1,5 @@
 package exterminatorjeff.undergroundbiomes.common;
 
-import org.apache.logging.log4j.Level;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.config.SettingTracker;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
@@ -10,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import org.apache.logging.log4j.Level;
 
 /**
  *

@@ -1,15 +1,9 @@
 package exterminatorjeff.undergroundbiomes.common.itemblock;
 
-import java.lang.reflect.InvocationTargetException;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBButton;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.block.button.UBStoneButton;
-
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +13,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 /**
  * @author LouisDB

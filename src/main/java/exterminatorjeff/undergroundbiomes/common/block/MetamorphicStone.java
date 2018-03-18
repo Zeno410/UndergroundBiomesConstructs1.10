@@ -2,16 +2,10 @@ package exterminatorjeff.undergroundbiomes.common.block;
 
 import com.google.common.base.Predicate;
 import exterminatorjeff.undergroundbiomes.api.API;
-import exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant;
-import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.*;
-
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
 import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
-import java.util.ArrayList;
-import java.util.List;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -22,8 +16,13 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.*;
+
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
@@ -99,7 +98,7 @@ public class MetamorphicStone extends UBStone {
         OresRegistry.INSTANCE.setRecheck(world, pos);
         return super.isReplaceableOreGen(state, world, pos, target); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public UBStone baseStone() {
         return this;

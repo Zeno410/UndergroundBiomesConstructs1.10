@@ -1,19 +1,18 @@
 package exterminatorjeff.undergroundbiomes.api.names;
 
-import org.apache.logging.log4j.Level;
-
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.apache.logging.log4j.Level;
 
 /**
  * Common superclass for all type of entries.<br>
  * Allows a {@link Block} or {@link Item} to be registered, as well as its
  * model, and provides and access for other mods.
- * 
+ *
  * @author LouisDB
  *
  * @param <T>
@@ -31,7 +30,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return <code>true</code> if this {@link Entry} is registered,
 	 *         <code>false</code> otherwise.
 	 */
@@ -40,7 +39,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return The thing or <code>null</code>.
 	 */
 	protected final T getThing() {
@@ -51,7 +50,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
 
 	/**
 	 * Register item/block
-	 * 
+	 *
 	 * @param thing
 	 */
 	public final void register(T thing) {
@@ -67,7 +66,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
 
 	/**
 	 * Register item(s)/block(s) model.
-	 * 
+	 *
 	 * @param stateMapper
 	 */
 	public final void registerModel(IStateMapper stateMapper) {
@@ -84,7 +83,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
 
 	/**
 	 * Prepend the mod ID to the internal name.
-	 * 
+	 *
 	 * @param internalName
 	 * @return MODID:internalName
 	 */

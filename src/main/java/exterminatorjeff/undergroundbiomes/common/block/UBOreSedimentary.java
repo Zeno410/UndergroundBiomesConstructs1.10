@@ -1,15 +1,16 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
-import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.*;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.SEDIMENTARY_VARIANT_PROPERTY;
+import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.values;
 
 /**
  *

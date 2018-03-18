@@ -2,14 +2,11 @@
  */
 
 package exterminatorjeff.undergroundbiomes.world;
+
 import exterminatorjeff.undergroundbiomes.api.UBBiome;
 import exterminatorjeff.undergroundbiomes.world.noise.SimplexNoiseGenerator;
 import exterminatorjeff.undergroundbiomes.world.noise.Voronoi;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 
 public class SimpleStoneReplacer extends UBStoneReplacer {
 
@@ -24,7 +21,7 @@ public class SimpleStoneReplacer extends UBStoneReplacer {
             voronoi.setSeed((int)seed);
             voronoi.setFrequency(0.05D / biomeSize);
 	}
-        
+
         /**enManager mana
 	 * @param value
 	 * @param n

@@ -2,15 +2,16 @@
  */
 
 package exterminatorjeff.undergroundbiomes.world;
+
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.UBBiome;
 import exterminatorjeff.undergroundbiomes.api.UndergroundBiomeSet;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.api.names.StoneEntry;
-import exterminatorjeff.undergroundbiomes.config.UBConfig;
-import java.util.ArrayList;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+
+import java.util.ArrayList;
 
 /**
  *

@@ -1,29 +1,26 @@
 package exterminatorjeff.undergroundbiomes.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.logging.log4j.Level;
-
 import com.google.common.collect.Lists;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.names.StoneEntry;
 import exterminatorjeff.undergroundbiomes.config.SettingTracker;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
-import java.util.function.Consumer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import org.apache.logging.log4j.Level;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

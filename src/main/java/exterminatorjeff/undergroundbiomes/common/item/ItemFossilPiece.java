@@ -1,7 +1,5 @@
 package exterminatorjeff.undergroundbiomes.common.item;
 
-import java.util.List;
-
 import exterminatorjeff.undergroundbiomes.api.common.UBItem;
 import exterminatorjeff.undergroundbiomes.api.common.Variable;
 import exterminatorjeff.undergroundbiomes.api.enums.FossilVariant;

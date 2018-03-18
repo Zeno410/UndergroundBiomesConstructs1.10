@@ -2,19 +2,18 @@ package exterminatorjeff.undergroundbiomes.common.block;
 
 import com.google.common.base.Predicate;
 import exterminatorjeff.undergroundbiomes.api.API;
-
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
-import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */

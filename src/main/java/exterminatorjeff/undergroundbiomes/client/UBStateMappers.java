@@ -1,7 +1,5 @@
 package exterminatorjeff.undergroundbiomes.client;
 
-import org.apache.commons.lang3.StringUtils;
-
 import exterminatorjeff.undergroundbiomes.common.block.UBOre;
 import exterminatorjeff.undergroundbiomes.common.block.button.UBStoneButton;
 import exterminatorjeff.undergroundbiomes.common.block.slab.UBStoneSlab;
@@ -10,9 +8,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import org.apache.commons.lang3.StringUtils;
 
 /**
- * 
+ *
  * @author LouisDB
  *
  */

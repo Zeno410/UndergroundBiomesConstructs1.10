@@ -4,21 +4,16 @@ import exterminatorjeff.undergroundbiomes.api.common.UBDropsRegistry;
 import exterminatorjeff.undergroundbiomes.api.common.UBOresRegistry;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.api.common.UBStonesRegistry;
-import exterminatorjeff.undergroundbiomes.api.names.ButtonEntry;
-import exterminatorjeff.undergroundbiomes.api.names.ItemEntry;
-import exterminatorjeff.undergroundbiomes.api.names.SlabEntry;
-import exterminatorjeff.undergroundbiomes.api.names.StairsEntry;
-import exterminatorjeff.undergroundbiomes.api.names.StoneEntry;
-import exterminatorjeff.undergroundbiomes.api.names.WallEntry;
+import exterminatorjeff.undergroundbiomes.api.names.*;
 
 /**
  * Static access to Underground Biomes API.
- * 
+ *
  * @author CurtisA, LouisDB
  *
  */
 public final class API {
-    
+
     public static String VERSION = "1.0.0";
 
 	public static UBStonesRegistry STONES_REGISTRY;

@@ -1,18 +1,14 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
-import java.util.List;
-
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
-import exterminatorjeff.undergroundbiomes.api.names.ButtonEntry;
-import exterminatorjeff.undergroundbiomes.api.names.SlabEntry;
-import exterminatorjeff.undergroundbiomes.api.names.StairsEntry;
-import exterminatorjeff.undergroundbiomes.api.names.StoneEntry;
-import exterminatorjeff.undergroundbiomes.api.names.WallEntry;
+import exterminatorjeff.undergroundbiomes.api.names.*;
+
+import java.util.List;
 
 /**
  * Utility methods to access Underground Biomes content.
- * 
+ *
  * @author LouisDB
  *
  */

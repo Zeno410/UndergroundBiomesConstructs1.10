@@ -3,11 +3,10 @@ package exterminatorjeff.undergroundbiomes.common;
 import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
-import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 
 /**
  * Common interface for UB blocks.
- * 
+ *
  * @author LouisDB
  *
  */

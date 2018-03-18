@@ -2,7 +2,6 @@ package exterminatorjeff.undergroundbiomes.network;
 
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
-import exterminatorjeff.undergroundbiomes.core.UndergroundBiomes;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -12,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * 
+ *
  * @author LouisDB
  *
  */
