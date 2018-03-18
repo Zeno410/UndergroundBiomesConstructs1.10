@@ -1,0 +1,70 @@
+def variant_textures = [
+  stone : '',
+  brick : 'brick',
+  cobble: 'cobble'
+]
+def stones = [
+  sedimentary: [
+    variants  : ['stone'],
+    create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
+    create_for: ['stone': ['button']],
+    types     : ['limestone', 'chalk', 'shale', 'siltstone', 'lignite', 'dolomite', 'greywacke', 'chert']
+  ],
+  metamorphic: [
+    variants  : ['brick', 'cobble', 'stone'],
+    create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
+    create_for: ['stone' : ['button', 'halfslab_alt', 'fullslab_alt'],
+                 'cobble': ['button']],
+    types     : ['gneiss', 'eclogite', 'marble', 'quartzite', 'blueschist', 'greenschist', 'soapstone', 'migmatite']
+  ],
+  igneous    : [
+    variants  : ['brick', 'cobble', 'stone'],
+    create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
+    create_for: ['stone': ['button', 'halfslab_alt', 'fullslab_alt'],
+                 'cobble': ['button']],
+    types     : ['red_granite', 'black_granite', 'rhyolite', 'andesite', 'gabbro', 'basalt', 'komatiite', 'dacite']
+  ]
+]
+
+task processResourceTemplates(type: Copy, group: "build", description: "Creates Resources from templates") {
+  doLast {
+    println sourceSets.main.resources.srcDirs
+  }
+}
+
+stones.each { key, value ->
+  value.variants.each { variant ->
+    task "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}"(type: Copy) {
+      from 'src/main/resources_templates'
+      into 'build/resources/main'
+      include '**/block.json'
+      rename '(.*)', "${key}_${variant}.json"
+      expand(types: value.types, texture_name: variant_textures[variant])
+    }
+    processResourceTemplates.dependsOn "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}"
+    value.create.each { item_type ->
+      task "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
+        from 'src/main/resources_templates'
+        into 'build/resources/main'
+        include "**/${item_type}.json"
+        rename '(.*)', "${key}_${variant}_${item_type}.json"
+        expand(types: value.types, texture_name: variant_textures[variant])
+      }
+      processResourceTemplates.dependsOn "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
+    }
+  }
+  value.create_for.each { variant, items ->
+    items.each { item_type ->
+      task "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
+        from 'src/main/resources_templates'
+        into 'build/resources/main'
+        include "**/${item_type}.json"
+        rename '(.*)', "${key}_${variant}_${item_type}.json"
+        expand(types: value.types, texture_name: variant_textures[variant])
+      }
+      processResourceTemplates.dependsOn "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
+    }
+  }
+}
+
+processResources.dependsOn processResourceTemplates
