@@ -8,27 +8,26 @@ import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
  * Common interface for UB blocks.
  *
  * @author LouisDB
- *
  */
 public interface UBSubBlock extends UBBlock {
 
-	default UBStoneType getStoneType() {
-		return baseStone().getStoneType();
-	}
+  default UBStoneType getStoneType() {
+    return baseStone().getStoneType();
+  }
 
-	@Override
-	default UBStoneStyle getStoneStyle() {
-		return baseStone().getStoneStyle();
-	}
+  @Override
+  default UBStoneStyle getStoneStyle() {
+    return baseStone().getStoneStyle();
+  }
 
-	@Override
-	default int getNbVariants() {
-		return baseStone().getNbVariants();
-	}
+  @Override
+  default int getNbVariants() {
+    return baseStone().getNbVariants();
+  }
 
-	@Override
-	default String getVariantName(int meta) {
-		return baseStone().getVariantName(meta);
-	}
+  @Override
+  default String getVariantName(int meta) {
+    return baseStone().getVariantName(meta);
+  }
 
 }

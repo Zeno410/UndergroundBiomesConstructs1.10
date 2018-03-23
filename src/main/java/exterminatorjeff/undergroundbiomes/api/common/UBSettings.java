@@ -9,98 +9,97 @@ import java.util.Set;
  * See the UB configuration file for more information.
  *
  * @author LouisDB
- *
  */
 public interface UBSettings {
 
-	/*
-	 * General
-	 */
+  /*
+   * General
+   */
 
-	boolean crashOnProblems();
+  boolean crashOnProblems();
 
-	boolean realistic();
+  boolean realistic();
 
-	boolean ubifyRecipes();
+  boolean ubifyRecipes();
 
-	boolean ubifyOres();
+  boolean ubifyOres();
 
-	int regularStoneCrafting();
+  int regularStoneCrafting();
 
-	float hardnessModifier();
+  float hardnessModifier();
 
-	float resistanceModifier();
+  float resistanceModifier();
 
-	int biomeSize();
+  int biomeSize();
 
-	int generationHeight();
+  int generationHeight();
 
-	boolean regularStoneBiomes();
+  boolean regularStoneBiomes();
 
-	boolean harmoniousStrata();
+  boolean harmoniousStrata();
 
-	Set<Integer> includedDimensions();
+  Set<Integer> includedDimensions();
 
-	Set<Integer> excludedDimensions();
+  Set<Integer> excludedDimensions();
 
-	boolean dimensionSpecificSeeds();
+  boolean dimensionSpecificSeeds();
 
-	boolean ubifyVillages();
+  boolean ubifyVillages();
 
-	boolean buttonsOn();
+  boolean buttonsOn();
 
-	boolean igneousButtonsOn();
+  boolean igneousButtonsOn();
 
-	boolean metamorphicButtonsOn();
+  boolean metamorphicButtonsOn();
 
-	boolean sedimentaryButtonsOn();
+  boolean sedimentaryButtonsOn();
 
-	boolean stoneButtonsOn();
+  boolean stoneButtonsOn();
 
-	boolean cobbleButtonsOn();
+  boolean cobbleButtonsOn();
 
-	boolean brickButtonsOn();
+  boolean brickButtonsOn();
 
-	boolean stairsOn();
+  boolean stairsOn();
 
-	boolean igneousStairsOn();
+  boolean igneousStairsOn();
 
-	boolean metamorphicStairsOn();
+  boolean metamorphicStairsOn();
 
-	boolean sedimentaryStairsOn();
+  boolean sedimentaryStairsOn();
 
-	boolean stoneStairsOn();
+  boolean stoneStairsOn();
 
-	boolean cobbleStairsOn();
+  boolean cobbleStairsOn();
 
-	boolean brickStairsOn();
+  boolean brickStairsOn();
 
-	boolean wallsOn();
+  boolean wallsOn();
 
-	boolean igneousWallsOn();
+  boolean igneousWallsOn();
 
-	boolean metamorphicWallsOn();
+  boolean metamorphicWallsOn();
 
-	boolean sedimentaryWallsOn();
+  boolean sedimentaryWallsOn();
 
-	boolean stoneWallsOn();
+  boolean stoneWallsOn();
 
-	boolean cobbleWallsOn();
+  boolean cobbleWallsOn();
 
-	boolean brickWallsOn();
+  boolean brickWallsOn();
 
-	int buttonRecipeResult();
+  int buttonRecipeResult();
 
-	boolean disableVanillaStoneVariants();
+  boolean disableVanillaStoneVariants();
 
-	/*
-	 * Client
-	 */
+  /*
+   * Client
+   */
 
-	boolean plainSlabTextures();
+  boolean plainSlabTextures();
 
-        boolean alternativeSlabTextures();
+  boolean alternativeSlabTextures();
 
-        boolean generationAllowed(IBlockState block);
+  boolean generationAllowed(IBlockState block);
 
 }

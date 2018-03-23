@@ -10,33 +10,31 @@ import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.ME
 import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.METAMORPHIC_VARIANT_PROPERTY;
 
 /**
- *
  * @author CurtisA, LouisDB
- *
  */
 public abstract class UBMetamorphicStoneSlab extends UBStoneSlab {
 
-	public UBMetamorphicStoneSlab() {
-		setDefaultState(getDefaultState().withProperty(METAMORPHIC_VARIANT_PROPERTY, METAMORPHIC_VARIANTS[0]));
-	}
+  public UBMetamorphicStoneSlab() {
+    setDefaultState(getDefaultState().withProperty(METAMORPHIC_VARIANT_PROPERTY, METAMORPHIC_VARIANTS[0]));
+  }
 
-	@Override
-	public UBStone baseStone() {
-		return (UBStone) API.METAMORPHIC_STONE.getBlock();
-	}
+  @Override
+  public UBStone baseStone() {
+    return (UBStone) API.METAMORPHIC_STONE.getBlock();
+  }
 
-	@Override
-	public IProperty<?> getVariantProperty() {
-		return METAMORPHIC_VARIANT_PROPERTY;
-	}
+  @Override
+  public IProperty<?> getVariantProperty() {
+    return METAMORPHIC_VARIANT_PROPERTY;
+  }
 
-	@Override
-	public Comparable<?> getTypeForItem(ItemStack stack) {
-		return METAMORPHIC_VARIANTS[stack.getMetadata() & 7];
-	}
+  @Override
+  public Comparable<?> getTypeForItem(ItemStack stack) {
+    return METAMORPHIC_VARIANTS[stack.getMetadata() & 7];
+  }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return super.getStateFromMeta(meta).withProperty(METAMORPHIC_VARIANT_PROPERTY, METAMORPHIC_VARIANTS[meta & 7]);
-	}
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return super.getStateFromMeta(meta).withProperty(METAMORPHIC_VARIANT_PROPERTY, METAMORPHIC_VARIANTS[meta & 7]);
+  }
 }

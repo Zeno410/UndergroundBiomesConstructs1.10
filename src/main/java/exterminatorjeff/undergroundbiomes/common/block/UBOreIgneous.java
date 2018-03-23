@@ -13,34 +13,32 @@ import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.IGNEOU
 import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.values;
 
 /**
- *
  * @author CurtisA, LouisDB
- *
  */
 public class UBOreIgneous extends UBOre {
 
-	public UBOreIgneous(Block baseOre, int baseOreMeta) {
-		super(baseOre, baseOreMeta);
-	}
+  public UBOreIgneous(Block baseOre, int baseOreMeta) {
+    super(baseOre, baseOreMeta);
+  }
 
-	@Override
-	public UBStone baseStone() {
-		return (UBStone) API.IGNEOUS_STONE.getBlock();
-	}
+  @Override
+  public UBStone baseStone() {
+    return (UBStone) API.IGNEOUS_STONE.getBlock();
+  }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, IGNEOUS_VARIANT_PROPERTY);
-	}
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, IGNEOUS_VARIANT_PROPERTY);
+  }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(IGNEOUS_VARIANT_PROPERTY, values()[meta]);
-	}
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(IGNEOUS_VARIANT_PROPERTY, values()[meta]);
+  }
 
-	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return getDefaultState().withProperty(IGNEOUS_VARIANT_PROPERTY, values()[placer.getHeldItemMainhand().getMetadata()]);
-	}
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    return getDefaultState().withProperty(IGNEOUS_VARIANT_PROPERTY, values()[placer.getHeldItemMainhand().getMetadata()]);
+  }
 
 }

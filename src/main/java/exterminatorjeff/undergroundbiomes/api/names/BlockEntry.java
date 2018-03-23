@@ -10,33 +10,31 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 /**
- *
  * @author LouisDB
- *
  */
-public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess{
+public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess {
 
-	public BlockEntry(String internalName) {
-		super(internalName);
-	}
+  public BlockEntry(String internalName) {
+    super(internalName);
+  }
 
-        public BlockEntry(Block block) {
-            super(block.getUnlocalizedName());
-            // sanitize inputs
-            if (getBlock() == null ) throw new RuntimeException();
-        }
+  public BlockEntry(Block block) {
+    super(block.getUnlocalizedName());
+    // sanitize inputs
+    if (getBlock() == null) throw new RuntimeException();
+  }
 
-	public Block getBlock() {
-		return getThing().toBlock();
-	}
+  public Block getBlock() {
+    return getThing().toBlock();
+  }
 
-	public Item getItemBlock() {
-		return getThing().getItemBlock();
-	}
+  public Item getItemBlock() {
+    return getThing().getItemBlock();
+  }
 
-	protected UBBlock getUBBlock() {
-		return getThing();
-	}
+  protected UBBlock getUBBlock() {
+    return getThing();
+  }
 
   @Override
   protected void doRegisterItem(IForgeRegistry<Item> registry) {
@@ -51,16 +49,16 @@ public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess{
   }
 
   public void registerModel() {
-		super.registerModel(null);
-	}
+    super.registerModel(null);
+  }
 
-	@Override
-	protected void doRegisterModel(IStateMapper stateMapper) {
-		for (int meta = 0; meta < getUBBlock().getNbVariants(); ++meta) {
-			ModelResourceLocation location = new ModelResourceLocation(externalName(internalName), "type=" + getUBBlock().getVariantName(meta));
-			ModelLoader.setCustomModelResourceLocation(getItemBlock(), meta, location);
-			LOGGER.debug("Model location: " + location);
-		}
-	}
+  @Override
+  protected void doRegisterModel(IStateMapper stateMapper) {
+    for (int meta = 0; meta < getUBBlock().getNbVariants(); ++meta) {
+      ModelResourceLocation location = new ModelResourceLocation(externalName(internalName), "type=" + getUBBlock().getVariantName(meta));
+      ModelLoader.setCustomModelResourceLocation(getItemBlock(), meta, location);
+      LOGGER.debug("Model location: " + location);
+    }
+  }
 
 }

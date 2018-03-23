@@ -5,12 +5,11 @@ import net.minecraft.util.EnumFacing;
 
 /**
  * Common interface for UB buttons.
- * 
- * @author LouisDB
  *
+ * @author LouisDB
  */
 public interface UBButton extends UBItem, Variable {
 
-	Block getBlock(EnumFacing facing);
+  Block getBlock(EnumFacing facing);
 
 }

@@ -7,10 +7,9 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
  * Common interface for UB items.
  *
  * @author LouisDB
- *
  */
 public interface UBItem extends IForgeRegistryEntry<Item> {
 
-	Item toItem();
+  Item toItem();
 
 }

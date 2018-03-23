@@ -11,23 +11,21 @@ import java.util.List;
  * A {@link FunctionalInterface} used to get the drops of an UB stone.
  *
  * @author LouisDB
- *
  * @see UBDropsRegistry
- *
  */
 @FunctionalInterface
 public interface DropSource {
 
-	/**
-	 * Add drops to the list based on coordinates (usually height), state,
-	 * fortune level and randomness.
-	 *
-	 * @param drops
-	 * @param world
-	 * @param pos
-	 * @param state
-	 * @param fortune
-	 */
-	void addDrops(List<ItemStack> drops, World world, BlockPos pos, IBlockState state, int fortune);
+  /**
+   * Add drops to the list based on coordinates (usually height), state,
+   * fortune level and randomness.
+   *
+   * @param drops
+   * @param world
+   * @param pos
+   * @param state
+   * @param fortune
+   */
+  void addDrops(List<ItemStack> drops, World world, BlockPos pos, IBlockState state, int fortune);
 
 }

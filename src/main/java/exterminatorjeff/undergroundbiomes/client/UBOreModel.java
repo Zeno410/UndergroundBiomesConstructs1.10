@@ -26,50 +26,49 @@ import java.util.Collection;
  * One instance per UBOre instance.
  *
  * @author LouisDB
- *
  */
 @SideOnly(Side.CLIENT)
 public class UBOreModel implements IModel {
 
-	public static final UBLogger LOGGER = new UBLogger(UBOreModel.class, Level.INFO);
-	public static final String UBORE_MODEL_NAME = "custom_ore";
-	public static final String UBORE_MODEL_PATH = ModInfo.MODID + ":block/" + UBORE_MODEL_NAME;
+  public static final UBLogger LOGGER = new UBLogger(UBOreModel.class, Level.INFO);
+  public static final String UBORE_MODEL_NAME = "custom_ore";
+  public static final String UBORE_MODEL_PATH = ModInfo.MODID + ":block/" + UBORE_MODEL_NAME;
 
-	private final ResourceLocation stoneTexture;
-	private final ResourceLocation oreTexture;
-	private final IModel baseModel;
+  private final ResourceLocation stoneTexture;
+  private final ResourceLocation oreTexture;
+  private final IModel baseModel;
 
-	public UBOreModel(UBOreModelResourceLocation location) {
-		IModel baseModel = null;
-		try {
-			baseModel = ModelLoaderRegistry.getModel(new ResourceLocation(UBORE_MODEL_PATH));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		this.baseModel = baseModel;
-		stoneTexture = new ResourceLocation(ModInfo.MODID + ":blocks/" + location.getVariant());
-		oreTexture = OresRegistry.INSTANCE.getOverlayFor(location.ubOre.baseOre, location.ubOre.baseOreMeta);
-	}
-
-	@Override
-	public Collection<ResourceLocation> getDependencies() {
-		return ImmutableSet.of();
-	}
-
-	@Override
-	public Collection<ResourceLocation> getTextures() {
-		return ImmutableSet.of();
-	}
-
-	@Override
-  public IBakedModel bake(IModelState state, VertexFormat format, java.util.function.Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-		IModel finalModel = baseModel.retexture(ImmutableMap.of("stone", stoneTexture.toString(), "ore", oreTexture.toString()));
-		return finalModel.bake(state, format, bakedTextureGetter);
-	}
+  public UBOreModel(UBOreModelResourceLocation location) {
+    IModel baseModel = null;
+    try {
+      baseModel = ModelLoaderRegistry.getModel(new ResourceLocation(UBORE_MODEL_PATH));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    this.baseModel = baseModel;
+    stoneTexture = new ResourceLocation(ModInfo.MODID + ":blocks/" + location.getVariant());
+    oreTexture = OresRegistry.INSTANCE.getOverlayFor(location.ubOre.baseOre, location.ubOre.baseOreMeta);
+  }
 
   @Override
-	public IModelState getDefaultState() {
-		return ModelRotation.X0_Y0;
-	}
+  public Collection<ResourceLocation> getDependencies() {
+    return ImmutableSet.of();
+  }
+
+  @Override
+  public Collection<ResourceLocation> getTextures() {
+    return ImmutableSet.of();
+  }
+
+  @Override
+  public IBakedModel bake(IModelState state, VertexFormat format, java.util.function.Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+    IModel finalModel = baseModel.retexture(ImmutableMap.of("stone", stoneTexture.toString(), "ore", oreTexture.toString()));
+    return finalModel.bake(state, format, bakedTextureGetter);
+  }
+
+  @Override
+  public IModelState getDefaultState() {
+    return ModelRotation.X0_Y0;
+  }
 
 }

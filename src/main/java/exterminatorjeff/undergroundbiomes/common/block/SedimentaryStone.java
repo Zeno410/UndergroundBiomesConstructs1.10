@@ -19,91 +19,88 @@ import java.util.Random;
 import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.*;
 
 /**
- *
  * @author CurtisA, LouisDB
- *
  */
 public class SedimentaryStone extends UBStone {
 
-	public SedimentaryStone() {
-		setDefaultState(blockState.getBaseState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, LIMESTONE));
-	}
+  public SedimentaryStone() {
+    setDefaultState(blockState.getBaseState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, LIMESTONE));
+  }
 
-	@Override
-	public UBStoneType getStoneType() {
-		return UBStoneType.SEDIMENTARY;
-	}
+  @Override
+  public UBStoneType getStoneType() {
+    return UBStoneType.SEDIMENTARY;
+  }
 
-	@Override
-	public UBStoneStyle getStoneStyle() {
-		return UBStoneStyle.STONE;
-	}
+  @Override
+  public UBStoneStyle getStoneStyle() {
+    return UBStoneStyle.STONE;
+  }
 
-	@Override
-	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, SEDIMENTARY_VARIANT_PROPERTY);
-	}
+  @Override
+  public BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, SEDIMENTARY_VARIANT_PROPERTY);
+  }
 
-	@Override
-	public int getNbVariants() {
-		return NB_VARIANTS;
-	}
+  @Override
+  public int getNbVariants() {
+    return NB_VARIANTS;
+  }
 
-	@Override
-	public String getVariantName(int meta) {
-		return SEDIMENTARY_VARIANTS[meta & 7].toString();
-	}
+  @Override
+  public String getVariantName(int meta) {
+    return SEDIMENTARY_VARIANTS[meta & 7].toString();
+  }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, SEDIMENTARY_VARIANTS[meta & 7]);
-	}
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, SEDIMENTARY_VARIANTS[meta & 7]);
+  }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(SEDIMENTARY_VARIANT_PROPERTY).getMetadata();
-	}
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    return state.getValue(SEDIMENTARY_VARIANT_PROPERTY).getMetadata();
+  }
 
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if (state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE) {
-			return API.LIGNITE_COAL.getItem();
-                }
-		else
-			return super.getItemDropped(state, rand, fortune);
-	}
+  @Override
+  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+    if (state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE) {
+      return API.LIGNITE_COAL.getItem();
+    } else
+      return super.getItemDropped(state, rand, fortune);
+  }
 
-	@Override
-	public int damageDropped(IBlockState state) {
-		if (state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE) {
-                    return 0;
-                }
-		return super.damageDropped(state);
-	}
-
-	@Override
-	public boolean isFortuneAffected(IBlockState state) {
-		return state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE;
-	}
-
-	@Override
-	public float getBlockHardness(IBlockState state, World worldIn, BlockPos pos) {
-		return getBaseHardness() * state.getValue(SEDIMENTARY_VARIANT_PROPERTY).getHardness();
-	}
-
-	@Override
-	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
-		return getBaseResistance() * world.getBlockState(pos).getValue(SEDIMENTARY_VARIANT_PROPERTY).getResistance();
-	}
-
-    @Override
-    public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target) {
-        OresRegistry.INSTANCE.setRecheck(world, pos);
-        return super.isReplaceableOreGen(state, world, pos, target); //To change body of generated methods, choose Tools | Templates.
+  @Override
+  public int damageDropped(IBlockState state) {
+    if (state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE) {
+      return 0;
     }
+    return super.damageDropped(state);
+  }
 
-    @Override
-    public UBStone baseStone() {
-        return this;
-    }
+  @Override
+  public boolean isFortuneAffected(IBlockState state) {
+    return state.getValue(SEDIMENTARY_VARIANT_PROPERTY) == LIGNITE;
+  }
+
+  @Override
+  public float getBlockHardness(IBlockState state, World worldIn, BlockPos pos) {
+    return getBaseHardness() * state.getValue(SEDIMENTARY_VARIANT_PROPERTY).getHardness();
+  }
+
+  @Override
+  public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
+    return getBaseResistance() * world.getBlockState(pos).getValue(SEDIMENTARY_VARIANT_PROPERTY).getResistance();
+  }
+
+  @Override
+  public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, Predicate<IBlockState> target) {
+    OresRegistry.INSTANCE.setRecheck(world, pos);
+    return super.isReplaceableOreGen(state, world, pos, target); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public UBStone baseStone() {
+    return this;
+  }
 }

@@ -18,13 +18,12 @@ import org.apache.logging.log4j.Level;
  * Common superclass for all type of entries.<br>
  * Allows a {@link Block} or {@link Item} to be registered, as well as its
  * model, and provides and access for other mods.
-<<<<<<< Updated upstream
- *
- * @author LouisDB
-=======
->>>>>>> Stashed changes
+ * <<<<<<< Updated upstream
  *
  * @param <T>
+ * @author LouisDB
+ * =======
+ * >>>>>>> Stashed changes
  * @author LouisDB
  */
 public abstract class Entry<T extends IForgeRegistryEntry<?>> {

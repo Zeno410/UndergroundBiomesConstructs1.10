@@ -17,57 +17,56 @@ import org.apache.logging.log4j.Level;
  * The main class
  *
  * @author CurtisA, LouisDB
- *
  */
 @Mod(modid = ModInfo.MODID, name = ModInfo.NAME, version = ModInfo.VERSION)
 public class UndergroundBiomes {
 
-	@Instance
-	public static UndergroundBiomes INSTANCE;
+  @Instance
+  public static UndergroundBiomes INSTANCE;
 
-	@SidedProxy(serverSide = "exterminatorjeff.undergroundbiomes.core.ServerProxy", clientSide = "exterminatorjeff.undergroundbiomes.core.ClientProxy")
-	public static CommonProxy PROXY;
+  @SidedProxy(serverSide = "exterminatorjeff.undergroundbiomes.core.ServerProxy", clientSide = "exterminatorjeff.undergroundbiomes.core.ClientProxy")
+  public static CommonProxy PROXY;
 
-	public UndergroundBiomes() {
-	}
+  public UndergroundBiomes() {
+  }
 
-	/*
-	 *
-	 */
+  /*
+   *
+   */
 
-	private static final UBLogger LOGGER = new UBLogger(UndergroundBiomes.class, Level.INFO);
+  private static final UBLogger LOGGER = new UBLogger(UndergroundBiomes.class, Level.INFO);
 
-	public static boolean isPreInitDone = false;
+  public static boolean isPreInitDone = false;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		PROXY.preInit(event);
+  @EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+    PROXY.preInit(event);
 
-		if (API.VERSION != "1.0.0")
-			throw new RuntimeException("Another mod has included an obsolete version of the Underground Biomes API.");
+    if (API.VERSION != "1.0.0")
+      throw new RuntimeException("Another mod has included an obsolete version of the Underground Biomes API.");
 
-		isPreInitDone = true;
-		LOGGER.info("Pre-init done!");
-	}
+    isPreInitDone = true;
+    LOGGER.info("Pre-init done!");
+  }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		PROXY.init(event);
+  @EventHandler
+  public void init(FMLInitializationEvent event) {
+    PROXY.init(event);
 
-		LOGGER.info("Init done!");
-	}
+    LOGGER.info("Init done!");
+  }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) throws Exception {
-		PROXY.postInit(event);
+  @EventHandler
+  public void postInit(FMLPostInitializationEvent event) throws Exception {
+    PROXY.postInit(event);
 
-		LOGGER.info("Post-init done!");
-	}
+    LOGGER.info("Post-init done!");
+  }
 
-        @EventHandler
-        public void serverStopped(FMLServerStoppedEvent event) {
-            PROXY.onServerStopped(event);
-	    LOGGER.info("Server Stopped");
-        }
+  @EventHandler
+  public void serverStopped(FMLServerStoppedEvent event) {
+    PROXY.onServerStopped(event);
+    LOGGER.info("Server Stopped");
+  }
 
 }

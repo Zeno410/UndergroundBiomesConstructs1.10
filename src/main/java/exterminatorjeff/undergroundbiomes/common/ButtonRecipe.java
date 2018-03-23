@@ -11,42 +11,40 @@ import net.minecraft.item.crafting.CraftingManager;
 import org.apache.logging.log4j.Level;
 
 /**
- *
  * @author LouisDB
- *
  */
 public final class ButtonRecipe implements SettingTracker<Integer> {
 
-	private static final UBLogger LOGGER = new UBLogger(ButtonRecipe.class, Level.INFO);
+  private static final UBLogger LOGGER = new UBLogger(ButtonRecipe.class, Level.INFO);
 
-	/*
-	 *
-	 */
+  /*
+   *
+   */
 
-	@Override
-	public void update(Integer n) {
-		LOGGER.info("Modifying buttons recipes to output " + n + " buttons");
-		// Retrieve and modify button recipes
-		CraftingManager.getInstance().getRecipeList().forEach(recipe -> {
-			ItemStack output = recipe.getRecipeOutput();
-			if (output == null)
-				return;
+  @Override
+  public void update(Integer n) {
+    LOGGER.info("Modifying buttons recipes to output " + n + " buttons");
+    // Retrieve and modify button recipes
+    CraftingManager.getInstance().getRecipeList().forEach(recipe -> {
+      ItemStack output = recipe.getRecipeOutput();
+      if (output == null)
+        return;
 
-			Item item = output.getItem();
-			Block block = Block.getBlockFromItem(item);
+      Item item = output.getItem();
+      Block block = Block.getBlockFromItem(item);
 
-			if ( //
-			(block != null && (block == Blocks.STONE_BUTTON || block == Blocks.WOODEN_BUTTON)) || //
-			(StonesRegistry.INSTANCE.allButtons().contains(item)) || //
-			(item!=null&&
-                                item.getRegistryName()!=null&&
-                                item.getRegistryName().getResourcePath()!=null&&
-                                item.getRegistryName().getResourcePath().contains("button")) //
-			) {
-				recipe.getRecipeOutput().setCount(n);
-				LOGGER.debug(String.format("%s for '%s' modified", recipe.getClass().getSimpleName(), recipe.getRecipeOutput().getItem().getRegistryName()));
-			}
-		});
-	}
+      if ( //
+        (block != null && (block == Blocks.STONE_BUTTON || block == Blocks.WOODEN_BUTTON)) || //
+          (StonesRegistry.INSTANCE.allButtons().contains(item)) || //
+          (item != null &&
+            item.getRegistryName() != null &&
+            item.getRegistryName().getResourcePath() != null &&
+            item.getRegistryName().getResourcePath().contains("button")) //
+        ) {
+        recipe.getRecipeOutput().setCount(n);
+        LOGGER.debug(String.format("%s for '%s' modified", recipe.getClass().getSimpleName(), recipe.getRecipeOutput().getItem().getRegistryName()));
+      }
+    });
+  }
 
 }

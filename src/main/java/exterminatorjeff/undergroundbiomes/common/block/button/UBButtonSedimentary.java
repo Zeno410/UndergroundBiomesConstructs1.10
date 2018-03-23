@@ -11,30 +11,28 @@ import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.SE
 import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.SEDIMENTARY_VARIANT_PROPERTY;
 
 /**
- *
  * @author CurtisA, LouisDB
- *
  */
 public class UBButtonSedimentary extends UBStoneButton {
 
-	public UBButtonSedimentary(EnumFacing facing, ButtonItemBlock itemBlock) {
-		super(facing, itemBlock);
-		setDefaultState(getDefaultState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, SEDIMENTARY_VARIANTS[0]));
-	}
+  public UBButtonSedimentary(EnumFacing facing, ButtonItemBlock itemBlock) {
+    super(facing, itemBlock);
+    setDefaultState(getDefaultState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, SEDIMENTARY_VARIANTS[0]));
+  }
 
-	@Override
-	public UBStone baseStone() {
-		return (UBStone) API.SEDIMENTARY_STONE.getBlock();
-	}
+  @Override
+  public UBStone baseStone() {
+    return (UBStone) API.SEDIMENTARY_STONE.getBlock();
+  }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, POWERED, SEDIMENTARY_VARIANT_PROPERTY);
-	}
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING, POWERED, SEDIMENTARY_VARIANT_PROPERTY);
+  }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return super.getStateFromMeta(meta).withProperty(SEDIMENTARY_VARIANT_PROPERTY, SEDIMENTARY_VARIANTS[meta & 7]);
-	}
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return super.getStateFromMeta(meta).withProperty(SEDIMENTARY_VARIANT_PROPERTY, SEDIMENTARY_VARIANTS[meta & 7]);
+  }
 
 }

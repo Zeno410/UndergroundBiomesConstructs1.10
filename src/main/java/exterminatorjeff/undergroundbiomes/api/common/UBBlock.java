@@ -11,18 +11,17 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
  * Common interface for all UB blocks.
  *
  * @author LouisDB
- *
  */
 public interface UBBlock extends IForgeRegistryEntry<Block>, Variable {
 
-	Block toBlock();
+  Block toBlock();
 
-	Item getItemBlock();
+  Item getItemBlock();
 
-	UBStoneType getStoneType();
+  UBStoneType getStoneType();
 
-	UBStoneStyle getStoneStyle();
+  UBStoneStyle getStoneStyle();
 
-	UBStone baseStone();
+  UBStone baseStone();
 
 }

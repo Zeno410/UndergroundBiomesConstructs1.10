@@ -13,34 +13,32 @@ import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.ME
 import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.values;
 
 /**
- *
  * @author CurtisA, LouisDB
- *
  */
 public class UBOreMetamorphic extends UBOre {
 
-	public UBOreMetamorphic(Block baseOre, int baseOreMeta) {
-		super(baseOre, baseOreMeta);
-	}
+  public UBOreMetamorphic(Block baseOre, int baseOreMeta) {
+    super(baseOre, baseOreMeta);
+  }
 
-	@Override
-	public UBStone baseStone() {
-		return (UBStone) API.METAMORPHIC_STONE.getBlock();
-	}
+  @Override
+  public UBStone baseStone() {
+    return (UBStone) API.METAMORPHIC_STONE.getBlock();
+  }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, METAMORPHIC_VARIANT_PROPERTY);
-	}
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, METAMORPHIC_VARIANT_PROPERTY);
+  }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(METAMORPHIC_VARIANT_PROPERTY, values()[meta]);
-	}
+  @Override
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(METAMORPHIC_VARIANT_PROPERTY, values()[meta]);
+  }
 
-	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return getDefaultState().withProperty(METAMORPHIC_VARIANT_PROPERTY, values()[placer.getHeldItemMainhand().getMetadata()]);
-	}
+  @Override
+  public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+    return getDefaultState().withProperty(METAMORPHIC_VARIANT_PROPERTY, values()[placer.getHeldItemMainhand().getMetadata()]);
+  }
 
 }
