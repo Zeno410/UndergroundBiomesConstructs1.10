@@ -34,7 +34,7 @@ import static org.apache.logging.log4j.Level.*;
  */
 public final class UBLogger {
 
-	private static final Logger LOGGER = LogManager.getLogger(ModInfo.NAME);
+	private static final Logger LOGGER = LogManager.getLogger(ModInfo.MODID);
 
 	private final String name;
 	private final Level maxLevel;
@@ -49,7 +49,7 @@ public final class UBLogger {
 
 	public UBLogger(String name, Level maxLevel) {
 		this.name = name;
-		this.maxLevel = maxLevel;
+		this.maxLevel = Level.DEBUG;
 	}
 
 	private void log(Level level, String message) {

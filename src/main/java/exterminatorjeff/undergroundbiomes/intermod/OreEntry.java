@@ -1,6 +1,7 @@
 package exterminatorjeff.undergroundbiomes.intermod;
 
 import exterminatorjeff.undergroundbiomes.api.names.Entry;
+import exterminatorjeff.undergroundbiomes.api.names.ItemEntry;
 import exterminatorjeff.undergroundbiomes.client.UBOreModelResourceLocation;
 import exterminatorjeff.undergroundbiomes.common.block.UBOre;
 import net.minecraft.block.Block;
@@ -9,10 +10,10 @@ import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
- * 
+ *
  * @author LouisDB
  *
  */
@@ -42,14 +43,19 @@ class OreEntry extends Entry<UBOre> {
 		return getThing();
 	}
 
-	@Override
-	protected void doRegister() {
-		getBlock().setUnlocalizedName(internalName);
-		GameRegistry.register(getBlock().setRegistryName(internalName));
-		GameRegistry.register(getItem(), getBlock().getRegistryName());
-	}
+  @Override
+  protected void doRegisterItem(IForgeRegistry<Item> registry) {
+    getBlock().setUnlocalizedName(internalName);
+    registry.register(getItem());
+  }
 
-	@Override
+  @Override
+  protected void doRegisterBlock(IForgeRegistry<Block> registry) {
+    getBlock().setUnlocalizedName(internalName);
+    registry.register(getBlock().setRegistryName(internalName));
+  }
+
+  @Override
 	protected void doRegisterModel(IStateMapper stateMapper) {
 		// Block
 		ModelLoader.setCustomStateMapper(getBlock(), stateMapper);

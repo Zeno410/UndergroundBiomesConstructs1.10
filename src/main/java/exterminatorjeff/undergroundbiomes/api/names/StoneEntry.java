@@ -1,7 +1,11 @@
 package exterminatorjeff.undergroundbiomes.api.names;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.registries.IForgeRegistry;
+
 /**
- * 
+ *
  * @author LouisDB
  *
  */
@@ -32,4 +36,13 @@ public final class StoneEntry extends BlockEntry {
 		return stairs;
 	}
 
+  @Override
+  protected void doRegisterItem(IForgeRegistry<Item> registry) {
+
+  }
+
+  @Override
+  protected void doRegisterBlock(IForgeRegistry<Block> registry) {
+
+  }
 }

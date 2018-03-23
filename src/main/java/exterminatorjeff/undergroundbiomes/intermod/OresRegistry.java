@@ -115,18 +115,18 @@ public enum OresRegistry implements UBOresRegistry {
 	}
 
 	private void createOre(Block baseOre, int baseOreMeta) {
-            if (baseOre == null) throw new RuntimeException();
-		OreEntry igneousOre = new OreEntry(API.IGNEOUS_STONE.getBlock(), baseOre, baseOreMeta);
-		OreEntry metamorphicOre = new OreEntry(API.METAMORPHIC_STONE.getBlock(), baseOre, baseOreMeta);
-		OreEntry sedimentaryOre = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
-		igneousOre.register(new UBOreIgneous(baseOre, baseOreMeta));
-		metamorphicOre.register(new UBOreMetamorphic(baseOre, baseOreMeta));
-		sedimentaryOre.register(new UBOreSedimentary(baseOre, baseOreMeta));
-		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock()), igneousOre);
-		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.METAMORPHIC_STONE.getBlock()), metamorphicOre);
-		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), sedimentaryOre);
-		//
-		applyBaseOreSmelting(baseOre, igneousOre, metamorphicOre, sedimentaryOre);
+//            if (baseOre == null) throw new RuntimeException();
+//		OreEntry igneousOre = new OreEntry(API.IGNEOUS_STONE.getBlock(), baseOre, baseOreMeta);
+//		OreEntry metamorphicOre = new OreEntry(API.METAMORPHIC_STONE.getBlock(), baseOre, baseOreMeta);
+//		OreEntry sedimentaryOre = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
+////		igneousOre.register(new UBOreIgneous(baseOre, baseOreMeta));
+////		metamorphicOre.register(new UBOreMetamorphic(baseOre, baseOreMeta));
+////		sedimentaryOre.register(new UBOreSedimentary(baseOre, baseOreMeta));
+//		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock()), igneousOre);
+//		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.METAMORPHIC_STONE.getBlock()), metamorphicOre);
+//		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), sedimentaryOre);
+//		//
+//		applyBaseOreSmelting(baseOre, igneousOre, metamorphicOre, sedimentaryOre);
 	}
 
 	@Override

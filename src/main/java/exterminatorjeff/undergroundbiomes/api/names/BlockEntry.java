@@ -7,9 +7,10 @@ import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
- * 
+ *
  * @author LouisDB
  *
  */
@@ -18,7 +19,7 @@ public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess{
 	public BlockEntry(String internalName) {
 		super(internalName);
 	}
-        
+
         public BlockEntry(Block block) {
             super(block.getUnlocalizedName());
             // sanitize inputs
@@ -37,14 +38,19 @@ public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess{
 		return getThing();
 	}
 
-	@Override
-	protected void doRegister() {
-		getBlock().setUnlocalizedName(internalName);
-		GameRegistry.register(getBlock().setRegistryName(internalName));
-		GameRegistry.register(getItemBlock(), getBlock().getRegistryName());
-	}
+  @Override
+  protected void doRegisterItem(IForgeRegistry<Item> registry) {
+    getBlock().setUnlocalizedName(internalName);
+    registry.register(getItemBlock());
+  }
 
-	public void registerModel() {
+  @Override
+  protected void doRegisterBlock(IForgeRegistry<Block> registry) {
+    getBlock().setUnlocalizedName(internalName);
+    registry.register(getBlock().setRegistryName(internalName));
+  }
+
+  public void registerModel() {
 		super.registerModel(null);
 	}
 
