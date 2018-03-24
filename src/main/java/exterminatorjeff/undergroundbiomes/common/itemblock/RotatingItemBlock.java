@@ -87,8 +87,8 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
-    blocks.get(EnumFacing.NORTH).getSubBlocks(itemIn, tab, list);
+  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+    blocks.get(EnumFacing.NORTH).getSubBlocks(tab, list);
   }
 
   @Override

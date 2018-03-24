@@ -80,7 +80,7 @@ public class ButtonItemBlock extends RotatingItemBlock implements UBButton {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
-    block.getSubBlocks(itemIn, tab, list);
+  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+    block.getSubBlocks(tab, list);
   }
 }

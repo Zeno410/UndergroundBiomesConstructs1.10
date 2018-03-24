@@ -93,7 +93,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
   }
 
   @Override
-  public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
     for (int i = 0; i < getNbVariants(); ++i)
       list.add(new ItemStack(this, 1, i));
   }

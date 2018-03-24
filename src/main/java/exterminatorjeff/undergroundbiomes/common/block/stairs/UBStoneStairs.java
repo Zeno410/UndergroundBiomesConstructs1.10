@@ -87,11 +87,17 @@ public abstract class UBStoneStairs extends BlockStairs implements UBSubBlock {
     return i;
   }
 
+  /**
+   * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
+   *
+   * @param itemIn
+   * @param items
+   */
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+  public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> list) {
     for (int i = 0; i < getNbVariants(); ++i)
-      list.add(new ItemStack(itemIn, 1, i));
+      list.add(new ItemStack(this, 1, i));
   }
 
   @Override

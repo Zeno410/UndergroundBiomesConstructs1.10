@@ -92,9 +92,9 @@ public abstract class UBStone extends Block implements UBBlock {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
     for (int i = 0; i < getNbVariants(); ++i)
-      list.add(new ItemStack(itemIn, 1, i));
+      list.add(new ItemStack(this, 1, i));
   }
 
   public abstract int getMetaFromState(IBlockState state);

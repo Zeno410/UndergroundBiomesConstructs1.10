@@ -94,7 +94,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
     for (int i = 0; i < getNbVariants(); ++i)
       list.add(new ItemStack(itemBlock, 1, i));
   }
