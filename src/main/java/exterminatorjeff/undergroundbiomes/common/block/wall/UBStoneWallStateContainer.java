@@ -9,6 +9,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
+import javax.annotation.Nullable;
+
 /**
  * To not add the VARIANT property from BlockWall
  *
@@ -21,7 +23,7 @@ class UBStoneWallStateContainer extends BlockStateContainer {
   }
 
   @Override
-  protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
+  protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, java.util.Optional<?>> unlistedProperties) {
     return new CustomStateImplementation(block, properties);
   }
 

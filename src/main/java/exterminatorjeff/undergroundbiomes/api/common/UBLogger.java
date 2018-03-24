@@ -52,7 +52,7 @@ public final class UBLogger {
   }
 
   private void log(Level level, String message) {
-    if (level.isAtLeastAsSpecificAs(maxLevel)) {
+    if (level.isMoreSpecificThan(maxLevel) || level.compareTo(maxLevel) == 0) {
       String prefix = ModInfo.MODID + " " + name == null ? "" : "[" + name + "] ";
       if ((level == ERROR || level == FATAL) && API.SETTINGS.crashOnProblems())
         throw new RuntimeException(prefix + message);

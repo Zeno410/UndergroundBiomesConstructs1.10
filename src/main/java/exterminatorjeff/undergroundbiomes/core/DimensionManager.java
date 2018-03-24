@@ -82,7 +82,7 @@ public class DimensionManager implements UBDimensionalStrataColumnProvider {
       worldSaveDirectory = server.getFile(worldName);
     }
     try {
-      WorldServer worldServer = server.worldServerForDimension(0);
+      WorldServer worldServer = server.getWorld(0);
       File worldLocation = worldServer.getChunkSaveLocation();
       //UndergroundBiomes.logger.info(world.toString() + " " +worldLocation.getAbsolutePath());
       configManager.setWorldFile(worldLocation);
