@@ -33,7 +33,7 @@ public class TraditionalStoneReplacer extends UBStoneReplacer {
   @Override
   public int[] getBiomeValues(Chunk chunk) {
 
-    int[] var7 = this.undergroundBiomeIndexLayer.getInts(chunk.xPosition * 16, chunk.zPosition * 16, 16, 16);
+    int[] var7 = this.undergroundBiomeIndexLayer.getInts(chunk.getPos().x * 16, chunk.getPos().z * 16, 16, 16);
     return var7;
   }
 

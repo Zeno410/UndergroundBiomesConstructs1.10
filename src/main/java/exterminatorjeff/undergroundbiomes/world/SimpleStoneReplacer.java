@@ -67,8 +67,8 @@ public class SimpleStoneReplacer extends UBStoneReplacer {
    * Voronoi biomes map for this chunk
    */
     int[] biomeValues = new int[256];
-    int xPos = chunk.xPosition * 16;
-    int zPos = chunk.zPosition * 16;
+    int xPos = chunk.getPos().x * 16;
+    int zPos = chunk.getPos().z * 16;
     for (int x = 0; x < 16; x++) {
       for (int z = 0; z < 16; z++) {
         double v = simplex.noise(xPos + x, zPos + z, 2, 0.05D, 10000.0D, true);

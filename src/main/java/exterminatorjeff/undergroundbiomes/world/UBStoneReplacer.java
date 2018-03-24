@@ -36,8 +36,8 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
 
   public void replaceStoneInChunk(Chunk chunk) {
     int[] biomeValues = getBiomeValues(chunk);
-    int xPos = chunk.xPosition * 16;
-    int zPos = chunk.zPosition * 16;
+    int xPos = chunk.getPos().x * 16;
+    int zPos = chunk.getPos().z * 16;
     //TimeTracker.manager.start("overall");
 
     // For each storage array
@@ -109,7 +109,7 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
     HashMap<ChunkPos, ArrayList<BlockPos>> toRedo = OresRegistry.INSTANCE.forRedo(world);
     for (ChunkPos chunkID : toRedo.keySet()) {
       ArrayList<BlockPos> locations = toRedo.get(chunkID);
-      Chunk chunk = world.getChunkFromChunkCoords(chunkID.chunkXPos, chunkID.chunkZPos);
+      Chunk chunk = world.getChunkFromChunkCoords(chunkID.x, chunkID.z);
       int[] biomeValues = getBiomeValues(chunk);
       for (BlockPos location : locations) {
         IBlockState currentBlockState = chunk.getBlockState(location);
