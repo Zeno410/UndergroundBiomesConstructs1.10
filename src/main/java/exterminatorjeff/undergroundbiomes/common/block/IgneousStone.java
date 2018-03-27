@@ -2,6 +2,7 @@ package exterminatorjeff.undergroundbiomes.common.block;
 
 import com.google.common.base.Predicate;
 import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
 import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
 import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
@@ -25,9 +26,16 @@ import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.*;
  * @author CurtisA, LouisDB
  */
 public class IgneousStone extends UBStone {
+  public static final String internal_name = "ingeneous_stone";
 
   public IgneousStone() {
+    super();
     setDefaultState(blockState.getBaseState().withProperty(IGNEOUS_VARIANT_PROPERTY, RED_GRANITE));
+  }
+
+  @Override
+  public String getInternalName() {
+    return internal_name;
   }
 
   @Override

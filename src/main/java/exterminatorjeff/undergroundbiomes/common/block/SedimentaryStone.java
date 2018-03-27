@@ -22,6 +22,12 @@ import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.*;
  * @author CurtisA, LouisDB
  */
 public class SedimentaryStone extends UBStone {
+  public static final String internal_name = "sedimentary_stone";
+
+  @Override
+  public String getInternalName() {
+    return internal_name;
+  }
 
   public SedimentaryStone() {
     setDefaultState(blockState.getBaseState().withProperty(SEDIMENTARY_VARIANT_PROPERTY, LIMESTONE));

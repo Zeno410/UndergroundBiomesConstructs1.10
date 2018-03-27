@@ -25,6 +25,12 @@ import static exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant.*;
  * @author CurtisA, LouisDB
  */
 public class MetamorphicStone extends UBStone {
+  public static final String internal_name = "metamorphic_stone";
+
+  @Override
+  public String getInternalName() {
+    return internal_name;
+  }
 
   public MetamorphicStone() {
     setDefaultState(blockState.getBaseState().withProperty(METAMORPHIC_VARIANT_PROPERTY, GNEISS));

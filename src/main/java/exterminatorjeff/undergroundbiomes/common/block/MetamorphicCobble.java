@@ -11,6 +11,13 @@ import net.minecraft.world.IBlockAccess;
  * @author CurtisA, LouisDB
  */
 public class MetamorphicCobble extends MetamorphicStone {
+  public static final String internal_name = "metamorphic_cobble";
+
+  @Override
+  public String getInternalName() {
+    return internal_name;
+  }
+
   @Override
   public UBStoneStyle getStoneStyle() {
     return UBStoneStyle.COBBLE;

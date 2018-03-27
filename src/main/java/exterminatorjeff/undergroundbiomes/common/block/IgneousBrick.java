@@ -16,6 +16,12 @@ import java.util.List;
  * @author CurtisA, LouisDB
  */
 public class IgneousBrick extends IgneousStone {
+  public static final String internal_name = "ingeneous_brick";
+
+  @Override
+  public String getInternalName() {
+    return internal_name;
+  }
 
   @Override
   public UBStoneStyle getStoneStyle() {

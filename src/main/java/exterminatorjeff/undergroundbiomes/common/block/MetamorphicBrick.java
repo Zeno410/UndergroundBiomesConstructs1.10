@@ -16,6 +16,13 @@ import java.util.List;
  * @author CurtisA, LouisDB
  */
 public class MetamorphicBrick extends MetamorphicStone {
+  public static final String internal_name = "metamorphic_brick";
+
+  @Override
+  public String getInternalName() {
+    return internal_name;
+  }
+
   @Override
   public UBStoneStyle getStoneStyle() {
     return UBStoneStyle.BRICK;

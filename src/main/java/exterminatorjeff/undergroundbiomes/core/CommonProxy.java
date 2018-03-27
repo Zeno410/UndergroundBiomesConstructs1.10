@@ -34,7 +34,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -83,6 +85,9 @@ public class CommonProxy {
 //    createBlocks();
 //    createItems();
 //    createOres();
+  }
+
+  public void init(FMLInitializationEvent e) {
 
     try {
       new IC2Registrar().register();
@@ -94,9 +99,7 @@ public class CommonProxy {
     DropsRegistry.INSTANCE.init();
 
     OresRegistry.INSTANCE.fulfillRequests();
-  }
 
-  public void init(FMLInitializationEvent e) {
     addOreDicts();
     createRecipes();
     GameRegistry.registerFuelHandler(UBFuelHandler.INSTANCE);
@@ -155,8 +158,10 @@ public class CommonProxy {
   private ArrayList<Runnable> oneShotServerCloseActions = new ArrayList<Runnable>();
   private ArrayList<Runnable> serverCloseActions = new ArrayList<Runnable>();
 
-  @SubscribeEvent
-  public void registerBlock(RegistryEvent.Register<Block> event) {
+  public void registerModels(ModelRegistryEvent event) {
+  };
+
+  public void registerBlocks(RegistryEvent.Register<Block> event) {
     /*
      * Blocks
      */
@@ -179,6 +184,7 @@ public class CommonProxy {
     API.METAMORPHIC_BRICK.registerBlock(event, new MetamorphicBrick());
     API.SEDIMENTARY_STONE.registerBlock(event, new SedimentaryStone());
 
+    // TODO
 //    /*
 //     * Slabs
 //     */
@@ -273,11 +279,11 @@ public class CommonProxy {
   }
 
   @SubscribeEvent
-  public void registerItem(RegistryEvent.Register<Item> event) {
+  public void registerItems(RegistryEvent.Register<Item> event) {
 
-    event.getRegistry().register(new ItemLigniteCoal());
-    event.getRegistry().register(new ItemFossilPiece());
-
+    API.LIGNITE_COAL.registerItem(event, new ItemLigniteCoal());
+    API.FOSSIL_PIECE.registerItem(event, new ItemFossilPiece());
+// TODO
     API.IGNEOUS_STONE.registerItem(event, new IgneousStone());
     API.IGNEOUS_COBBLE.registerItem(event, new IgneousCobble());
     API.IGNEOUS_BRICK.registerItem(event, new IgneousBrick());
@@ -300,18 +306,19 @@ public class CommonProxy {
   public void addOreDicts() {
     // wildcarding is not working
     for (int i = 0; i < 8; i++) {
-      OreDictionary.registerOre("stone", new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
-      OreDictionary.registerOre("stone", new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
-      OreDictionary.registerOre("stone", new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
-      OreDictionary.registerOre("cobblestone", new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
-      OreDictionary.registerOre("cobblestone", new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
-      OreDictionary.registerOre("stoneBricks", new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
-      OreDictionary.registerOre("stoneBricks", new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
+//      OreDictionary.registerOre("stone", new ItemStack(new IgneousStone().getItemBlock(), 1, i));
+//      OreDictionary.registerOre("stone", new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
+//      OreDictionary.registerOre("stone", new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
+//      OreDictionary.registerOre("cobblestone", new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
+//      OreDictionary.registerOre("cobblestone", new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
+//      OreDictionary.registerOre("stoneBricks", new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
+//      OreDictionary.registerOre("stoneBricks", new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
     }
     OresRegistry.INSTANCE.copyOreDictionaries();
   }
 
   private final void createRecipes() {
+    //TODO
 //    GameRegistry.addShapedRecipe(new ItemStack(Items.COAL), "XXX", "XXX", "XXX", 'X', API.LIGNITE_COAL.getItem());
 //    GameRegistry.addShapelessRecipe(new ItemStack(Items.DYE, 1, 15), new ItemStack(API.FOSSIL_PIECE.getItem(), 1, WILDCARD_VALUE));
 //

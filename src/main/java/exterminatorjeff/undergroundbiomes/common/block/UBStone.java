@@ -1,6 +1,7 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
 import com.google.common.base.Predicate;
+import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
@@ -44,6 +45,8 @@ public abstract class UBStone extends Block implements UBBlock {
     setHardness(UBConfig.SPECIFIC.hardnessModifier());
     setResistance(UBConfig.SPECIFIC.resistanceModifier());
     setHarvestLevel("pickaxe", 0);
+    setUnlocalizedName(this.getInternalName());
+    setRegistryName(ModInfo.MODID,this.getInternalName());
     ((UBConfig) (UBConfig.SPECIFIC)).hardnessModifier.addTracker(hardness -> setHardness(hardness));
     ((UBConfig) (UBConfig.SPECIFIC)).resistanceModifier.addTracker(resistance -> setResistance(resistance));
   }
@@ -100,6 +103,8 @@ public abstract class UBStone extends Block implements UBBlock {
   public abstract int getMetaFromState(IBlockState state);
 
   public abstract IBlockState getStateFromMeta(int meta);
+
+  public abstract String getInternalName();
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {

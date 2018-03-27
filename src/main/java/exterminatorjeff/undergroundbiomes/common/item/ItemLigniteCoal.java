@@ -1,5 +1,6 @@
 package exterminatorjeff.undergroundbiomes.common.item;
 
+import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBItem;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import net.minecraft.item.Item;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 public class ItemLigniteCoal extends Item implements UBItem {
 
   public ItemLigniteCoal() {
+    super();
     setCreativeTab(UBCreativeTab.UB_ITEMS_TAB);
   }
 

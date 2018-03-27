@@ -6,6 +6,7 @@ import exterminatorjeff.undergroundbiomes.client.UBOreModelLoader;
 import exterminatorjeff.undergroundbiomes.client.UBStateMappers;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -23,8 +24,6 @@ public final class ClientProxy extends CommonProxy {
 
     MinecraftForge.EVENT_BUS.register(OresRegistry.INSTANCE);
     ModelLoaderRegistry.registerLoader(new UBOreModelLoader());
-    registerBlocksModels();
-    registerItemsModels();
     OresRegistry.INSTANCE.addVanillaOverlays();
     OresRegistry.INSTANCE.registerOreModels();
   }
@@ -35,7 +34,8 @@ public final class ClientProxy extends CommonProxy {
 
     UBCreativeTab.UB_BLOCKS_TAB.setTabIconItem(API.IGNEOUS_BRICK.getItemBlock());
     UBCreativeTab.UB_ITEMS_TAB.setTabIconItem(API.LIGNITE_COAL.getItem());
-    UBCreativeTab.UB_ORES_TAB.setTabIconItem(OresRegistry.INSTANCE.getUBOresTabIcon());
+    // TODO
+    //UBCreativeTab.UB_ORES_TAB.setTabIconItem(OresRegistry.INSTANCE.getUBOresTabIcon());
   }
 
   @Override
@@ -43,6 +43,11 @@ public final class ClientProxy extends CommonProxy {
     super.postInit(e);
 
   }
+
+  public void registerModels(ModelRegistryEvent event) {
+    registerBlocksModels();
+    registerItemsModels();
+  };
 
   private final void registerBlocksModels() {
     // Stones

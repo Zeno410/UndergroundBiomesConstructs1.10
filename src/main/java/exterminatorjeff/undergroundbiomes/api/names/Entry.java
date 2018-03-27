@@ -31,6 +31,9 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
   protected static final UBLogger LOGGER = new UBLogger(Entry.class, Level.INFO);
 
   protected final String internalName;
+
+  private boolean isItemRegistered = false;
+
   /**
    * Can be a {@link Block}, an {@link Item}...
    */
@@ -45,6 +48,9 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
    * <code>false</code> otherwise.
    */
   public boolean isRegistered() {
+    return thing != null;
+  }
+  public boolean isItemRegistered() {
     return thing != null;
   }
 
@@ -64,8 +70,9 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
    */
 
   public final void registerItem(RegistryEvent.Register<Item> event, T thing) {
-    if (this.thing == null) {
+    if (this.thing == null || (!isItemRegistered)) {
       this.thing = thing;
+      this.isItemRegistered = true;
       doRegisterItem(event.getRegistry());
       LOGGER.debug("Registering '" + thing.getRegistryName() + "' for entry '" + internalName + "'");
     } else
@@ -76,7 +83,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
     if (this.thing == null) {
       this.thing = thing;
       doRegisterBlock(event.getRegistry());
-      LOGGER.debug("Registering '" + thing.getRegistryName() + "' for entry '" + internalName + "'");
+      LOGGER.debug("Registering '" + this.thing.getRegistryName() + "' for entry '" + internalName + "'");
     } else
       throw new RuntimeException("This entry is already registered! (" + internalName + ")");
   }

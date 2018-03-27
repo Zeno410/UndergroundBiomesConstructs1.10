@@ -1,5 +1,6 @@
 package exterminatorjeff.undergroundbiomes.api.names;
 
+import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -45,7 +46,7 @@ public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess {
   @Override
   protected void doRegisterBlock(IForgeRegistry<Block> registry) {
     getBlock().setUnlocalizedName(internalName);
-    registry.register(getBlock().setRegistryName(internalName));
+    registry.register(getBlock().setRegistryName(ModInfo.MODID,internalName));
   }
 
   public void registerModel() {
