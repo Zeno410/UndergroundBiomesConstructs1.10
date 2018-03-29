@@ -26,7 +26,7 @@ import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.*;
  * @author CurtisA, LouisDB
  */
 public class IgneousStone extends UBStone {
-  public static final String internal_name = "ingeneous_stone";
+  public static final String internal_name = "igneous_stone";
 
   public IgneousStone() {
     super();

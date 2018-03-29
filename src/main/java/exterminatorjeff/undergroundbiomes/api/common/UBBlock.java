@@ -5,6 +5,7 @@ import exterminatorjeff.undergroundbiomes.api.enums.UBStoneType;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 /**
@@ -16,7 +17,7 @@ public interface UBBlock extends IForgeRegistryEntry<Block>, Variable {
 
   Block toBlock();
 
-  Item getItemBlock();
+  ItemBlock getItemBlock();
 
   UBStoneType getStoneType();
 

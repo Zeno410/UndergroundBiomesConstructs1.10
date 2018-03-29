@@ -32,8 +32,9 @@ public final class ClientProxy extends CommonProxy {
   public void init(FMLInitializationEvent e) {
     super.init(e);
 
-    UBCreativeTab.UB_BLOCKS_TAB.setTabIconItem(API.IGNEOUS_BRICK.getItemBlock());
+    UBCreativeTab.UB_BLOCKS_TAB.setTabIconItem(API.IGNEOUS_STONE.getItemBlock());
     UBCreativeTab.UB_ITEMS_TAB.setTabIconItem(API.LIGNITE_COAL.getItem());
+    UBCreativeTab.UB_ORES_TAB.setTabIconItem(API.LIGNITE_COAL.getItem());
     // TODO
     //UBCreativeTab.UB_ORES_TAB.setTabIconItem(OresRegistry.INSTANCE.getUBOresTabIcon());
   }

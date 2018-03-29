@@ -20,7 +20,7 @@ def stones = [
   igneous    : [
     variants  : ['brick', 'cobble', 'stone'],
     create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
-    create_for: ['stone': ['button', 'halfslab_alt', 'fullslab_alt'],
+    create_for: ['stone' : ['button', 'halfslab_alt', 'fullslab_alt'],
                  'cobble': ['button']],
     types     : ['red_granite', 'black_granite', 'rhyolite', 'andesite', 'gabbro', 'basalt', 'komatiite', 'dacite']
   ]
@@ -34,36 +34,47 @@ task processResourceTemplates(type: Copy, group: "build", description: "Creates 
 
 stones.each { key, value ->
   value.variants.each { variant ->
-    task "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}"(type: Copy) {
+    task "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}"(type: Copy) {
       from 'src/main/resources_templates'
       into 'build/resources/main'
-      include '**/block.json'
+      include '**/blockstates/block.json'
       rename '(.*)', "${key}_${variant}.json"
       expand(types: value.types, texture_name: variant_textures[variant])
     }
-    processResourceTemplates.dependsOn "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}"
+    processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}"
     value.create.each { item_type ->
-      task "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
+      task "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
         from 'src/main/resources_templates'
         into 'build/resources/main'
-        include "**/${item_type}.json"
+        include "**/blockstates/${item_type}.json"
         rename '(.*)', "${key}_${variant}_${item_type}.json"
         expand(types: value.types, texture_name: variant_textures[variant])
       }
-      processResourceTemplates.dependsOn "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
+      processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
     }
   }
   value.create_for.each { variant, items ->
     items.each { item_type ->
-      task "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
+      task "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
         from 'src/main/resources_templates'
         into 'build/resources/main'
-        include "**/${item_type}.json"
+        include "**/blockstates/${item_type}.json"
         rename '(.*)', "${key}_${variant}_${item_type}.json"
         expand(types: value.types, texture_name: variant_textures[variant])
       }
-      processResourceTemplates.dependsOn "processResourceTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
+      processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
     }
+  }
+  value.types.each { type ->
+    task "processModelsTemplatesFor${key.capitalize()}${type.capitalize()}"(type: Copy) {
+      from 'src/main/resources_templates'
+      into 'build/resources/main'
+      include "**/models/block/block.json"
+      rename '(.*)', "${type}.json"
+      expand(name: type)
+    }
+    processResourceTemplates.dependsOn "processModelsTemplatesFor${key.capitalize()}${type.capitalize()}"
+
   }
 }
 

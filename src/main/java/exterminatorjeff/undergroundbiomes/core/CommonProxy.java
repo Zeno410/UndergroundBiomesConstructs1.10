@@ -31,6 +31,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.world.WorldServer;
@@ -166,16 +167,7 @@ public class CommonProxy {
      * Blocks
      */
     LOGGER.debug("Start registering blocks");
-    IForgeRegistry registry = event.getRegistry();
-//    registry.register(new IgneousStone());
-//    registry.register(new IgneousCobble());
-//    registry.register(new IgneousBrick());
-//    registry.register(new MetamorphicStone());
-//    registry.register(new MetamorphicCobble());
-//    registry.register(new MetamorphicBrick());
-//    registry.register(new SedimentaryStone());
 
-//
     API.IGNEOUS_STONE.registerBlock(event, new IgneousStone());
     API.IGNEOUS_COBBLE.registerBlock(event, new IgneousCobble());
     API.IGNEOUS_BRICK.registerBlock(event, new IgneousBrick());
@@ -284,13 +276,22 @@ public class CommonProxy {
     API.LIGNITE_COAL.registerItem(event, new ItemLigniteCoal());
     API.FOSSIL_PIECE.registerItem(event, new ItemFossilPiece());
 // TODO
-    API.IGNEOUS_STONE.registerItem(event, new IgneousStone());
-    API.IGNEOUS_COBBLE.registerItem(event, new IgneousCobble());
-    API.IGNEOUS_BRICK.registerItem(event, new IgneousBrick());
-    API.METAMORPHIC_STONE.registerItem(event, new MetamorphicStone());
-    API.METAMORPHIC_COBBLE.registerItem(event, new MetamorphicCobble());
-    API.METAMORPHIC_BRICK.registerItem(event, new MetamorphicBrick());
-    API.SEDIMENTARY_STONE.registerItem(event, new SedimentaryStone());
+    ItemBlock itemBlock = new IgneousStone().getItemBlock();
+    event.getRegistry().register(itemBlock);
+//    API.IGNEOUS_STONE.registerItem(event, new IgneousStone());
+//    API.IGNEOUS_COBBLE.registerItem(event, new IgneousCobble());
+
+    ItemBlock itemBlock2 = new MetamorphicStone().getItemBlock();
+    event.getRegistry().register(itemBlock2);
+
+    ItemBlock itemBlock3 = new SedimentaryStone().getItemBlock();
+    event.getRegistry().register(itemBlock3);
+
+    // event.getRegistry().register(new ItemBlock(new IgneousCobble()).setRegistryName("red_granite_cobble"));
+//    event.getRegistry().register(new ItemBlock(new IgneousBrick()).setRegistryName("red_granite"));
+//    event.getRegistry().register(new ItemBlock(new MetamorphicStone()).setRegistryName("red_granite"));
+//    event.getRegistry().register(new ItemBlock(new MetamorphicCobble()).setRegistryName("red_granite"));
+//    event.getRegistry().register(new ItemBlock(new SedimentaryStone()).setRegistryName("red_granite"));
   }
 
   private final void createOres() {
@@ -306,6 +307,7 @@ public class CommonProxy {
   public void addOreDicts() {
     // wildcarding is not working
     for (int i = 0; i < 8; i++) {
+      // TODO
 //      OreDictionary.registerOre("stone", new ItemStack(new IgneousStone().getItemBlock(), 1, i));
 //      OreDictionary.registerOre("stone", new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
 //      OreDictionary.registerOre("stone", new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));

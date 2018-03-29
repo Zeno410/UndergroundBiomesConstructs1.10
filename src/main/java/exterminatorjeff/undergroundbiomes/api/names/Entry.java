@@ -74,7 +74,7 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
       this.thing = thing;
       this.isItemRegistered = true;
       doRegisterItem(event.getRegistry());
-      LOGGER.debug("Registering '" + thing.getRegistryName() + "' for entry '" + internalName + "'");
+      LOGGER.debug("Registering item '" + thing.getRegistryName() + "' for entry '" + internalName + "'");
     } else
       throw new RuntimeException("This entry is already registered! (" + internalName + ")");
   }

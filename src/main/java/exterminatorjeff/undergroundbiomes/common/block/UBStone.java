@@ -40,7 +40,6 @@ public abstract class UBStone extends Block implements UBBlock {
 
   public UBStone() {
     super(Material.ROCK);
-    itemBlock = new UBItemBlockStone(this);
     setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
     setHardness(UBConfig.SPECIFIC.hardnessModifier());
     setResistance(UBConfig.SPECIFIC.resistanceModifier());
@@ -49,6 +48,7 @@ public abstract class UBStone extends Block implements UBBlock {
     setRegistryName(ModInfo.MODID,this.getInternalName());
     ((UBConfig) (UBConfig.SPECIFIC)).hardnessModifier.addTracker(hardness -> setHardness(hardness));
     ((UBConfig) (UBConfig.SPECIFIC)).resistanceModifier.addTracker(resistance -> setResistance(resistance));
+    itemBlock = new UBItemBlockStone(this);
   }
 
   @Override
@@ -147,6 +147,8 @@ public abstract class UBStone extends Block implements UBBlock {
     public UBItemBlockStone(UBStone block) {
       super(block);
       setMaxDamage(0);
+      setUnlocalizedName(block.getUnlocalizedName());
+      setRegistryName(block.getRegistryName());
       setHasSubtypes(true);
     }
 
