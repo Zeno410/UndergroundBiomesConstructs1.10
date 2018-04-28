@@ -394,13 +394,13 @@ public class CommonProxy {
     // wildcarding is not working
     for (int i = 0; i < 8; i++) {
       // TODO
-//      OreDictionary.registerOre("stone", new ItemStack(new IgneousStone().getItemBlock(), 1, i));
-//      OreDictionary.registerOre("stone", new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
-//      OreDictionary.registerOre("stone", new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
-//      OreDictionary.registerOre("cobblestone", new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
-//      OreDictionary.registerOre("cobblestone", new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
-//      OreDictionary.registerOre("stoneBricks", new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
-//      OreDictionary.registerOre("stoneBricks", new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
+      OreDictionary.registerOre("stone", new ItemStack(API.IGNEOUS_STONE.getItemBlock(), 1, i));
+      OreDictionary.registerOre("stone", new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i));
+      OreDictionary.registerOre("stone", new ItemStack(API.SEDIMENTARY_STONE.getItemBlock(), 1, i));
+      OreDictionary.registerOre("cobblestone", new ItemStack(API.IGNEOUS_COBBLE.getItemBlock(), 1, i));
+      OreDictionary.registerOre("cobblestone", new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i));
+      OreDictionary.registerOre("stoneBricks", new ItemStack(API.IGNEOUS_BRICK.getItemBlock(), 1, i));
+      OreDictionary.registerOre("stoneBricks", new ItemStack(API.METAMORPHIC_BRICK.getItemBlock(), 1, i));
     }
     OresRegistry.INSTANCE.copyOreDictionaries();
   }
