@@ -15,7 +15,7 @@ import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.RED_GR
  * @author CurtisA, LouisDB
  */
 public class IgneousCobble extends IgneousStone {
-  public static final String internal_name = "ingeneous_cobble";
+  public static final String internal_name = "igneous_cobble";
 
   @Override
   public String getInternalName() {

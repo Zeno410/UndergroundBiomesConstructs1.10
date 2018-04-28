@@ -1,23 +1,13 @@
 {
 	"forge_marker": 1,
   "defaults": {
-    "textures": {
-      "all": "undergroundbiomes:blocks/${types[0]}<% if(texture_name) { %>_$texture_name<% } %>"
-    },
 		"model": "cube_all",
 		"uvlock": true
 	},
 	"variants": {
-    "inventory": {
-      "model": "cube_all",
-      "textures": {
-        "all": "undergroundbiomes:blocks/${types[0]}<% if(texture_name) { %>_$texture_name<% } %>"
-      }
-    },
     "type": {<%
       for (i=0; i < types.size; i++) { %>
       "${types[i]}": {
-"model": "cube_all",
         "textures": {
           "all": "undergroundbiomes:blocks/${types[i]}<% if(texture_name) { %>_$texture_name<% } %>"
         }

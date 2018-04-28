@@ -18,12 +18,8 @@ import org.apache.logging.log4j.Level;
  * Common superclass for all type of entries.<br>
  * Allows a {@link Block} or {@link Item} to be registered, as well as its
  * model, and provides and access for other mods.
- * <<<<<<< Updated upstream
  *
  * @param <T>
- * @author LouisDB
- * =======
- * >>>>>>> Stashed changes
  * @author LouisDB
  */
 public abstract class Entry<T extends IForgeRegistryEntry<?>> {
@@ -71,10 +67,12 @@ public abstract class Entry<T extends IForgeRegistryEntry<?>> {
 
   public final void registerItem(RegistryEvent.Register<Item> event, T thing) {
     if (this.thing == null || (!isItemRegistered)) {
-      this.thing = thing;
+      if(this.thing == null) {
+        this.thing = thing;
+      }
       this.isItemRegistered = true;
       doRegisterItem(event.getRegistry());
-      LOGGER.debug("Registering item '" + thing.getRegistryName() + "' for entry '" + internalName + "'");
+      LOGGER.debug("Registering item '" + this.thing.getRegistryName() + "' for entry '" + internalName + "'");
     } else
       throw new RuntimeException("This entry is already registered! (" + internalName + ")");
   }

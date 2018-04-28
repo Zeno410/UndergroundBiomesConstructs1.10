@@ -16,11 +16,12 @@ public final class WallEntry extends BlockEntry {
 
   @Override
   protected void doRegisterItem(IForgeRegistry<Item> registry) {
-
+    registry.register(getItemBlock().setRegistryName(internalName));
   }
 
   @Override
   protected void doRegisterBlock(IForgeRegistry<Block> registry) {
-
+    getBlock().setRegistryName(internalName);
+    registry.register(getBlock());
   }
 }

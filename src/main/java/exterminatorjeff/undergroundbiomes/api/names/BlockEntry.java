@@ -40,16 +40,12 @@ public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess {
 
   @Override
   protected void doRegisterItem(IForgeRegistry<Item> registry) {
-    ItemBlock itemBlock = getItemBlock();
-    itemBlock.setUnlocalizedName(internalName);
-    itemBlock.setRegistryName(internalName);
-    registry.register(itemBlock);
+    registry.register(getItemBlock());
   }
 
   @Override
   protected void doRegisterBlock(IForgeRegistry<Block> registry) {
-    getBlock().setUnlocalizedName(internalName);
-    registry.register(getBlock().setRegistryName(internalName));
+    registry.register(getBlock());
   }
 
   public void registerModel() {
@@ -60,7 +56,7 @@ public abstract class BlockEntry extends Entry<UBBlock> implements BlockAccess {
   protected void doRegisterModel(IStateMapper stateMapper) {
     for (int meta = 0; meta < getUBBlock().getNbVariants(); ++meta) {
       ModelResourceLocation location = new ModelResourceLocation(externalName(internalName), "type=" + getUBBlock().getVariantName(meta));
-      ModelLoader.setCustomModelResourceLocation((Item) getItemBlock(), meta, location);
+      ModelLoader.setCustomModelResourceLocation(getItemBlock(), meta, location);
       LOGGER.debug("Model location: " + location);
     }
   }

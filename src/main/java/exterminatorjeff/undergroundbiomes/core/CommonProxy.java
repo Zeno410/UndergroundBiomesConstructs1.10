@@ -160,7 +160,10 @@ public class CommonProxy {
   private ArrayList<Runnable> serverCloseActions = new ArrayList<Runnable>();
 
   public void registerModels(ModelRegistryEvent event) {
-  };
+    // Only used in Client, overwritten there
+  }
+
+  ;
 
   public void registerBlocks(RegistryEvent.Register<Block> event) {
     /*
@@ -176,122 +179,205 @@ public class CommonProxy {
     API.METAMORPHIC_BRICK.registerBlock(event, new MetamorphicBrick());
     API.SEDIMENTARY_STONE.registerBlock(event, new SedimentaryStone());
 
-    // TODO
-//    /*
-//     * Slabs
-//     */
-//
-//    API.IGNEOUS_BRICK_SLAB.register(new SlabItemBlock(new UBIgneousBrickSlabHalf(), new UBIgneousBrickSlabDouble()));
-//    API.METAMORPHIC_BRICK_SLAB.register(new SlabItemBlock(new UBMetamorphicBrickSlabHalf(), new UBMetamorphicBrickSlabDouble()));
-//    API.IGNEOUS_STONE_SLAB.register(new SlabItemBlock(new UBIgneousStoneSlabHalf(), new UBIgneousStoneSlabDouble()));
-//    API.METAMORPHIC_STONE_SLAB.register(new SlabItemBlock(new UBMetamorphicStoneSlabHalf(), new UBMetamorphicStoneSlabDouble()));
-//    API.IGNEOUS_COBBLE_SLAB.register(new SlabItemBlock(new UBIgneousCobbleSlabHalf(), new UBIgneousCobbleSlabDouble()));
-//    API.METAMORPHIC_COBBLE_SLAB.register(new SlabItemBlock(new UBMetamorphicCobbleSlabHalf(), new UBMetamorphicCobbleSlabDouble()));
-//    API.SEDIMENTARY_STONE_SLAB.register(new SlabItemBlock(new UBSedimentaryStoneSlabHalf(), new UBSedimentaryStoneSlabDouble()));
-//
-//    /*
-//     * Buttons
-//     */
-//
-//    if (UBConfig.SPECIFIC.buttonsOn()) {
-//      if (UBConfig.SPECIFIC.igneousButtonsOn()) {
-//        if (UBConfig.SPECIFIC.stoneButtonsOn()) {
-//          API.IGNEOUS_STONE_BUTTON.register(new ButtonItemBlock(API.IGNEOUS_STONE, UBButtonIgneous.class));
-//        }
-//        if (UBConfig.SPECIFIC.cobbleButtonsOn()) {
-//          API.IGNEOUS_COBBLE_BUTTON.register(new ButtonItemBlock(API.IGNEOUS_COBBLE, UBButtonIgneousCobble.class));
-//        }
-//        if (UBConfig.SPECIFIC.brickButtonsOn())
-//          API.IGNEOUS_BRICK_BUTTON.register(new ButtonItemBlock(API.IGNEOUS_BRICK, UBButtonIgneousBrick.class));
-//      }
-//      if (UBConfig.SPECIFIC.metamorphicButtonsOn()) {
-//        if (UBConfig.SPECIFIC.stoneButtonsOn())
-//          API.METAMORPHIC_STONE_BUTTON.register(new ButtonItemBlock(API.METAMORPHIC_STONE, UBButtonMetamorphic.class));
-//        if (UBConfig.SPECIFIC.cobbleButtonsOn())
-//          API.METAMORPHIC_COBBLE_BUTTON.register(new ButtonItemBlock(API.METAMORPHIC_COBBLE, UBButtonMetamorphicCobble.class));
-//        if (UBConfig.SPECIFIC.brickButtonsOn())
-//          API.METAMORPHIC_BRICK_BUTTON.register(new ButtonItemBlock(API.METAMORPHIC_BRICK, UBButtonMetamorphicBrick.class));
-//      }
-//      if (UBConfig.SPECIFIC.sedimentaryButtonsOn())
-//        API.SEDIMENTARY_STONE_BUTTON.register(new ButtonItemBlock(API.SEDIMENTARY_STONE, UBButtonSedimentary.class));
-//    }
-//
-//
-//    /*
-//     * Walls
-//     */
-//
-//    if (UBConfig.SPECIFIC.wallsOn()) {
-//      if (UBConfig.SPECIFIC.igneousWallsOn()) {
-//        if (UBConfig.SPECIFIC.stoneWallsOn())
-//          API.IGNEOUS_STONE_WALL.register(new UBWallIgneous(API.IGNEOUS_STONE));
-//        if (UBConfig.SPECIFIC.cobbleWallsOn())
-//          API.IGNEOUS_COBBLE_WALL.register(new UBWallIgneousCobble(API.IGNEOUS_COBBLE));
-//        if (UBConfig.SPECIFIC.brickWallsOn())
-//          API.IGNEOUS_BRICK_WALL.register(new UBWallIgneousBrick(API.IGNEOUS_BRICK));
-//      }
-//      if (UBConfig.SPECIFIC.metamorphicWallsOn()) {
-//        if (UBConfig.SPECIFIC.stoneWallsOn())
-//          API.METAMORPHIC_STONE_WALL.register(new UBWallMetamorphic(API.METAMORPHIC_STONE));
-//        if (UBConfig.SPECIFIC.cobbleWallsOn())
-//          API.METAMORPHIC_COBBLE_WALL.register(new UBWallMetamorphicCobble(API.METAMORPHIC_COBBLE));
-//        if (UBConfig.SPECIFIC.brickWallsOn())
-//          API.METAMORPHIC_BRICK_WALL.register(new UBWallMetamorphicBrick(API.METAMORPHIC_BRICK));
-//      }
-//      if (UBConfig.SPECIFIC.sedimentaryWallsOn())
-//        API.SEDIMENTARY_STONE_WALL.register(new UBWallSedimentary(API.SEDIMENTARY_STONE));
-//    }
-//
-//    /*
-//     * Stairs
-//     */
-//
-//    if (UBConfig.SPECIFIC.stairsOn()) {
-//      if (UBConfig.SPECIFIC.igneousStairsOn()) {
-//        if (UBConfig.SPECIFIC.stoneStairsOn())
-//          API.IGNEOUS_STONE_STAIRS.register(new StairsItemBlock(API.IGNEOUS_STONE, UBStairsIgneous.class));
-//        if (UBConfig.SPECIFIC.cobbleStairsOn())
-//          API.IGNEOUS_COBBLE_STAIRS.register(new StairsItemBlock(API.IGNEOUS_COBBLE, UBStairsIgneousCobble.class));
-//        if (UBConfig.SPECIFIC.brickStairsOn())
-//          API.IGNEOUS_BRICK_STAIRS.register(new StairsItemBlock(API.IGNEOUS_BRICK, UBStairsIgneousBrick.class));
-//      }
-//      if (UBConfig.SPECIFIC.metamorphicStairsOn()) {
-//        if (UBConfig.SPECIFIC.stoneStairsOn())
-//          API.METAMORPHIC_STONE_STAIRS.register(new StairsItemBlock(API.METAMORPHIC_STONE, UBStairsMetamorphic.class));
-//        if (UBConfig.SPECIFIC.cobbleStairsOn())
-//          API.METAMORPHIC_COBBLE_STAIRS.register(new StairsItemBlock(API.METAMORPHIC_COBBLE, UBStairsMetamorphicCobble.class));
-//        if (UBConfig.SPECIFIC.brickStairsOn())
-//          API.METAMORPHIC_BRICK_STAIRS.register(new StairsItemBlock(API.METAMORPHIC_BRICK, UBStairsMetamorphicBrick.class));
-//      }
-//      if (UBConfig.SPECIFIC.sedimentaryStairsOn())
-//        API.SEDIMENTARY_STONE_STAIRS.register(new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
-//
-//
-//    }
+    /*
+     * Slabs
+     */
+
+    API.IGNEOUS_BRICK_SLAB.registerBlock(event, new SlabItemBlock(new UBIgneousBrickSlabHalf(), new UBIgneousBrickSlabDouble()));
+    API.METAMORPHIC_BRICK_SLAB.registerBlock(event, new SlabItemBlock(new UBMetamorphicBrickSlabHalf(), new UBMetamorphicBrickSlabDouble()));
+    API.IGNEOUS_STONE_SLAB.registerBlock(event, new SlabItemBlock(new UBIgneousStoneSlabHalf(), new UBIgneousStoneSlabDouble()));
+    API.METAMORPHIC_STONE_SLAB.registerBlock(event, new SlabItemBlock(new UBMetamorphicStoneSlabHalf(), new UBMetamorphicStoneSlabDouble()));
+    API.IGNEOUS_COBBLE_SLAB.registerBlock(event, new SlabItemBlock(new UBIgneousCobbleSlabHalf(), new UBIgneousCobbleSlabDouble()));
+    API.METAMORPHIC_COBBLE_SLAB.registerBlock(event, new SlabItemBlock(new UBMetamorphicCobbleSlabHalf(), new UBMetamorphicCobbleSlabDouble()));
+    API.SEDIMENTARY_STONE_SLAB.registerBlock(event, new SlabItemBlock(new UBSedimentaryStoneSlabHalf(), new UBSedimentaryStoneSlabDouble()));
+
+    /*
+     * Buttons
+     */
+
+    if (UBConfig.SPECIFIC.buttonsOn()) {
+      if (UBConfig.SPECIFIC.igneousButtonsOn()) {
+        if (UBConfig.SPECIFIC.stoneButtonsOn()) {
+          API.IGNEOUS_STONE_BUTTON.registerBlock(event, new ButtonItemBlock(API.IGNEOUS_STONE, UBButtonIgneous.class));
+        }
+        if (UBConfig.SPECIFIC.cobbleButtonsOn()) {
+          API.IGNEOUS_COBBLE_BUTTON.registerBlock(event, new ButtonItemBlock(API.IGNEOUS_COBBLE, UBButtonIgneousCobble.class));
+        }
+        if (UBConfig.SPECIFIC.brickButtonsOn())
+          API.IGNEOUS_BRICK_BUTTON.registerBlock(event, new ButtonItemBlock(API.IGNEOUS_BRICK, UBButtonIgneousBrick.class));
+      }
+      if (UBConfig.SPECIFIC.metamorphicButtonsOn()) {
+        if (UBConfig.SPECIFIC.stoneButtonsOn())
+          API.METAMORPHIC_STONE_BUTTON.registerBlock(event, new ButtonItemBlock(API.METAMORPHIC_STONE, UBButtonMetamorphic.class));
+        if (UBConfig.SPECIFIC.cobbleButtonsOn())
+          API.METAMORPHIC_COBBLE_BUTTON.registerBlock(event, new ButtonItemBlock(API.METAMORPHIC_COBBLE, UBButtonMetamorphicCobble.class));
+        if (UBConfig.SPECIFIC.brickButtonsOn())
+          API.METAMORPHIC_BRICK_BUTTON.registerBlock(event, new ButtonItemBlock(API.METAMORPHIC_BRICK, UBButtonMetamorphicBrick.class));
+      }
+      if (UBConfig.SPECIFIC.sedimentaryButtonsOn())
+        API.SEDIMENTARY_STONE_BUTTON.registerBlock(event, new ButtonItemBlock(API.SEDIMENTARY_STONE, UBButtonSedimentary.class));
+    }
+
+
+    /*
+     * Walls
+     */
+
+    if (UBConfig.SPECIFIC.wallsOn()) {
+      if (UBConfig.SPECIFIC.igneousWallsOn()) {
+        if (UBConfig.SPECIFIC.stoneWallsOn())
+          API.IGNEOUS_STONE_WALL.registerBlock(event, new UBWallIgneous(API.IGNEOUS_STONE));
+        if (UBConfig.SPECIFIC.cobbleWallsOn())
+          API.IGNEOUS_COBBLE_WALL.registerBlock(event, new UBWallIgneousCobble(API.IGNEOUS_COBBLE));
+        if (UBConfig.SPECIFIC.brickWallsOn())
+          API.IGNEOUS_BRICK_WALL.registerBlock(event, new UBWallIgneousBrick(API.IGNEOUS_BRICK));
+      }
+      if (UBConfig.SPECIFIC.metamorphicWallsOn()) {
+        if (UBConfig.SPECIFIC.stoneWallsOn())
+          API.METAMORPHIC_STONE_WALL.registerBlock(event, new UBWallMetamorphic(API.METAMORPHIC_STONE));
+        if (UBConfig.SPECIFIC.cobbleWallsOn())
+          API.METAMORPHIC_COBBLE_WALL.registerBlock(event, new UBWallMetamorphicCobble(API.METAMORPHIC_COBBLE));
+        if (UBConfig.SPECIFIC.brickWallsOn())
+          API.METAMORPHIC_BRICK_WALL.registerBlock(event, new UBWallMetamorphicBrick(API.METAMORPHIC_BRICK));
+      }
+      if (UBConfig.SPECIFIC.sedimentaryWallsOn())
+        API.SEDIMENTARY_STONE_WALL.registerBlock(event, new UBWallSedimentary(API.SEDIMENTARY_STONE));
+    }
+
+    /*
+     * Stairs
+     */
+
+    if (UBConfig.SPECIFIC.stairsOn()) {
+      if (UBConfig.SPECIFIC.igneousStairsOn()) {
+        if (UBConfig.SPECIFIC.stoneStairsOn())
+          API.IGNEOUS_STONE_STAIRS.registerBlock(event, new StairsItemBlock(API.IGNEOUS_STONE, UBStairsIgneous.class));
+        if (UBConfig.SPECIFIC.cobbleStairsOn())
+          API.IGNEOUS_COBBLE_STAIRS.registerBlock(event, new StairsItemBlock(API.IGNEOUS_COBBLE, UBStairsIgneousCobble.class));
+        if (UBConfig.SPECIFIC.brickStairsOn())
+          API.IGNEOUS_BRICK_STAIRS.registerBlock(event, new StairsItemBlock(API.IGNEOUS_BRICK, UBStairsIgneousBrick.class));
+      }
+      if (UBConfig.SPECIFIC.metamorphicStairsOn()) {
+        if (UBConfig.SPECIFIC.stoneStairsOn())
+          API.METAMORPHIC_STONE_STAIRS.registerBlock(event, new StairsItemBlock(API.METAMORPHIC_STONE, UBStairsMetamorphic.class));
+        if (UBConfig.SPECIFIC.cobbleStairsOn())
+          API.METAMORPHIC_COBBLE_STAIRS.registerBlock(event, new StairsItemBlock(API.METAMORPHIC_COBBLE, UBStairsMetamorphicCobble.class));
+        if (UBConfig.SPECIFIC.brickStairsOn())
+          API.METAMORPHIC_BRICK_STAIRS.registerBlock(event, new StairsItemBlock(API.METAMORPHIC_BRICK, UBStairsMetamorphicBrick.class));
+      }
+      if (UBConfig.SPECIFIC.sedimentaryStairsOn())
+        API.SEDIMENTARY_STONE_STAIRS.registerBlock(event, new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
+    }
   }
 
   @SubscribeEvent
   public void registerItems(RegistryEvent.Register<Item> event) {
 
+    LOGGER.debug("Start registering blocks");
     API.LIGNITE_COAL.registerItem(event, new ItemLigniteCoal());
     API.FOSSIL_PIECE.registerItem(event, new ItemFossilPiece());
-// TODO
-    ItemBlock itemBlock = new IgneousStone().getItemBlock();
-    event.getRegistry().register(itemBlock);
-//    API.IGNEOUS_STONE.registerItem(event, new IgneousStone());
-//    API.IGNEOUS_COBBLE.registerItem(event, new IgneousCobble());
 
-    ItemBlock itemBlock2 = new MetamorphicStone().getItemBlock();
-    event.getRegistry().register(itemBlock2);
+    /* Blocks */
 
-    ItemBlock itemBlock3 = new SedimentaryStone().getItemBlock();
-    event.getRegistry().register(itemBlock3);
+    IForgeRegistry<Item> registry = event.getRegistry();
+    registry.register(API.IGNEOUS_STONE.getItemBlock());
+    registry.register(API.METAMORPHIC_STONE.getItemBlock());
+    registry.register(API.SEDIMENTARY_STONE.getItemBlock());
 
-    // event.getRegistry().register(new ItemBlock(new IgneousCobble()).setRegistryName("red_granite_cobble"));
-//    event.getRegistry().register(new ItemBlock(new IgneousBrick()).setRegistryName("red_granite"));
-//    event.getRegistry().register(new ItemBlock(new MetamorphicStone()).setRegistryName("red_granite"));
-//    event.getRegistry().register(new ItemBlock(new MetamorphicCobble()).setRegistryName("red_granite"));
-//    event.getRegistry().register(new ItemBlock(new SedimentaryStone()).setRegistryName("red_granite"));
+    registry.register(API.IGNEOUS_COBBLE.getItemBlock());
+    registry.register(API.METAMORPHIC_COBBLE.getItemBlock());
+
+    registry.register(API.IGNEOUS_BRICK.getItemBlock());
+    registry.register(API.METAMORPHIC_BRICK.getItemBlock());
+
+    /* Slabs */
+
+    API.IGNEOUS_STONE_SLAB.registerItem(event, null);
+    API.METAMORPHIC_STONE_SLAB.registerItem(event, null);
+    API.IGNEOUS_COBBLE_SLAB.registerItem(event, null);
+    API.METAMORPHIC_COBBLE_SLAB.registerItem(event, null);
+    API.SEDIMENTARY_STONE_SLAB.registerItem(event, null);
+    API.IGNEOUS_BRICK_SLAB.registerItem(event, null);
+    API.METAMORPHIC_BRICK_SLAB.registerItem(event, null);
+
+    /*
+     * Buttons
+     */
+
+    if (UBConfig.SPECIFIC.buttonsOn()) {
+      if (UBConfig.SPECIFIC.igneousButtonsOn()) {
+        if (UBConfig.SPECIFIC.stoneButtonsOn()) {
+          registry.register(API.IGNEOUS_STONE_BUTTON.getItemBlock());
+        }
+        if (UBConfig.SPECIFIC.cobbleButtonsOn()) {
+          registry.register(API.IGNEOUS_COBBLE_BUTTON.getItemBlock());
+        }
+        if (UBConfig.SPECIFIC.brickButtonsOn())
+          registry.register(API.IGNEOUS_BRICK_BUTTON.getItemBlock());
+      }
+      if (UBConfig.SPECIFIC.metamorphicButtonsOn()) {
+        if (UBConfig.SPECIFIC.stoneButtonsOn())
+          registry.register(API.METAMORPHIC_STONE_BUTTON.getItemBlock());
+        if (UBConfig.SPECIFIC.cobbleButtonsOn())
+          registry.register(API.METAMORPHIC_COBBLE_BUTTON.getItemBlock());
+        if (UBConfig.SPECIFIC.brickButtonsOn())
+          registry.register(API.METAMORPHIC_BRICK_BUTTON.getItemBlock());
+      }
+      if (UBConfig.SPECIFIC.sedimentaryButtonsOn())
+        registry.register(API.SEDIMENTARY_STONE_BUTTON.getItemBlock());
+    }
+
+
+    /*
+     * Walls
+     */
+
+    if (UBConfig.SPECIFIC.wallsOn()) {
+      if (UBConfig.SPECIFIC.igneousWallsOn()) {
+        if (UBConfig.SPECIFIC.stoneWallsOn())
+          API.IGNEOUS_STONE_WALL.registerItem(event, new UBWallIgneous(API.IGNEOUS_STONE));
+        if (UBConfig.SPECIFIC.cobbleWallsOn())
+          API.IGNEOUS_COBBLE_WALL.registerItem(event, new UBWallIgneousCobble(API.IGNEOUS_COBBLE));
+        if (UBConfig.SPECIFIC.brickWallsOn())
+          API.IGNEOUS_BRICK_WALL.registerItem(event, new UBWallIgneousBrick(API.IGNEOUS_BRICK));
+      }
+      if (UBConfig.SPECIFIC.metamorphicWallsOn()) {
+        if (UBConfig.SPECIFIC.stoneWallsOn())
+          API.METAMORPHIC_STONE_WALL.registerItem(event, new UBWallMetamorphic(API.METAMORPHIC_STONE));
+        if (UBConfig.SPECIFIC.cobbleWallsOn())
+          API.METAMORPHIC_COBBLE_WALL.registerItem(event, new UBWallMetamorphicCobble(API.METAMORPHIC_COBBLE));
+        if (UBConfig.SPECIFIC.brickWallsOn())
+          API.METAMORPHIC_BRICK_WALL.registerItem(event, new UBWallMetamorphicBrick(API.METAMORPHIC_BRICK));
+      }
+      if (UBConfig.SPECIFIC.sedimentaryWallsOn())
+        API.SEDIMENTARY_STONE_WALL.registerItem(event, new UBWallSedimentary(API.SEDIMENTARY_STONE));
+    }
+
+    /*
+     * Stairs
+     */
+
+    if (UBConfig.SPECIFIC.stairsOn()) {
+      if (UBConfig.SPECIFIC.igneousStairsOn()) {
+        if (UBConfig.SPECIFIC.stoneStairsOn())
+          API.IGNEOUS_STONE_STAIRS.registerItem(event, new StairsItemBlock(API.IGNEOUS_STONE, UBStairsIgneous.class));
+        if (UBConfig.SPECIFIC.cobbleStairsOn())
+          API.IGNEOUS_COBBLE_STAIRS.registerItem(event, new StairsItemBlock(API.IGNEOUS_COBBLE, UBStairsIgneousCobble.class));
+        if (UBConfig.SPECIFIC.brickStairsOn())
+          API.IGNEOUS_BRICK_STAIRS.registerItem(event, new StairsItemBlock(API.IGNEOUS_BRICK, UBStairsIgneousBrick.class));
+      }
+      if (UBConfig.SPECIFIC.metamorphicStairsOn()) {
+        if (UBConfig.SPECIFIC.stoneStairsOn())
+          API.METAMORPHIC_STONE_STAIRS.registerItem(event, new StairsItemBlock(API.METAMORPHIC_STONE, UBStairsMetamorphic.class));
+        if (UBConfig.SPECIFIC.cobbleStairsOn())
+          API.METAMORPHIC_COBBLE_STAIRS.registerItem(event, new StairsItemBlock(API.METAMORPHIC_COBBLE, UBStairsMetamorphicCobble.class));
+        if (UBConfig.SPECIFIC.brickStairsOn())
+          API.METAMORPHIC_BRICK_STAIRS.registerItem(event, new StairsItemBlock(API.METAMORPHIC_BRICK, UBStairsMetamorphicBrick.class));
+      }
+      if (UBConfig.SPECIFIC.sedimentaryStairsOn())
+        API.SEDIMENTARY_STONE_STAIRS.registerItem(event, new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
+    }
+
   }
 
   private final void createOres() {

@@ -33,14 +33,4 @@ public final class StoneEntry extends BlockEntry {
   public StairsEntry getStairs() {
     return stairs;
   }
-
-  @Override
-  protected void doRegisterItem(IForgeRegistry<Item> registry) {
-
-  }
-
-  @Override
-  protected void doRegisterBlock(IForgeRegistry<Block> registry) {
-
-  }
 }

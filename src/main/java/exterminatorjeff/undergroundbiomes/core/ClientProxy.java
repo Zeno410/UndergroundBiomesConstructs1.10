@@ -67,11 +67,12 @@ public final class ClientProxy extends CommonProxy {
       API.IGNEOUS_STONE_SLAB.registerModel();
       API.METAMORPHIC_STONE_SLAB.registerModel();
     }
+    API.SEDIMENTARY_STONE_SLAB.registerModel();
+
     API.IGNEOUS_COBBLE_SLAB.registerModel();
     API.METAMORPHIC_COBBLE_SLAB.registerModel();
     API.IGNEOUS_BRICK_SLAB.registerModel();
     API.METAMORPHIC_BRICK_SLAB.registerModel();
-    API.SEDIMENTARY_STONE_SLAB.registerModel();
     // Buttons
     API.IGNEOUS_STONE_BUTTON.registerModel(UBStateMappers.UBBUTTON_STATE_MAPPER);
     API.IGNEOUS_COBBLE_BUTTON.registerModel(UBStateMappers.UBBUTTON_STATE_MAPPER);
