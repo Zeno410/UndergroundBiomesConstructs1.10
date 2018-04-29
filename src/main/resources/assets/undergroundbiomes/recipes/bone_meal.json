@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "undergroundbiomes:fossil_piece",
+      "data": 32767
+    }
+  ],
+  "result": {
+    "item": "minecraft:dye",
+    "data": 15,
+    "count": 1
+  }
+}

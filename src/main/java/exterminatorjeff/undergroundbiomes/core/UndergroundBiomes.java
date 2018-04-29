@@ -5,6 +5,7 @@ import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -71,6 +72,10 @@ public class UndergroundBiomes {
     PROXY.registerModels(event);
   }
 
+  @SubscribeEvent
+  public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+      PROXY.createRecipes(event);
+  }
 
   @EventHandler
   public  void init(FMLInitializationEvent event) {

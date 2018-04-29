@@ -65,17 +65,65 @@ stones.each { key, value ->
       processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
     }
   }
-  value.types.each { type ->
-    task "processModelsTemplatesFor${key.capitalize()}${type.capitalize()}"(type: Copy) {
-      from 'src/main/resources_templates'
-      into 'build/resources/main'
-      include "**/models/block/block.json"
-      rename '(.*)', "${type}.json"
-      expand(name: type)
-    }
-    processResourceTemplates.dependsOn "processModelsTemplatesFor${key.capitalize()}${type.capitalize()}"
-
-  }
 }
 
+stones.each { stone_type, value ->
+//  if(value.variants.contains("cobble")) {
+//    for(int index = 0; index < value.types.size(); index++) {
+//      String type = value.types[index]
+//      task "processSmeltRecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
+//        from 'src/main/resources_templates'
+//        into 'build/resources/main'
+//        include "**/recipes/smelt.json"
+//        rename '(.*).json', "smelt_${type}_cobble.json"
+//        expand(input: {item: stone_type + "_cobble", meta: index}, result: {item: stone_type + "_stone", meta: index})
+//      }
+//      processResourceTemplates.dependsOn "processSmeltRecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
+//    }
+//  }
+  value.variants.each { variant ->
+    value.create.each { item_type ->
+      for (int index = 0; index < value.types.size(); index++) {
+        String type = value.types[index]
+        task "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
+          from 'src/main/resources_templates'
+          into 'build/resources/main'
+          include "**/recipes/${item_type}.json"
+          rename '(.*).json', "${type}_${variant}_${item_type}.json"
+          expand(input: stone_type + "_" + variant, output: stone_type + "_" + variant + "_${item_type}", meta: index)
+        }
+        processResourceTemplates.dependsOn "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
+      }
+    }
+  }
+  value.create_for.each { variant, items ->
+    items.each { item_type ->
+      for (int index = 0; index < value.types.size(); index++) {
+        String type = value.types[index]
+        task "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
+          from 'src/main/resources_templates'
+          into 'build/resources/main'
+          include "**/recipes/${item_type}.json"
+          rename '(.*).json', "${type}_${variant}_${item_type}.json"
+          expand(input: stone_type + "_" + variant, output: stone_type + "_" + variant + "_${item_type}", meta: index)
+        }
+        processResourceTemplates.dependsOn "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
+      }
+    }
+  }
+  if(value.types.contains("brick")) {
+    for (int index = 0; index < value.types.size(); index++) {
+      String type = value.types[index]
+      String item_type = "brick"
+      task "process${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
+        from 'src/main/resources_templates'
+        into 'build/resources/main'
+        include "**/recipes/${item_type}.json"
+        rename '(.*).json', "${type}_${item_type}.json"
+        expand(input: stone_type + "_stone", output: stone_type + "_${item_type}", meta: index)
+      }
+      processResourceTemplates.dependsOn "process${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
+    }
+  }
+}
 processResources.dependsOn processResourceTemplates
