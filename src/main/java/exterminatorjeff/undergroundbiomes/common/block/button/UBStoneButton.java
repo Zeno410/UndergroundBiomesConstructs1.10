@@ -39,6 +39,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
   public UBStoneButton(EnumFacing facing, ButtonItemBlock itemBlock) {
     this.facing = facing;
     this.itemBlock = itemBlock;
+    setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
     setTickRandomly(true);
   }
 
@@ -65,11 +66,6 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
   public ItemStack getItem(World world, BlockPos bp, IBlockState ibs) {
     int meta = getMetaFromState(ibs);
     return new ItemStack(itemBlock, 1, meta);
-  }
-
-  @Override
-  public CreativeTabs getCreativeTabToDisplayOn() {
-    return UBCreativeTab.UB_BLOCKS_TAB; //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override

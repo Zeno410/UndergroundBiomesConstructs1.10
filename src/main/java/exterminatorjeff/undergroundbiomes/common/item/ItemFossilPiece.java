@@ -30,8 +30,10 @@ public class ItemFossilPiece extends Item implements UBItem, Variable {
 
   @Override
   public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
-    for (int i = 0; i < FossilVariant.NB_VARIANTS; ++i)
-      list.add(new ItemStack(this, 1, i));
+    if (this.isInCreativeTab(tabs)) {
+      for (int i = 0; i < FossilVariant.NB_VARIANTS; ++i)
+        list.add(new ItemStack(this, 1, i));
+    }
   }
 
   @Override

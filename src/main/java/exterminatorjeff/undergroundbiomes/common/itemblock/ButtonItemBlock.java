@@ -74,13 +74,9 @@ public class ButtonItemBlock extends RotatingItemBlock implements UBButton {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public CreativeTabs getCreativeTab() {
-    return UBCreativeTab.UB_BLOCKS_TAB; //To change body of generated methods, choose Tools | Templates.
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-    block.getSubBlocks(tab, list);
+    if (this.isInCreativeTab(tab)) {
+      block.getSubBlocks(tab, list);
+    }
   }
 }

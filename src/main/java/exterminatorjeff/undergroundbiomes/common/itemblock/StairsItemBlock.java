@@ -2,10 +2,12 @@ package exterminatorjeff.undergroundbiomes.common.itemblock;
 
 import exterminatorjeff.undergroundbiomes.api.common.UBStairs;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
+import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStoneStairs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,6 +17,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -26,6 +30,7 @@ public class StairsItemBlock extends RotatingItemBlock implements UBStairs {
 
   public StairsItemBlock(BlockEntry baseStoneEntry, Class<? extends UBStoneStairs> blockClass) {
     super(baseStoneEntry);
+    setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
       Block block = null;
       try {
@@ -40,6 +45,7 @@ public class StairsItemBlock extends RotatingItemBlock implements UBStairs {
 
   public StairsItemBlock(BlockEntry baseStoneEntry, HashMap<EnumFacing, Block> blocks) {
     super(baseStoneEntry);
+    setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
     this.blocks = blocks;
   }
 
@@ -112,4 +118,11 @@ public class StairsItemBlock extends RotatingItemBlock implements UBStairs {
     throw new RuntimeException(state.getBlock().getUnlocalizedName());
     //return true;
   }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public CreativeTabs getCreativeTab() {
+    return UBCreativeTab.UB_BLOCKS_TAB;
+  }
+
 }

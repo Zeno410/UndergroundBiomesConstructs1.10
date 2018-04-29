@@ -4,7 +4,6 @@ import exterminatorjeff.undergroundbiomes.api.common.UBBlock;
 import exterminatorjeff.undergroundbiomes.api.common.UBItem;
 import exterminatorjeff.undergroundbiomes.api.common.Variable;
 import exterminatorjeff.undergroundbiomes.api.names.BlockEntry;
-import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.common.block.button.UBStoneButton;
 import net.minecraft.block.Block;
@@ -41,7 +40,6 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
     baseStone = (UBStone) baseStoneEntry.getBlock();
     setMaxDamage(0);
     setHasSubtypes(true);
-    setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
   }
 
   public RotatingItemBlock(BlockEntry baseStoneEntry, Block block) {
@@ -49,7 +47,6 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
     baseStone = (UBStone) baseStoneEntry.getBlock();
     setMaxDamage(0);
     setHasSubtypes(true);
-    setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
   }
 
   public RotatingItemBlock(UBStoneButton button) {
@@ -57,7 +54,6 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
     baseStone = button.baseStone();
     setMaxDamage(0);
     setHasSubtypes(true);
-    setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
   }
 
   @Override
@@ -88,7 +84,9 @@ abstract class RotatingItemBlock extends ItemBlock implements UBItem, Variable {
   @SideOnly(Side.CLIENT)
   @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-    blocks.get(EnumFacing.NORTH).getSubBlocks(tab, list);
+    if (this.isInCreativeTab(tab)) {
+      blocks.get(EnumFacing.NORTH).getSubBlocks(tab, list);
+    }
   }
 
   @Override
