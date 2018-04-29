@@ -14,12 +14,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -108,41 +110,33 @@ public enum OresRegistry implements UBOresRegistry {
     }
   }
 
-  private void createOre(Block baseOre) {
-    createOre(baseOre, UBOre.NO_METADATA);
+  public void registerBlocks(RegistryEvent.Register<Block> event) {
+    for (UBifyRequest request : requests) {
+      Block baseOre = request.baseOre;
+      int baseOreMeta = request.baseOreMeta;
+      request.getIgneousOreEntry().registerBlock(event, new UBOreIgneous(baseOre, baseOreMeta));
+      request.getMetamorphicOreEntry().registerBlock(event, new UBOreMetamorphic(baseOre, baseOreMeta));
+      request.getSedimentraryOreEntry().registerBlock(event, new UBOreSedimentary(baseOre, baseOreMeta));
+      ubifiedOres.put(toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock()), request.getIgneousOreEntry());
+      ubifiedOres.put(toKey(baseOre, baseOreMeta, API.METAMORPHIC_STONE.getBlock()), request.getMetamorphicOreEntry());
+      ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), request.getSedimentraryOreEntry());
+    }
   }
 
-  private void createOre(Block baseOre, int baseOreMeta) {
-//            if (baseOre == null) throw new RuntimeException();
-//		OreEntry igneousOre = new OreEntry(API.IGNEOUS_STONE.getBlock(), baseOre, baseOreMeta);
-//		OreEntry metamorphicOre = new OreEntry(API.METAMORPHIC_STONE.getBlock(), baseOre, baseOreMeta);
-//		OreEntry sedimentaryOre = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
-////		igneousOre.register(new UBOreIgneous(baseOre, baseOreMeta));
-////		metamorphicOre.register(new UBOreMetamorphic(baseOre, baseOreMeta));
-////		sedimentaryOre.register(new UBOreSedimentary(baseOre, baseOreMeta));
-//		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock()), igneousOre);
-//		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.METAMORPHIC_STONE.getBlock()), metamorphicOre);
-//		ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), sedimentaryOre);
-//		//
-//		applyBaseOreSmelting(baseOre, igneousOre, metamorphicOre, sedimentaryOre);
+  public void registerItems(RegistryEvent.Register<Item> event) {
+    for (UBifyRequest request : requests) {
+      request.getIgneousOreEntry().registerItem(event, new UBOreIgneous(request.baseOre, request.baseOreMeta));
+      request.getMetamorphicOreEntry().registerItem(event, new UBOreMetamorphic(request.baseOre, request.baseOreMeta));
+      request.getSedimentraryOreEntry().registerItem(event, new UBOreSedimentary(request.baseOre, request.baseOreMeta));
+    }
   }
 
-  @Override
-  public void setupOre(Block baseOre) {
-    if (UndergroundBiomes.isPreInitDone) {
-      createOre(baseOre);
-      LOGGER.debug(format(SETUP_INFO_MSG, baseOre));
-    } else
-      throw new RuntimeException(format(SETUP_ERROR_MSG, baseOre));
-  }
-
-  @Override
-  public void setupOre(Block baseOre, int baseOreMeta) {
-    if (UndergroundBiomes.isPreInitDone) {
-      createOre(baseOre, baseOreMeta);
-      LOGGER.debug(format(SETUP_INFO_MSG, baseOre, baseOreMeta));
-    } else
-      throw new RuntimeException(format(SETUP_ERROR_MSG, baseOre, baseOreMeta));
+  public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+    //TODO
+    for (UBifyRequest request : requests) {
+      applyBaseOreSmelting(request.baseOre, request.getIgneousOreEntry(), request.getMetamorphicOreEntry(),
+        request.getSedimentraryOreEntry());
+    }
   }
 
   @Override
@@ -160,55 +154,47 @@ public enum OresRegistry implements UBOresRegistry {
     if (UndergroundBiomes.isPreInitDone || alreadySetup)
       throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, baseOreMeta));
     else {
-      requests.add(new UBifyRequestMeta(baseOre, baseOreMeta));
+      requests.add(new UBifyRequest(baseOre, baseOreMeta));
       LOGGER.debug(format(REQUEST_INFO_MSG, baseOre, baseOreMeta));
-    }
-  }
-
-  /**
-   * Must be called during pre-init
-   */
-  public void fulfillRequests() {
-    if (!alreadySetup) {
-      alreadySetup = true;
-      for (UBifyRequest request : requests)
-        request.fulfill();
-      requests.clear();
     }
   }
 
   private class UBifyRequest {
     protected final Block baseOre;
+    protected final int baseOreMeta;
+    protected OreEntry igneousOreEntry;
+    protected OreEntry metamorphicOreEntry;
+    protected OreEntry sedimentraryOreEntry;
 
     UBifyRequest(Block baseOre) {
+      this(baseOre, UBOre.NO_METADATA);
+    }
+
+    UBifyRequest(Block baseOre, int baseOreMeta) {
+      if (baseOre == null) throw new RuntimeException();
       this.baseOre = baseOre;
-    }
-
-    void fulfill() {
-      createOre(baseOre);
-      LOGGER.debug(format(SETUP_INFO_MSG, baseOre));
-    }
-  }
-
-  private static String keyName;
-
-  private class UBifyRequestMeta extends UBifyRequest {
-    protected final int baseOreMeta;
-
-    UBifyRequestMeta(Block baseOre, int baseOreMeta) {
-      super(baseOre);
       this.baseOreMeta = baseOreMeta;
     }
 
-    @Override
-    void fulfill() {
-      createOre(baseOre, baseOreMeta);
-      if (baseOre.getUnlocalizedName().contains("ic2") && baseOreMeta == 2) {
-        keyName = toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock());
-      }
-      LOGGER.debug(format(SETUP_INFO_MSG, baseOre, baseOreMeta));
+    public OreEntry getIgneousOreEntry() {
+      if (igneousOreEntry == null)
+        this.igneousOreEntry = new OreEntry(API.IGNEOUS_STONE.getBlock(), baseOre, baseOreMeta);
+      return igneousOreEntry;
+    }
+
+    public OreEntry getMetamorphicOreEntry() {
+      if (metamorphicOreEntry == null)
+        this.metamorphicOreEntry = new OreEntry(API.METAMORPHIC_STONE.getBlock(), baseOre, baseOreMeta);
+      return metamorphicOreEntry;
+    }
+
+    public OreEntry getSedimentraryOreEntry() {
+      if (sedimentraryOreEntry == null)
+        this.sedimentraryOreEntry = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
+      return sedimentraryOreEntry;
     }
   }
+
 
   /**
    * Get a random {@link ItemStack} to be used as creative tab icon for

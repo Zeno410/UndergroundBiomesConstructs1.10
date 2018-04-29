@@ -1,7 +1,10 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
 
 /**
  * Allows mods to UBifiy their ores.<br>
@@ -13,20 +16,10 @@ import net.minecraft.util.ResourceLocation;
  */
 public interface UBOresRegistry {
 
-  /**
-   * Create UBified versions for the given ore.
-   *
-   * @param baseOre
-   */
-  void setupOre(Block baseOre);
 
-  /**
-   * Create UBified versions for the given ore with the given metadata value.
-   *
-   * @param baseOre
-   * @param baseOreMeta
-   */
-  void setupOre(Block baseOre, int baseOreMeta);
+  public void registerBlocks(RegistryEvent.Register<Block> event);
+  public void registerItems(RegistryEvent.Register<Item> event);
+  public void registerRecipes(RegistryEvent.Register<IRecipe> event);
 
   /**
    * Request creation of UBified versions for the given ore.

@@ -44,7 +44,7 @@ class OreEntry extends Entry<UBOre> {
   @Override
   protected void doRegisterItem(IForgeRegistry<Item> registry) {
     getBlock().setUnlocalizedName(internalName);
-    registry.register(getItem());
+    registry.register(getItem().setRegistryName(internalName));
   }
 
   @Override

@@ -99,7 +99,7 @@ public class CommonProxy {
 
 //    createBlocks();
 //    createItems();
-//    createOres();
+    createOres();
   }
 
   public void init(FMLInitializationEvent e) {
@@ -112,8 +112,6 @@ public class CommonProxy {
     }
 
     DropsRegistry.INSTANCE.init();
-
-    OresRegistry.INSTANCE.fulfillRequests();
 
     addOreDicts();
     GameRegistry.registerFuelHandler(UBFuelHandler.INSTANCE);
@@ -281,6 +279,7 @@ public class CommonProxy {
       if (UBConfig.SPECIFIC.sedimentaryStairsOn())
         API.SEDIMENTARY_STONE_STAIRS.registerBlock(event, new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
     }
+    OresRegistry.INSTANCE.registerBlocks(event);
   }
 
   @SubscribeEvent
@@ -390,7 +389,7 @@ public class CommonProxy {
       if (UBConfig.SPECIFIC.sedimentaryStairsOn())
         API.SEDIMENTARY_STONE_STAIRS.registerItem(event, new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
     }
-
+    OresRegistry.INSTANCE.registerItems(event);
   }
 
   private final void createOres() {

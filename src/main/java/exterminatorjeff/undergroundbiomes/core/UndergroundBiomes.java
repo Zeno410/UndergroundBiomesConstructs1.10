@@ -80,14 +80,12 @@ public class UndergroundBiomes {
   @EventHandler
   public  void init(FMLInitializationEvent event) {
     PROXY.init(event);
-
     LOGGER.info("Init done!");
   }
 
   @EventHandler
   public void postInit(FMLPostInitializationEvent event) throws Exception {
     PROXY.postInit(event);
-
     LOGGER.info("Post-init done!");
   }
 

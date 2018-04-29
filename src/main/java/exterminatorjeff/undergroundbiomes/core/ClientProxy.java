@@ -25,7 +25,6 @@ public final class ClientProxy extends CommonProxy {
     MinecraftForge.EVENT_BUS.register(OresRegistry.INSTANCE);
     ModelLoaderRegistry.registerLoader(new UBOreModelLoader());
     OresRegistry.INSTANCE.addVanillaOverlays();
-    OresRegistry.INSTANCE.registerOreModels();
   }
 
   @Override
@@ -48,6 +47,7 @@ public final class ClientProxy extends CommonProxy {
   public void registerModels(ModelRegistryEvent event) {
     registerBlocksModels();
     registerItemsModels();
+    OresRegistry.INSTANCE.registerOreModels();
   };
 
   private final void registerBlocksModels() {
