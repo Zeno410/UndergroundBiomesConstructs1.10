@@ -66,6 +66,7 @@ import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 import exterminatorjeff.undergroundbiomes.intermod.IC2Registrar;
 import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 import org.apache.logging.log4j.Level;
@@ -173,8 +174,6 @@ public class CommonProxy {
   public void registerModels(ModelRegistryEvent event) {
     // Only used in Client, overwritten there
   }
-
-  ;
 
   public void registerBlocks(RegistryEvent.Register<Block> event) {
     /*
@@ -432,7 +431,9 @@ public class CommonProxy {
     }
 
     // TODO: Figure out how to update the cobblestone recipe
-    //((UBConfig) (UBConfig.SPECIFIC)).regularStoneCrafting.addTrackerAndUpdate(new RegularStoneRecipe());
+    RegularStoneRecipe regularCobblestoneRecipe = new RegularStoneRecipe();
+    modRegistry.register(regularCobblestoneRecipe);
+    ((UBConfig) (UBConfig.SPECIFIC)).regularStoneCrafting.addTrackerAndUpdate(regularCobblestoneRecipe);
     ((UBConfig) (UBConfig.SPECIFIC)).changeButtonRecipe.addTrackerAndUpdate(new ButtonRecipe());
 
   }
