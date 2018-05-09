@@ -54,43 +54,43 @@ public enum DropsRegistry implements UBDropsRegistry {
    * Must be called during pre-init, after blocks and items have been created.
    */
   public void init() {
-//		addSourceFor(API.IGNEOUS_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
-//			if (pos.getY() <= 32 && world.rand.nextInt(100) <= fortune)
-//				drops.add(new ItemStack(Items.GOLD_NUGGET));
-//		});
-//		addSourceFor(API.METAMORPHIC_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
-//			if (world.rand.nextInt(100) <= fortune) {
-//				if (pos.getY() <= 16)
-//					drops.add(new ItemStack(Items.REDSTONE));
-//				else if (pos.getY() <= 32)
-//					drops.add(new ItemStack(Items.DYE, 1, 4)); // Lapis lazuli
-//			}
-//		});
-//		addSourceFor(API.SEDIMENTARY_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
-//			if (world.rand.nextInt(100) <= fortune) {
-//				switch (state.getValue(SedimentaryVariant.SEDIMENTARY_VARIANT_PROPERTY)) {
-//				case CHALK:
-//					drops.add(new ItemStack(API.FOSSIL_PIECE.getItem(), 1, world.rand.nextInt(FossilVariant.NB_VARIANTS)));
-//					break;
-//				case DOLOMITE:
-//				case LIGNITE:
-//				case LIMESTONE:
-//					drops.add(new ItemStack(API.FOSSIL_PIECE.getItem(), 1, world.rand.nextInt(FossilVariant.NB_VARIANTS)));
-//					break;
-//				case SILTSTONE:
-//					drops.add(new ItemStack(API.FOSSIL_PIECE.getItem(), 1, world.rand.nextInt(FossilVariant.NB_VARIANTS)));
-//					break;
-//				case SHALE:
-//					drops.add(new ItemStack(Items.CLAY_BALL));
-//					break;
-//				case CHERT:
-//					drops.add(new ItemStack(Items.FLINT));
-//					break;
-//				default:
-//					break;
-//				}
-//			}
-//		});
+		addSourceFor(API.IGNEOUS_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
+			if (pos.getY() <= 32 && world.rand.nextInt(100) <= fortune)
+				drops.add(new ItemStack(Items.GOLD_NUGGET));
+		});
+		addSourceFor(API.METAMORPHIC_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
+			if (world.rand.nextInt(100) <= fortune) {
+				if (pos.getY() <= 16)
+					drops.add(new ItemStack(Items.REDSTONE));
+				else if (pos.getY() <= 32)
+					drops.add(new ItemStack(Items.DYE, 1, 4)); // Lapis lazuli
+			}
+		});
+		addSourceFor(API.SEDIMENTARY_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
+			if (world.rand.nextInt(100) <= fortune) {
+				switch (state.getValue(SedimentaryVariant.SEDIMENTARY_VARIANT_PROPERTY)) {
+				case CHALK:
+					drops.add(new ItemStack(API.FOSSIL_PIECE.getItem(), 1, world.rand.nextInt(FossilVariant.NB_VARIANTS)));
+					break;
+				case DOLOMITE:
+				case LIGNITE:
+				case LIMESTONE:
+					drops.add(new ItemStack(API.FOSSIL_PIECE.getItem(), 1, world.rand.nextInt(FossilVariant.NB_VARIANTS)));
+					break;
+				case SILTSTONE:
+					drops.add(new ItemStack(API.FOSSIL_PIECE.getItem(), 1, world.rand.nextInt(FossilVariant.NB_VARIANTS)));
+					break;
+				case SHALE:
+					drops.add(new ItemStack(Items.CLAY_BALL));
+					break;
+				case CHERT:
+					drops.add(new ItemStack(Items.FLINT));
+					break;
+				default:
+					break;
+				}
+			}
+		});
   }
 
   /**
