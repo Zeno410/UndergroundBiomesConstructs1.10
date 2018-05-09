@@ -98,20 +98,10 @@ public class CommonProxy {
     dimensionManager = new DimensionManager(configManager);
     API.STRATA_COLUMN_PROVIDER = dimensionManager;
 
-//    createBlocks();
-//    createItems();
     createOres();
   }
 
   public void init(FMLInitializationEvent e) {
-
-    try {
-      new IC2Registrar().register();
-    } catch (java.lang.NoClassDefFoundError ignored) {
-      throw new RuntimeException();
-      // IC2 not installed;
-    }
-
     DropsRegistry.INSTANCE.init();
 
     addOreDicts();
