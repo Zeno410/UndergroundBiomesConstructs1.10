@@ -7,10 +7,11 @@
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["exterminatorJeff", "Zeno410", "kyeiti"],
+  "credits": "The Forge and FML guys, for providing the API to make all of this possible",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["forestry", "ic2", 'zildium'],
+    "useDependencyInformation": true
 }
 ]

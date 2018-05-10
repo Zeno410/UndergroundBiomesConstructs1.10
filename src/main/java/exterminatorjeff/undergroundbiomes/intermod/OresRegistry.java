@@ -141,7 +141,7 @@ public enum OresRegistry implements UBOresRegistry {
 
   @Override
   public void requestOreSetup(Block baseOre) {
-    if (UndergroundBiomes.isPreInitDone || alreadySetup)
+    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
       throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre));
     else {
       requests.add(new UBifyRequest(baseOre));
@@ -151,7 +151,7 @@ public enum OresRegistry implements UBOresRegistry {
 
   @Override
   public void requestOreSetup(Block baseOre, int baseOreMeta) {
-    if (UndergroundBiomes.isPreInitDone || alreadySetup)
+    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
       throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, baseOreMeta));
     else {
       requests.add(new UBifyRequest(baseOre, baseOreMeta));
@@ -258,13 +258,13 @@ public enum OresRegistry implements UBOresRegistry {
    * Must be called during pre-init
    */
   public void addVanillaOverlays() {
-    registerOreOverlay(Blocks.COAL_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/coal_overlay"));
-    registerOreOverlay(Blocks.DIAMOND_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/diamond_overlay"));
-    registerOreOverlay(Blocks.EMERALD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/emerald_overlay"));
-    registerOreOverlay(Blocks.GOLD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/gold_overlay"));
-    registerOreOverlay(Blocks.IRON_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/iron_overlay"));
-    registerOreOverlay(Blocks.LAPIS_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/lapis_overlay"));
-    registerOreOverlay(Blocks.REDSTONE_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/redstone_overlay"));
+    registerOreOverlay(Blocks.COAL_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/coal"));
+    registerOreOverlay(Blocks.DIAMOND_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/diamond"));
+    registerOreOverlay(Blocks.EMERALD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/emerald"));
+    registerOreOverlay(Blocks.GOLD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/gold"));
+    registerOreOverlay(Blocks.IRON_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/iron"));
+    registerOreOverlay(Blocks.LAPIS_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/lapis"));
+    registerOreOverlay(Blocks.REDSTONE_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/redstone"));
   }
 
   /**

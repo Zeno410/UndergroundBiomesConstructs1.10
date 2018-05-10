@@ -43,7 +43,7 @@ public class UndergroundBiomes {
 
   private static final UBLogger LOGGER = new UBLogger(UndergroundBiomes.class, Level.INFO);
 
-  public static boolean isPreInitDone = false;
+  public static boolean areBlocksAlreadyRegistered = false;
 
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
@@ -53,13 +53,14 @@ public class UndergroundBiomes {
     if (API.VERSION != "1.0.0")
       throw new RuntimeException("Another mod has included an obsolete version of the Underground Biomes API.");
 
-    isPreInitDone = true;
     LOGGER.info("Pre-init done!");
   }
 
   @SubscribeEvent
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     PROXY.registerBlocks(event);
+
+    areBlocksAlreadyRegistered = true;
   }
 
   @SubscribeEvent

@@ -1,6 +1,7 @@
 package exterminatorjeff.undergroundbiomes.core;
 
 import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant;
 import exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant;
@@ -169,6 +170,8 @@ public class CommonProxy {
     /*
      * Blocks
      */
+    new IC2Registrar().register(event);
+
     LOGGER.debug("Start registering blocks");
 
     API.IGNEOUS_STONE.registerBlock(event, new IgneousStone());
@@ -273,6 +276,7 @@ public class CommonProxy {
 
   @SubscribeEvent
   public void registerItems(RegistryEvent.Register<Item> event) {
+
 
     LOGGER.debug("Start registering blocks");
     API.LIGNITE_COAL.registerItem(event, new ItemLigniteCoal());
@@ -416,7 +420,7 @@ public class CommonProxy {
       GameRegistry.addSmelting(new ItemStack(API.METAMORPHIC_COBBLE.getItemBlock(), 1, i), new ItemStack(API.METAMORPHIC_STONE.getItemBlock(), 1, i), 0.1f);
     }
 
-    if(UBConfig.SPECIFIC.buttonsOn()) {
+    if (UBConfig.SPECIFIC.buttonsOn()) {
       modRegistry.remove(new ResourceLocation("minecraft:stone_button"));
     }
 
