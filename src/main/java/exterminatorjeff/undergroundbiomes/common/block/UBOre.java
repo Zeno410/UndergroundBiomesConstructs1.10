@@ -125,22 +125,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
 
   @Override
   public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-    List<ItemStack> drops = new ArrayList<ItemStack>();
-    Random rand = world instanceof World ? ((World) world).rand : RANDOM;
-    Item itemBlock = Item.getItemFromBlock(this);
-    int count = quantityDropped(state, fortune, rand);
-    for (int i = 0; i < count; ++i) {
-      Item itemDropped = getItemDropped(state, rand, fortune);
-      if (itemDropped != null) {
-        // The ore block do not drop the block item (like diamond)
-        if (itemDropped != itemBlock) {
-          drops.add(new ItemStack(itemDropped, 1, damageDropped(state)));
-        } else {
-          drops.add(new ItemStack(itemDropped, 1, getMetaFromState(state)));
-        }
-      }
-    }
-    return drops;
+    return baseOre.getDrops(world, pos, baseOreState, fortune);
   }
 
   @Override
@@ -155,8 +140,9 @@ public abstract class UBOre extends Block implements UBSubBlock {
   }
 
   @Override
+  // Use baseOreState to support forestry ores
   public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
-    return baseOre.getExpDrop(state, world, pos, fortune);
+    return baseOre.getExpDrop(baseOreState, world, pos, fortune);
   }
 
   @Override

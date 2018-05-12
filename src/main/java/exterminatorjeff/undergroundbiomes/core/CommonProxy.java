@@ -24,10 +24,7 @@ import exterminatorjeff.undergroundbiomes.common.itemblock.SlabItemBlock;
 import exterminatorjeff.undergroundbiomes.common.itemblock.StairsItemBlock;
 import exterminatorjeff.undergroundbiomes.config.ConfigManager;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
-import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
-import exterminatorjeff.undergroundbiomes.intermod.IC2Registrar;
-import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
-import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
+import exterminatorjeff.undergroundbiomes.intermod.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -171,6 +168,7 @@ public class CommonProxy {
      * Blocks
      */
     new IC2Registrar().register(event);
+    new ForestryRegistrar().register(event);
 
     LOGGER.debug("Start registering blocks");
 
