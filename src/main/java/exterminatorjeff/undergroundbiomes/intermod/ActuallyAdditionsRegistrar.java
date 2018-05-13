@@ -20,7 +20,6 @@ public class ActuallyAdditionsRegistrar extends ModOreRegistrar {
   public static String oreName = "actuallyadditions:block_misc";
 
   public void register(RegistryEvent.Register<Block> event) {
-    event.getRegistry().containsKey(new ResourceLocation("actuallyadditions:block_colored_lamp"));
     registerOre(event, oreName, 3, ModInfo.MODID + ":blocks/overlays/black_quarz");
   }
 }

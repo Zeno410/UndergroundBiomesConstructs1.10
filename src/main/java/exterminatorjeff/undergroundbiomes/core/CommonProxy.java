@@ -167,9 +167,10 @@ public class CommonProxy {
     /*
      * Blocks
      */
-    new IC2Registrar().register(event);
-    new ForestryRegistrar().register(event);
     new ActuallyAdditionsRegistrar().register(event);
+    new ForestryRegistrar().register(event);
+    new IC2Registrar().register(event);
+    new ImmersiveEngineeringRegistrar().register(event);
 
     LOGGER.debug("Start registering blocks");
 
