@@ -169,6 +169,7 @@ public class CommonProxy {
      */
     new IC2Registrar().register(event);
     new ForestryRegistrar().register(event);
+    new ActuallyAdditionsRegistrar().register(event);
 
     LOGGER.debug("Start registering blocks");
 
@@ -276,7 +277,7 @@ public class CommonProxy {
   public void registerItems(RegistryEvent.Register<Item> event) {
 
 
-    LOGGER.debug("Start registering blocks");
+    LOGGER.debug("Start registering items");
     API.LIGNITE_COAL.registerItem(event, new ItemLigniteCoal());
     API.FOSSIL_PIECE.registerItem(event, new ItemFossilPiece());
 

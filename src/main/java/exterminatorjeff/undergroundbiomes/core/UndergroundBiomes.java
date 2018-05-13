@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Level;
 
@@ -56,7 +57,8 @@ public class UndergroundBiomes {
     LOGGER.info("Pre-init done!");
   }
 
-  @SubscribeEvent
+  // Ensure all other mods have their blocks registered, so ores can be referenced
+  @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     PROXY.registerBlocks(event);
 

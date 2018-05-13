@@ -11,7 +11,7 @@
   "credits": "The Forge and FML guys, for providing the API to make all of this possible",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": ["forestry", "ic2", 'zildium'],
+  "dependencies": ["actuallyadditions","forestry", "ic2"],
     "useDependencyInformation": true
 }
 ]
