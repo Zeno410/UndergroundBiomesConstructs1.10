@@ -1,28 +1,28 @@
 def variant_textures = [
-  stone : '',
-  brick : 'brick',
-  cobble: 'cobble'
+  stone : """""",
+  brick : "brick",
+  cobble: "cobble"
 ]
 def stones = [
   sedimentary: [
-    variants  : ['stone'],
-    create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
-    create_for: ['stone': ['button']],
-    types     : ['limestone', 'chalk', 'shale', 'siltstone', 'lignite', 'dolomite', 'greywacke', 'chert']
+    variants  : ["stone"],
+    create    : ["fullslab", "halfslab", "wall", "stairs"],
+    create_for: ["stone": ["button"]],
+    types     : ["limestone", "chalk", "shale", "siltstone", "lignite", "dolomite", "greywacke", "chert"]
   ],
   metamorphic: [
-    variants  : ['brick', 'cobble', 'stone'],
-    create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
-    create_for: ['stone' : ['button', 'halfslab_alt', 'fullslab_alt'],
-                 'cobble': ['button']],
-    types     : ['gneiss', 'eclogite', 'marble', 'quartzite', 'blueschist', 'greenschist', 'soapstone', 'migmatite']
+    variants  : ["brick", "cobble", "stone"],
+    create    : ["fullslab", "halfslab", "wall", "stairs"],
+    create_for: ["stone" : ["button", "halfslab_alt", "fullslab_alt"],
+                 "cobble": ["button"]],
+    types     : ["gneiss", "eclogite", "marble", "quartzite", "blueschist", "greenschist", "soapstone", "migmatite"]
   ],
   igneous    : [
-    variants  : ['brick', 'cobble', 'stone'],
-    create    : ['fullslab', 'halfslab', 'wall', 'stairs'],
-    create_for: ['stone' : ['button', 'halfslab_alt', 'fullslab_alt'],
-                 'cobble': ['button']],
-    types     : ['red_granite', 'black_granite', 'rhyolite', 'andesite', 'gabbro', 'basalt', 'komatiite', 'dacite']
+    variants  : ["brick", "cobble", "stone"],
+    create    : ["fullslab", "halfslab", "wall", "stairs"],
+    create_for: ["stone" : ["button", "halfslab_alt", "fullslab_alt"],
+                 "cobble": ["button"]],
+    types     : ["red_granite", "black_granite", "rhyolite", "andesite", "gabbro", "basalt", "komatiite", "dacite"]
   ]
 ]
 
@@ -35,19 +35,19 @@ task processResourceTemplates(type: Copy, group: "build", description: "Creates 
 stones.each { key, value ->
   value.variants.each { variant ->
     task "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}"(type: Copy) {
-      from 'src/main/resources_templates'
-      into 'build/resources/main'
-      include '**/blockstates/block.json'
-      rename '(.*)', "${key}_${variant}.json"
+      from "src/main/resources_templates"
+      into "build/resources/main"
+      include "**/blockstates/block.json"
+      rename "(.*)", "${key}_${variant}.json"
       expand(types: value.types, texture_name: variant_textures[variant])
     }
     processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}"
     value.create.each { item_type ->
       task "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
-        from 'src/main/resources_templates'
-        into 'build/resources/main'
+        from "src/main/resources_templates"
+        into "build/resources/main"
         include "**/blockstates/${item_type}.json"
-        rename '(.*)', "${key}_${variant}_${item_type}.json"
+        rename "(.*)", "${key}_${variant}_${item_type}.json"
         expand(types: value.types, texture_name: variant_textures[variant])
       }
       processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
@@ -56,10 +56,10 @@ stones.each { key, value ->
   value.create_for.each { variant, items ->
     items.each { item_type ->
       task "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"(type: Copy) {
-        from 'src/main/resources_templates'
-        into 'build/resources/main'
+        from "src/main/resources_templates"
+        into "build/resources/main"
         include "**/blockstates/${item_type}.json"
-        rename '(.*)', "${key}_${variant}_${item_type}.json"
+        rename "(.*)", "${key}_${variant}_${item_type}.json"
         expand(types: value.types, texture_name: variant_textures[variant])
       }
       processResourceTemplates.dependsOn "processBlockstateTemplatesFor${key.capitalize()}${variant.capitalize()}${item_type.capitalize()}"
@@ -72,24 +72,37 @@ stones.each { stone_type, value ->
 //    for(int index = 0; index < value.types.size(); index++) {
 //      String type = value.types[index]
 //      task "processSmeltRecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
-//        from 'src/main/resources_templates'
-//        into 'build/resources/main'
+//        from "src/main/resources_templates"
+//        into "build/resources/main"
 //        include "**/recipes/smelt.json"
-//        rename '(.*).json', "smelt_${type}_cobble.json"
+//        rename "(.*).json", "smelt_${type}_cobble.json"
 //        expand(input: {item: stone_type + "_cobble", meta: index}, result: {item: stone_type + "_stone", meta: index})
 //      }
 //      processResourceTemplates.dependsOn "processSmeltRecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
 //    }
 //  }
+  if (value.variants.contains("brick")) {
+    for (int index = 0; index < value.types.size(); index++) {
+      String type = value.types[index]
+      task "processBrickRecipeTemplatesFor${type.capitalize()}"(type: Copy) {
+        from "src/main/resources_templates"
+        into "build/resources/main"
+        include "**/recipes/brick.json"
+        rename "(.*).json", "${type}_brick.json"
+        expand(input: stone_type + "_stone", output: stone_type + "_brick", meta: index)
+      }
+      processResourceTemplates.dependsOn "processBrickRecipeTemplatesFor${type.capitalize()}"
+    }
+  }
   value.variants.each { variant ->
     value.create.each { item_type ->
       for (int index = 0; index < value.types.size(); index++) {
         String type = value.types[index]
         task "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
-          from 'src/main/resources_templates'
-          into 'build/resources/main'
+          from "src/main/resources_templates"
+          into "build/resources/main"
           include "**/recipes/${item_type}.json"
-          rename '(.*).json', "${type}_${variant}_${item_type}.json"
+          rename "(.*).json", "${type}_${variant}_${item_type}.json"
           expand(input: stone_type + "_" + variant, output: stone_type + "_" + variant + "_${item_type}", meta: index)
         }
         processResourceTemplates.dependsOn "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
@@ -101,25 +114,25 @@ stones.each { stone_type, value ->
       for (int index = 0; index < value.types.size(); index++) {
         String type = value.types[index]
         task "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
-          from 'src/main/resources_templates'
-          into 'build/resources/main'
+          from "src/main/resources_templates"
+          into "build/resources/main"
           include "**/recipes/${item_type}.json"
-          rename '(.*).json', "${type}_${variant}_${item_type}.json"
+          rename "(.*).json", "${type}_${variant}_${item_type}.json"
           expand(input: stone_type + "_" + variant, output: stone_type + "_" + variant + "_${item_type}", meta: index)
         }
         processResourceTemplates.dependsOn "process${variant.capitalize()}${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
       }
     }
   }
-  if(value.types.contains("brick")) {
+  if (value.types.contains("brick")) {
     for (int index = 0; index < value.types.size(); index++) {
       String type = value.types[index]
       String item_type = "brick"
       task "process${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"(type: Copy) {
-        from 'src/main/resources_templates'
-        into 'build/resources/main'
+        from "src/main/resources_templates"
+        into "build/resources/main"
         include "**/recipes/${item_type}.json"
-        rename '(.*).json', "${type}_${item_type}.json"
+        rename "(.*).json", "${type}_${item_type}.json"
         expand(input: stone_type + "_stone", output: stone_type + "_${item_type}", meta: index)
       }
       processResourceTemplates.dependsOn "process${item_type.capitalize()}RecipeTemplatesFor${stone_type.capitalize()}${type.capitalize()}"
