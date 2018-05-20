@@ -1,1 +1,1 @@
-UndergroundBiomesConstruct for Minecraf 1.12.2
+UndergroundBiomesConstruct for Minecraft 1.12.2
