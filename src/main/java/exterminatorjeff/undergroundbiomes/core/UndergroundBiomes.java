@@ -75,7 +75,8 @@ public class UndergroundBiomes {
     PROXY.registerModels(event);
   }
 
-  @SubscribeEvent
+  // Ensure all other mods have their smelting recipes registered, so they can be referenced
+  @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
       PROXY.createRecipes(event);
   }

@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
@@ -80,6 +81,12 @@ public class UBConfig implements UBSettings {
   private static final String CATEGORY_MISCELLANEOUS = "Miscellaneaous";
   public final IntegerSetting changeButtonRecipe = new IntegerSetting(CATEGORY_MISCELLANEOUS, "ChangeButtonRecipe");
   public final BooleanSetting disableVanillaStoneVariants = new BooleanSetting(CATEGORY_MISCELLANEOUS, "DisableVanillaStoneVariants");
+  public final BooleanSetting tooltipDisplayModName = new BooleanSetting(CATEGORY_MISCELLANEOUS, "DisplayOriginalModInOreTooltip");
+  public final StringSetting tooltipModNamePreText = new StringSetting(CATEGORY_MISCELLANEOUS, "OreTooltipTextBefore");
+  public final StringSetting tooltipModNamePreTextFormatting = new StringSetting(CATEGORY_MISCELLANEOUS, "OreTooltipTextBeforeFormatting");
+  public final StringSetting tooltipModNameFormatting = new StringSetting(CATEGORY_MISCELLANEOUS, "OreTooltipOreModNameFormatting");
+  public final StringSetting tooltipModNamePostText = new StringSetting(CATEGORY_MISCELLANEOUS, "OreTooltipTextAfter");
+  public final StringSetting tooltipModNamePostTextFormatting = new StringSetting(CATEGORY_MISCELLANEOUS, "OreTooltipTextAfterFormatting");
 
   /*
    *
@@ -160,7 +167,12 @@ public class UBConfig implements UBSettings {
 
     changeButtonRecipe.initProperty(configuration, 8, "Change the result of the button recipe\n" + "Default: 8");
     disableVanillaStoneVariants.initProperty(configuration, false, "Remove vanilla andesite, diorite, and granite");
-
+    tooltipDisplayModName.initProperty(configuration, true, "Display the mod which originally added this ore in the tooltip?");
+    tooltipModNamePreText.initProperty(configuration, "Ore from", "Text to display before the mod's name");
+    tooltipModNamePreTextFormatting.initProperty(configuration, "gray", "Formatting to use for the text before the mod's name");
+    tooltipModNameFormatting.initProperty(configuration, "gold italic", "Formatting for the mod's name");
+    tooltipModNamePostText.initProperty(configuration, "", "Text to display after the mod's name");
+    tooltipModNamePostTextFormatting.initProperty(configuration, "gray", "Formatting for the text after the mod's name");
     for (HashMap<Integer, BooleanSetting> blockActivations : stoneGenerationSettings.values()) {
       for (BooleanSetting setting : blockActivations.values()) {
         setting.initProperty(configuration, Boolean.TRUE, "");
@@ -552,5 +564,52 @@ public class UBConfig implements UBSettings {
   @Override
   public boolean alternativeSlabTextures() {
     return plainSlabTextures();
+  }
+
+  @Override
+  public boolean displayTooltipModName() {
+    return tooltipDisplayModName.getValue();
+  }
+
+  @Override
+  public String getTooltipModNamePreText() {
+    return tooltipModNamePreText.getValue();
+  }
+
+  @Override
+  public String getTooltipModNamePreTextFormatting() {
+    return parseFormatting(tooltipModNamePreTextFormatting.getValue());
+  }
+
+  @Override
+  public String getTooltipModNameFormatting() {
+    return parseFormatting(tooltipModNameFormatting.getValue());
+  }
+
+  @Override
+  public String getTooltipModNamePostText() {
+    return tooltipModNamePostText.getValue();
+  }
+
+  @Override
+  public String getTooltipModNamePostTextFormatting() {
+    return parseFormatting(tooltipModNamePostTextFormatting.getValue());
+  }
+
+  private String parseFormatting(String readableFormat) {
+    String format = "";
+    if (readableFormat.isEmpty()) {
+      return format;
+    }
+    String[] strings = readableFormat.split(" ");
+    for (String string : strings) {
+      TextFormatting valueByName = TextFormatting.getValueByName(string);
+      if (valueByName != null) {
+        format += valueByName.toString();
+      } else {
+        LOGGER.warn("Invalid format: " + string);
+      }
+    }
+    return format;
   }
 }

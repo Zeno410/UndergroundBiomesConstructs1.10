@@ -43,9 +43,9 @@ public enum OresRegistry implements UBOresRegistry {
 
   private static final UBLogger LOGGER = new UBLogger(OresRegistry.class, Level.INFO);
 
-  private final String SETUP_ERROR_MSG = "Cannot setup UBOres for '%s', " + ModInfo.NAME + "'s pre-init is not done yet!";
+  private final String SETUP_ERROR_MSG = "Cannot setup UBOres for '%s', " + ModInfo.NAME + "'s block registering has not started yet!";
   private final String SETUP_INFO_MSG = "The ore '%s' has been successfully UBfied.";
-  private final String REQUEST_ERROR_MSG = "Cannot request UBOres setup for '%s', " + ModInfo.NAME + "'s pre-init is done!";
+  private final String REQUEST_ERROR_MSG = "Cannot request UBOres setup for '%s', " + ModInfo.NAME + "'s block registering is done!";
   private final String REQUEST_INFO_MSG = "Request for '%s' to be UBfied added.";
 
   private String format(String message, Block baseOre) {
@@ -101,8 +101,8 @@ public enum OresRegistry implements UBOresRegistry {
   /**
    * Add smelting recipes for UBified versions.
    */
-  private void applyBaseOreSmelting(Block baseOre, OreEntry... ores) {
-    ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(baseOre));
+  private void applyBaseOreSmelting(Block baseOre, int meta, OreEntry... ores) {
+    ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(baseOre, 1, meta));
     if (result != null) {
       for (OreEntry ore : ores)
         for (int i = 0; i < ore.ore().getNbVariants(); ++i)
@@ -114,6 +114,7 @@ public enum OresRegistry implements UBOresRegistry {
     for (UBifyRequest request : requests) {
       Block baseOre = request.baseOre;
       int baseOreMeta = request.baseOreMeta;
+      LOGGER.info("Registering ore: " + baseOre.getUnlocalizedName());
       request.getIgneousOreEntry().registerBlock(event, new UBOreIgneous(baseOre, baseOreMeta));
       request.getMetamorphicOreEntry().registerBlock(event, new UBOreMetamorphic(baseOre, baseOreMeta));
       request.getSedimentraryOreEntry().registerBlock(event, new UBOreSedimentary(baseOre, baseOreMeta));
@@ -134,7 +135,7 @@ public enum OresRegistry implements UBOresRegistry {
   public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
     //TODO
     for (UBifyRequest request : requests) {
-      applyBaseOreSmelting(request.baseOre, request.getIgneousOreEntry(), request.getMetamorphicOreEntry(),
+      applyBaseOreSmelting(request.baseOre, request.baseOreMeta, request.getIgneousOreEntry(), request.getMetamorphicOreEntry(),
         request.getSedimentraryOreEntry());
     }
   }
@@ -258,13 +259,13 @@ public enum OresRegistry implements UBOresRegistry {
    * Must be called during pre-init
    */
   public void addVanillaOverlays() {
-    registerOreOverlay(Blocks.COAL_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/coal"));
-    registerOreOverlay(Blocks.DIAMOND_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/diamond"));
-    registerOreOverlay(Blocks.EMERALD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/emerald"));
-    registerOreOverlay(Blocks.GOLD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/gold"));
-    registerOreOverlay(Blocks.IRON_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/iron"));
-    registerOreOverlay(Blocks.LAPIS_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/lapis"));
-    registerOreOverlay(Blocks.REDSTONE_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/redstone"));
+    registerOreOverlay(Blocks.COAL_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/coal"));
+    registerOreOverlay(Blocks.DIAMOND_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/diamond"));
+    registerOreOverlay(Blocks.EMERALD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/emerald"));
+    registerOreOverlay(Blocks.GOLD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/gold"));
+    registerOreOverlay(Blocks.IRON_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/iron"));
+    registerOreOverlay(Blocks.LAPIS_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/lapis"));
+    registerOreOverlay(Blocks.REDSTONE_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/redstone"));
   }
 
   /**

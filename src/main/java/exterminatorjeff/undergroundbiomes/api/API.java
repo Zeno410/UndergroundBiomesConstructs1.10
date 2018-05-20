@@ -5,6 +5,7 @@ import exterminatorjeff.undergroundbiomes.api.common.UBOresRegistry;
 import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
 import exterminatorjeff.undergroundbiomes.api.common.UBStonesRegistry;
 import exterminatorjeff.undergroundbiomes.api.names.*;
+import exterminatorjeff.undergroundbiomes.intermod.ModOreRegistrar;
 
 /**
  * Static access to Underground Biomes API.
@@ -20,6 +21,7 @@ public final class API {
   public static UBDropsRegistry DROPS_REGISTRY;
   public static UBDimensionalStrataColumnProvider STRATA_COLUMN_PROVIDER;
   public static UBSettings SETTINGS;
+  public static ModOreRegistrar MOD_ORE_REGISTRAR;
 
   /*
    * Stones

@@ -102,4 +102,11 @@ public interface UBSettings {
 
   boolean generationAllowed(IBlockState block);
 
+  boolean displayTooltipModName();
+  String getTooltipModNamePreText();
+  String getTooltipModNamePreTextFormatting();
+  String getTooltipModNameFormatting();
+  String getTooltipModNamePostText();
+  String getTooltipModNamePostTextFormatting();
+
 }

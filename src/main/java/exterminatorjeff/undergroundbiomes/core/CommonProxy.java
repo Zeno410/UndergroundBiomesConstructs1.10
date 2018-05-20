@@ -1,14 +1,9 @@
 package exterminatorjeff.undergroundbiomes.core;
 
 import exterminatorjeff.undergroundbiomes.api.API;
-import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant;
 import exterminatorjeff.undergroundbiomes.api.enums.MetamorphicVariant;
-import exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant;
-import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
-import exterminatorjeff.undergroundbiomes.api.names.Entry;
-import exterminatorjeff.undergroundbiomes.api.names.StoneEntry;
 import exterminatorjeff.undergroundbiomes.common.ButtonRecipe;
 import exterminatorjeff.undergroundbiomes.common.RegularStoneRecipe;
 import exterminatorjeff.undergroundbiomes.common.UBFuelHandler;
@@ -24,58 +19,32 @@ import exterminatorjeff.undergroundbiomes.common.itemblock.SlabItemBlock;
 import exterminatorjeff.undergroundbiomes.common.itemblock.StairsItemBlock;
 import exterminatorjeff.undergroundbiomes.config.ConfigManager;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
-import exterminatorjeff.undergroundbiomes.intermod.*;
-
+import exterminatorjeff.undergroundbiomes.intermod.DropsRegistry;
+import exterminatorjeff.undergroundbiomes.intermod.ModOreRegistrar;
+import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
+import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.server.dedicated.PropertyManager;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.io.File;
-import java.util.ArrayList;
-
-import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
-
-import exterminatorjeff.undergroundbiomes.intermod.IC2Registrar;
-import net.minecraftforge.oredict.OreIngredient;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 import org.apache.logging.log4j.Level;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.logging.Logger;
 
-import static net.minecraftforge.oredict.OreDictionary.WILDCARD_VALUE;
 
 /**
  * @author CurtisA, LouisDB
@@ -87,13 +56,15 @@ public class CommonProxy {
 
   public void preInit(FMLPreInitializationEvent event) {
     LOGGER.debug("Start preInit");
+    configManager = new ConfigManager(event);
+    dimensionManager = new DimensionManager(configManager);
+
     API.STONES_REGISTRY = StonesRegistry.INSTANCE;
     API.ORES_REGISTRY = OresRegistry.INSTANCE;
     API.DROPS_REGISTRY = DropsRegistry.INSTANCE;
     API.SETTINGS = UBConfig.SPECIFIC;
+    API.MOD_ORE_REGISTRAR = new ModOreRegistrar(event);
 
-    configManager = new ConfigManager(event);
-    dimensionManager = new DimensionManager(configManager);
     API.STRATA_COLUMN_PROVIDER = dimensionManager;
 
     createOres();
@@ -108,6 +79,7 @@ public class CommonProxy {
 
   public void postInit(FMLPostInitializationEvent e) {
     MinecraftForge.EVENT_BUS.register(dimensionManager);
+    API.ORES_REGISTRY.registerRecipes(null);
   }
 
   public void serverLoad(FMLServerAboutToStartEvent event) {
@@ -167,11 +139,12 @@ public class CommonProxy {
     /*
      * Blocks
      */
-    new ActuallyAdditionsRegistrar().register(event);
-    new ForestryRegistrar().register(event);
-    new IC2Registrar().register(event);
-    new ImmersiveEngineeringRegistrar().register(event);
-    new ThermalFoundationRegistrar().register(event);
+//    new ActuallyAdditionsRegistrar().register(event);
+//    new ForestryRegistrar().register(event);
+//    new IC2Registrar().register(event);
+//    new ImmersiveEngineeringRegistrar().register(event);
+//    new ThermalFoundationRegistrar().register(event);
+    API.MOD_ORE_REGISTRAR.requestOreSetups(event);
 
     LOGGER.debug("Start registering blocks");
 
@@ -425,12 +398,12 @@ public class CommonProxy {
       modRegistry.remove(new ResourceLocation("minecraft:stone_button"));
     }
 
-    // TODO: Figure out how to update the cobblestone recipe
     RegularStoneRecipe regularCobblestoneRecipe = new RegularStoneRecipe();
     modRegistry.register(regularCobblestoneRecipe);
     ((UBConfig) (UBConfig.SPECIFIC)).regularStoneCrafting.addTrackerAndUpdate(regularCobblestoneRecipe);
     ((UBConfig) (UBConfig.SPECIFIC)).changeButtonRecipe.addTrackerAndUpdate(new ButtonRecipe());
-
+    // This will probably be needed here in 1.13
+    //API.ORES_REGISTRY.registerRecipes(event);
   }
 
 }

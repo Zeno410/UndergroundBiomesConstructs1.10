@@ -1,12 +1,16 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
+import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.UBSubBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,17 +18,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -114,6 +123,36 @@ public abstract class UBOre extends Block implements UBSubBlock {
     }
   }
 
+  @Override
+  public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+    baseOre.onBlockDestroyedByPlayer(world, pos, baseOreState);
+  }
+
+  @Override
+  public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+    baseOre.onBlockHarvested(world, pos, baseOreState, player);
+  }
+
+  @Override
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    return baseOre.removedByPlayer(baseOreState, world, pos, player, willHarvest);
+  }
+
+  @Override
+  public boolean canProvidePower(IBlockState state) {
+    return baseOre.canProvidePower(baseOreState);
+  }
+
+  @Override
+  public int getWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+    return baseOre.getWeakPower(baseOreState, world, pos, side);
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+    baseOre.randomDisplayTick(baseOreState, world, pos, rand);
+  }
 
   @Override
   public int damageDropped(IBlockState state) {
@@ -141,7 +180,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
   @SuppressWarnings("deprecation")
   @Override
   public float getBlockHardness(IBlockState state, World worldIn, BlockPos pos) {
-    return baseOre.getBlockHardness(state, worldIn, pos);
+    return baseOre.getBlockHardness(baseOreState, worldIn, pos);
   }
 
   @Override
@@ -167,13 +206,33 @@ public abstract class UBOre extends Block implements UBSubBlock {
 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    baseOre.updateTick(worldIn, pos, state, rand);
+    baseOre.updateTick(worldIn, pos, baseOreState, rand);
   }
 
   @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     return new ItemStack(itemBlock, 1, getMetaFromState(world.getBlockState(pos)));
   }
+
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World world, List<String> infos, ITooltipFlag tooltipFlag) {
+    if(API.SETTINGS.displayTooltipModName()) {
+      Map<String, ModContainer> indexedModList = Loader.instance().getIndexedModList();
+      String modName = indexedModList.get(baseOre.getRegistryName().getResourceDomain()).getName();
+      infos.add(
+        API.SETTINGS.getTooltipModNamePreTextFormatting() +
+          API.SETTINGS.getTooltipModNamePreText() +
+          "\u00A7r " +
+          API.SETTINGS.getTooltipModNameFormatting() +
+          modName +
+          "\u00A7r " +
+          API.SETTINGS.getTooltipModNamePostTextFormatting() +
+          API.SETTINGS.getTooltipModNamePostText()
+      );
+    }
+    super.addInformation(stack, world, infos, tooltipFlag);
+  }
+
 
   /**
    * @author CurtisA, LouisDB
@@ -195,6 +254,7 @@ public abstract class UBOre extends Block implements UBSubBlock {
     public int getDamage(ItemStack stack) {
       return stack.getMetadata();
     }
+
 
     @SideOnly(Side.CLIENT)
     @Override
