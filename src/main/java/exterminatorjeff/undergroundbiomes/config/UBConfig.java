@@ -63,6 +63,7 @@ public class UBConfig implements UBSettings {
   public Set<Integer> excludedDimensionsSet;
   public final BooleanSetting dimensionSpecificSeeds = new BooleanSetting(CATEGORY_GENERATION, "DimensionSpecificSeeds");
   public final BooleanSetting ubifyVillages = new BooleanSetting(CATEGORY_GENERATION, "UBifyVillages");
+  public final BooleanSetting replaceCobblestone = new BooleanSetting(CATEGORY_GENERATION, "ReplaceCobblestone");
 
   private static final String CATEGORY_VISUAL = "Visual";
   public final BooleanSetting plainSlabTextures = new BooleanSetting(CATEGORY_VISUAL, "PlainSlabTextures");
@@ -152,6 +153,7 @@ public class UBConfig implements UBSettings {
     excludedDimensions.initProperty(configuration, "-1,1", "Comma-separated list of dimension IDs, used only if include list is *");
     dimensionSpecificSeeds.initProperty(configuration, false, "Use a different seed for each dimensions");
     ubifyVillages.initProperty(configuration, true, "Use UB stones in villages structures");
+    replaceCobblestone.initProperty(configuration, false, "Replace vanilla cobblestone with UB variants");
 
     plainSlabTextures.initProperty(configuration, false, "Use normal stone textures for slabs");
 
@@ -386,6 +388,11 @@ public class UBConfig implements UBSettings {
   @Override
   public boolean ubifyVillages() {
     return ubifyVillages.getValue();
+  }
+
+  @Override
+  public boolean replaceCobblestone() {
+    return replaceCobblestone.getValue();
   }
 
   /*

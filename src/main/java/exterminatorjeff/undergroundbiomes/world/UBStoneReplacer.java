@@ -4,9 +4,13 @@
 package exterminatorjeff.undergroundbiomes.world;
 
 import exterminatorjeff.undergroundbiomes.api.*;
+import exterminatorjeff.undergroundbiomes.api.enums.UBStoneStyle;
+import exterminatorjeff.undergroundbiomes.common.block.IgneousStone;
+import exterminatorjeff.undergroundbiomes.common.block.MetamorphicStone;
 import exterminatorjeff.undergroundbiomes.common.block.UBStone;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
+import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
 import exterminatorjeff.undergroundbiomes.world.noise.NoiseGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -75,6 +79,11 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
               if (currentBlock == Blocks.STONE) {
                 // Replace with UBified version
                 storage.set(x, y, z, currentBiome.getStrataBlockAtLayer(yPos + y + variation));
+              } else if (currentBlock == Blocks.COBBLESTONE && API.SETTINGS.replaceCobblestone()) {
+                // Replace with UBified version
+                IBlockState strata = currentBiome.getStrataBlockAtLayer(yPos + y + variation);
+                UBStone block = (UBStone) strata.getBlock();
+                storage.set(x, y, z, (StonesRegistry.INSTANCE.stoneFor(block.getStoneType(), UBStoneStyle.COBBLE).getBlock()).getStateFromMeta(block.getMetaFromState(strata)));
               } else {
                 /*
                  * Ore

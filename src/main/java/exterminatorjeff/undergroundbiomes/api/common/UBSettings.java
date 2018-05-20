@@ -46,6 +46,8 @@ public interface UBSettings {
 
   boolean ubifyVillages();
 
+  boolean replaceCobblestone();
+
   boolean buttonsOn();
 
   boolean igneousButtonsOn();
