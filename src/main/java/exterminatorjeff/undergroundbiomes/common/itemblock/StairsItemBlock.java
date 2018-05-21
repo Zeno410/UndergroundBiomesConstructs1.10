@@ -96,7 +96,7 @@ public class StairsItemBlock extends RotatingItemBlock implements UBStairs {
       if (placeBlockAt(stack, player, worldIn, pos, facing, hitX, hitY, hitZ, iblockstate1)) {
         SoundType soundtype = worldIn.getBlockState(pos).getBlock().getSoundType();
         worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-        stack.setCount(stack.getCount());
+        stack.setCount(stack.getCount() - 1);
       }
       return EnumActionResult.SUCCESS;
     } else {
