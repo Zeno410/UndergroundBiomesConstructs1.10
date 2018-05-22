@@ -283,7 +283,6 @@ public class ModOreRegistrar implements UBModOreRegistrar {
     ores.add(new ModOre(oreName, 4, ModInfo.MODID + ":blocks/overlays/techreborn/bauxite"));
     ores.add(new ModOre(oreName, 12, ModInfo.MODID + ":blocks/overlays/techreborn/lead"));
     ores.add(new ModOre(oreName, 13, ModInfo.MODID + ":blocks/overlays/techreborn/silver"));
-    ores.add(new ModOre("thermalfoundation:ore_fluid", 2, ModInfo.MODID + ":blocks/overlays/thermalfoundation/destabilized_redstone"));
     return ores;
   }
 

@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
@@ -103,7 +104,7 @@ public enum OresRegistry implements UBOresRegistry {
    */
   private void applyBaseOreSmelting(Block baseOre, int meta, OreEntry... ores) {
     ItemStack result = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(baseOre, 1, meta));
-    if (result != null) {
+    if (result != null && result.getItem() != (new ItemStack(Blocks.AIR)).getItem()) {
       for (OreEntry ore : ores)
         for (int i = 0; i < ore.ore().getNbVariants(); ++i)
           GameRegistry.addSmelting(new ItemStack(ore.getBlock(), 1, i), result, FurnaceRecipes.instance().getSmeltingExperience(result));
