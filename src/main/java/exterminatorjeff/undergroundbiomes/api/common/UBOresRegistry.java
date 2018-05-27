@@ -6,6 +6,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 
+import java.util.ArrayList;
+
 /**
  * Allows mods to UBifiy their ores.<br>
  * <br>
@@ -29,6 +31,15 @@ public interface UBOresRegistry {
   void requestOreSetup(Block baseOre);
 
   /**
+   * Request creation of UBified versions for the given ore.
+   * Adds created ore to given OreDirectories
+   *
+   * @param baseOre
+   * @param oreDirectories
+   */
+  void requestOreSetup(Block baseOre, ArrayList<String> oreDirectories);
+
+  /**
    * Request creation of UBified versions for the given ore with the given
    * metadata value.
    *
@@ -36,6 +47,17 @@ public interface UBOresRegistry {
    * @param baseOreMeta
    */
   void requestOreSetup(Block baseOre, int baseOreMeta);
+
+  /**
+   * Request creation of UBified versions for the given ore with the given
+   * metadata value.
+   * Adds created ore to given OreDirectories
+   *
+   * @param baseOre
+   * @param baseOreMeta
+   * @param oreDirectories
+   */
+  void requestOreSetup(Block baseOre, int baseOreMeta, ArrayList<String> oreDirectories);
 
   /**
    * Register an overlay for the given ore.

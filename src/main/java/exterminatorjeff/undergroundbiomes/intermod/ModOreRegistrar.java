@@ -54,7 +54,7 @@ public class ModOreRegistrar implements UBModOreRegistrar {
       return;
     }
     Block block = registry.getValue(location);
-    API.ORES_REGISTRY.requestOreSetup(block, ore.meta);
+    API.ORES_REGISTRY.requestOreSetup(block, ore.meta, ore.oreDirectories);
     API.ORES_REGISTRY.registerOreOverlay(block, ore.meta, new ResourceLocation(ore.overlay));
   }
 
@@ -65,6 +65,8 @@ public class ModOreRegistrar implements UBModOreRegistrar {
   }
 
   private void createDefaults() {
+    writeDefaults(getMinecraftOres(), "minecraft.json");
+
     writeDefaults(getActuallyAdditionsOres(), "actuallyadditions.json");
     writeDefaults(getAppliedEnergisticsOres(), "appliedenergistics2.json");
     writeDefaults(getBaseMetalsOres(), "basemetals.json");
@@ -126,6 +128,18 @@ public class ModOreRegistrar implements UBModOreRegistrar {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  private ArrayList<ModOre> getMinecraftOres() {
+    ArrayList<ModOre> ores = new ArrayList<>();
+    ores.add(new ModOre("minecraft:diamond_ore", ModInfo.MODID + ":blocks/overlays/minecraft/diamond"));
+    ores.add(new ModOre("minecraft:iron_ore", ModInfo.MODID + ":blocks/overlays/minecraft/iron"));
+    ores.add(new ModOre("minecraft:coal_ore", ModInfo.MODID + ":blocks/overlays/minecraft/coal"));
+    ores.add(new ModOre("minecraft:lapis_ore", ModInfo.MODID + ":blocks/overlays/minecraft/lapis"));
+    ores.add(new ModOre("minecraft:redstone_ore", ModInfo.MODID + ":blocks/overlays/minecraft/redstone"));
+    ores.add(new ModOre("minecraft:gold_ore", ModInfo.MODID + ":blocks/overlays/minecraft/gold"));
+    ores.add(new ModOre("minecraft:emerald_ore", ModInfo.MODID + ":blocks/overlays/minecraft/emerald"));
+    return ores;
   }
 
   private ArrayList<ModOre> getActuallyAdditionsOres() {
@@ -190,7 +204,7 @@ public class ModOreRegistrar implements UBModOreRegistrar {
 
   private ArrayList<ModOre> getDraconicEvolutionOres() {
     ArrayList<ModOre> ores = new ArrayList<>();
-    ores.add(new ModOre("draconicevolution:draconium_ore", 0,ModInfo.MODID + ":blocks/overlays/draconicevolution/draconium"));
+    ores.add(new ModOre("draconicevolution:draconium_ore", 0, ModInfo.MODID + ":blocks/overlays/draconicevolution/draconium"));
     return ores;
   }
 
@@ -202,7 +216,7 @@ public class ModOreRegistrar implements UBModOreRegistrar {
 
   private ArrayList<ModOre> getExtremeReactorsOres() {
     ArrayList<ModOre> ores = new ArrayList<>();
-    ores.add(new ModOre("bigreactors:brore", 0,ModInfo.MODID + ":blocks/overlays/bigreactors/yellorite"));
+    ores.add(new ModOre("bigreactors:brore", 0, ModInfo.MODID + ":blocks/overlays/bigreactors/yellorite"));
     return ores;
   }
 
@@ -312,15 +326,25 @@ public class ModOreRegistrar implements UBModOreRegistrar {
     public String internalOreName;
     public int meta = UBOre.NO_METADATA;
     public String overlay;
+    public ArrayList<String> oreDirectories;
 
-    public ModOre(String internalOreName, int meta, String overlay) {
+    public ModOre(String internalOreName, int meta, String overlay, ArrayList<String> oreDirectories) {
       this.internalOreName = internalOreName;
       this.meta = meta;
       this.overlay = overlay;
+      this.oreDirectories = oreDirectories;
+    }
+
+    public ModOre(String internalOreName, int meta, String overlay) {
+      this(internalOreName, meta, overlay, new ArrayList<String>());
     }
 
     public ModOre(String ore_name, String overlay) {
-      this(ore_name, UBOre.NO_METADATA, overlay);
+      this(ore_name, UBOre.NO_METADATA, overlay, new ArrayList<String>());
+    }
+
+    public ModOre(String ore_name, String overlay, ArrayList<String> oreDirectories) {
+      this(ore_name, UBOre.NO_METADATA, overlay, oreDirectories);
     }
   }
 }

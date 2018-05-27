@@ -64,6 +64,7 @@ public enum OresRegistry implements UBOresRegistry {
   private boolean alreadySetup = false;
   private final Set<UBifyRequest> requests = new HashSet<UBifyRequest>();
   private final Map<String, OreEntry> ubifiedOres = new HashMap<>();
+  private final Map<String, ArrayList<String>> oreDirectories = new HashMap<>();
 
   private String toKey(Block baseOre, int baseOreMeta, Block baseStone) {
     if (baseOreMeta == UBOre.NO_METADATA)
@@ -122,6 +123,7 @@ public enum OresRegistry implements UBOresRegistry {
       ubifiedOres.put(toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock()), request.getIgneousOreEntry());
       ubifiedOres.put(toKey(baseOre, baseOreMeta, API.METAMORPHIC_STONE.getBlock()), request.getMetamorphicOreEntry());
       ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), request.getSedimentraryOreEntry());
+      oreDirectories.put(toKey(baseOre, baseOreMeta), request.oreDirectories);
     }
   }
 
@@ -152,11 +154,31 @@ public enum OresRegistry implements UBOresRegistry {
   }
 
   @Override
+  public void requestOreSetup(Block baseOre, ArrayList<String> oreDirectories) {
+    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
+      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre));
+    else {
+      requests.add(new UBifyRequest(baseOre, oreDirectories));
+      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre));
+    }
+  }
+
+  @Override
   public void requestOreSetup(Block baseOre, int baseOreMeta) {
     if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
       throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, baseOreMeta));
     else {
       requests.add(new UBifyRequest(baseOre, baseOreMeta));
+      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre, baseOreMeta));
+    }
+  }
+
+  @Override
+  public void requestOreSetup(Block baseOre, int baseOreMeta, ArrayList<String> oreDirectories) {
+    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
+      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, baseOreMeta));
+    else {
+      requests.add(new UBifyRequest(baseOre, baseOreMeta, oreDirectories));
       LOGGER.debug(format(REQUEST_INFO_MSG, baseOre, baseOreMeta));
     }
   }
@@ -167,15 +189,25 @@ public enum OresRegistry implements UBOresRegistry {
     protected OreEntry igneousOreEntry;
     protected OreEntry metamorphicOreEntry;
     protected OreEntry sedimentraryOreEntry;
+    protected ArrayList<String> oreDirectories;
 
     UBifyRequest(Block baseOre) {
       this(baseOre, UBOre.NO_METADATA);
     }
 
+    UBifyRequest(Block baseOre, ArrayList<String> oreDirectories) {
+      this(baseOre, UBOre.NO_METADATA, oreDirectories);
+    }
+
     UBifyRequest(Block baseOre, int baseOreMeta) {
+      this(baseOre, baseOreMeta, new ArrayList<String>());
+    }
+
+    UBifyRequest(Block baseOre, int baseOreMeta, ArrayList<String> oreDirectories) {
       if (baseOre == null) throw new RuntimeException();
       this.baseOre = baseOre;
       this.baseOreMeta = baseOreMeta;
+      this.oreDirectories = oreDirectories;
     }
 
     public OreEntry getIgneousOreEntry() {
@@ -194,6 +226,10 @@ public enum OresRegistry implements UBOresRegistry {
       if (sedimentraryOreEntry == null)
         this.sedimentraryOreEntry = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
       return sedimentraryOreEntry;
+    }
+
+    public ArrayList<String> getOreDirectories() {
+      return oreDirectories;
     }
   }
 
@@ -259,19 +295,6 @@ public enum OresRegistry implements UBOresRegistry {
   /**
    * Must be called during pre-init
    */
-  public void addVanillaOverlays() {
-    registerOreOverlay(Blocks.COAL_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/coal"));
-    registerOreOverlay(Blocks.DIAMOND_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/diamond"));
-    registerOreOverlay(Blocks.EMERALD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/emerald"));
-    registerOreOverlay(Blocks.GOLD_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/gold"));
-    registerOreOverlay(Blocks.IRON_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/iron"));
-    registerOreOverlay(Blocks.LAPIS_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/lapis"));
-    registerOreOverlay(Blocks.REDSTONE_ORE, new ResourceLocation(ModInfo.MODID + ":blocks/overlays/minecraft/redstone"));
-  }
-
-  /**
-   * Must be called during pre-init
-   */
   public void registerOreModels() {
     ubifiedOres.values().forEach((oreEntry) -> oreEntry.registerModel(UBStateMappers.UBORE_STATE_MAPPER));
   }
@@ -297,10 +320,17 @@ public enum OresRegistry implements UBOresRegistry {
     for (int i = 0; i < registrationIDs.length; i++) {
       String registrationName = OreDictionary.getOreName(registrationIDs[i]);
       LOGGER.info(baseOre.getLocalizedName() + " " + registrationName + " " + block.getLocalizedName());
-      for (int j = 0; j < 8; j++) {
-        ItemStack stack = new ItemStack(block, 1, j);
-        OreDictionary.registerOre(registrationName, stack);
-      }
+      registerOreDirctionary(registrationName, block);
+    }
+    for(String oreDictionary : oreDirectories.get(toKey(baseOre, baseOreMeta))){
+      registerOreDirctionary(oreDictionary, block);
+    };
+  }
+
+  private void registerOreDirctionary(String oreDictName, Block block) {
+    for (int j = 0; j < 8; j++) {
+      ItemStack stack = new ItemStack(block, 1, j);
+      OreDictionary.registerOre(oreDictName, stack);
     }
   }
 

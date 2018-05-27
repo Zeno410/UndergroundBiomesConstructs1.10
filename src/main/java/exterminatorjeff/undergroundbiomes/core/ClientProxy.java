@@ -24,7 +24,6 @@ public final class ClientProxy extends CommonProxy {
 
     MinecraftForge.EVENT_BUS.register(OresRegistry.INSTANCE);
     ModelLoaderRegistry.registerLoader(new UBOreModelLoader());
-    OresRegistry.INSTANCE.addVanillaOverlays();
   }
 
   @Override

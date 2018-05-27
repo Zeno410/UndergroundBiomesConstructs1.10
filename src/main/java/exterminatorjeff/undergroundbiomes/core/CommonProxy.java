@@ -66,8 +66,6 @@ public class CommonProxy {
     API.MOD_ORE_REGISTRAR = new ModOreRegistrar(event);
 
     API.STRATA_COLUMN_PROVIDER = dimensionManager;
-
-    createOres();
   }
 
   public void init(FMLInitializationEvent e) {
@@ -357,16 +355,6 @@ public class CommonProxy {
         API.SEDIMENTARY_STONE_STAIRS.registerItem(event, new StairsItemBlock(API.SEDIMENTARY_STONE, UBStairsSedimentary.class));
     }
     OresRegistry.INSTANCE.registerItems(event);
-  }
-
-  private final void createOres() {
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.DIAMOND_ORE);
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.GOLD_ORE);
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.IRON_ORE);
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.COAL_ORE);
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.EMERALD_ORE);
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.REDSTONE_ORE);
-    OresRegistry.INSTANCE.requestOreSetup(Blocks.LAPIS_ORE);
   }
 
   public void addOreDicts() {
