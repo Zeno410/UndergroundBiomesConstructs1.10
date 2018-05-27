@@ -12,7 +12,6 @@ import exterminatorjeff.undergroundbiomes.common.block.stairs.UBStoneStairs;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.StonesRegistry;
 import exterminatorjeff.undergroundbiomes.world.noise.SimplexNoiseGenerator;
-import exterminatorjeff.undergroundbiomes.world.noise.Voronoi;
 import net.minecraft.block.*;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
 import net.minecraft.block.state.IBlockState;
@@ -42,14 +41,11 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 
   private final int dimensionID;
   private final UndergroundBiomeSet biomesSet;
-  private final int biomeSize;
   private UBStoneReplacer stoneReplacer;
 
   private boolean worldLoaded = false;
   private World world;
   private int seed;
-  private SimplexNoiseGenerator simplex;
-  private Voronoi voronoi;
 
   public WorldGenManager(int dimensionID) {
     LOGGER = new UBLogger(WorldGenManager.class + " " + dimensionID, Level.INFO);
@@ -57,9 +53,6 @@ public final class WorldGenManager implements UBStrataColumnProvider {
 
     this.dimensionID = dimensionID;
     biomesSet = new UBBiomesSet(UBConfig.SPECIFIC);
-    //new UBBiomesSet(UBConfig.INSTANCE.regularStoneBiomes(), UBConfig.INSTANCE);
-
-    biomeSize = UBConfig.SPECIFIC.biomeSize();
   }
 
   @SubscribeEvent
@@ -78,27 +71,12 @@ public final class WorldGenManager implements UBStrataColumnProvider {
       if (UBConfig.SPECIFIC.dimensionSpecificSeeds())
         seed += dimensionID;
       this.stoneReplacer = new TraditionalStoneReplacer(seed, UBConfig.SPECIFIC.biomeSize(), biomesSet);
-      //this.stoneReplacer = new SimpleStoneReplacer(this.biomesSet.allowedBiomes(),seed,
-      //UBConfig.INSTANCE.biomeSize());
-      simplex = new SimplexNoiseGenerator(seed);
-      voronoi = new Voronoi();
-      voronoi.setSeed(seed);
-      voronoi.setFrequency(0.05D / biomeSize);
     }
   }
 
-  private double perlinNoise(int xPos, int zPos) {
-    double var = 0;
-    var += simplex.noise(xPos, zPos, 2, 0.005D, 1000D, true) * 4;
-    var += simplex.noise(xPos, zPos, 2, 0.025D, 1000D, true);
-    return var /= 5;
-  }
 
   private UBBiome blockBiomeValue(int xPos, int zPos) {
     return stoneReplacer.UBBiomeAt(xPos, zPos);
-    //double var = perlinNoise(xPos, zPos);
-    //double value = voronoi.getValue(xPos, zPos, var * 8 * biomeSize);
-    //return (int) ((((value + 1.0D) / 2.0D) * biomesSet.allowedBiomes().length - 1) + 0.5D);
   }
 
 
