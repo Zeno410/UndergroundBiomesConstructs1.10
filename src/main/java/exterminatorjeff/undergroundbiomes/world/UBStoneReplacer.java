@@ -82,8 +82,11 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
               } else if (currentBlock == Blocks.COBBLESTONE && API.SETTINGS.replaceCobblestone()) {
                 // Replace with UBified version
                 IBlockState strata = currentBiome.getStrataBlockAtLayer(yPos + y + variation);
-                UBStone block = (UBStone) strata.getBlock();
-                storage.set(x, y, z, (StonesRegistry.INSTANCE.stoneFor(block.getStoneType(), UBStoneStyle.COBBLE).getBlock()).getStateFromMeta(block.getMetaFromState(strata)));
+                if(strata.getBlock().getClass().isInstance(UBStone.class)) {
+                  UBStone block = (UBStone) strata.getBlock();
+                  storage.set(x, y, z, (StonesRegistry.INSTANCE.stoneFor(block.getStoneType(), UBStoneStyle.COBBLE).getBlock()).getStateFromMeta(block.getMetaFromState(strata)));
+                }
+                continue;
               } else {
                 /*
                  * Ore
