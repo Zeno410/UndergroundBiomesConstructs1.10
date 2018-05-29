@@ -37,6 +37,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
   private ButtonItemBlock itemBlock;
 
   public UBStoneButton(EnumFacing facing, ButtonItemBlock itemBlock) {
+    super();
     this.facing = facing;
     this.itemBlock = itemBlock;
     setCreativeTab(UBCreativeTab.UB_BLOCKS_TAB);
@@ -111,13 +112,6 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
     return new ItemStack(itemBlock, 1, state.getBlock().getMetaFromState(state));
   }
 
-  @Override
-  public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-    // The item choose the correct orientation
-    assert side == facing;
-    return true;
-  }
-
   /**
    * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
    * IBlockstate
@@ -125,7 +119,7 @@ public abstract class UBStoneButton extends BlockButtonStone implements UBSubBlo
   @Override
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     IBlockState state = getStateFromMeta(meta);
-    return canPlaceBlock(worldIn, pos, facing.getOpposite()) ? state : state.withProperty(FACING, EnumFacing.DOWN);
+    return canPlaceBlock(worldIn, pos, facing) ? state.withProperty(FACING, facing) : state.withProperty(FACING, EnumFacing.DOWN);
   }
 
 }
