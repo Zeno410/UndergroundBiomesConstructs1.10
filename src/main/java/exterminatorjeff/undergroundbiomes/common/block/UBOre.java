@@ -133,6 +133,15 @@ public abstract class UBOre extends Block implements UBSubBlock {
     baseOre.onBlockHarvested(world, pos, baseOreState, player);
   }
 
+  @Nullable
+  public String getHarvestTool(IBlockState state) {
+    return baseOre.getHarvestTool(baseOreState);
+  }
+
+  public int getHarvestLevel(IBlockState state) {
+    return baseOre.getHarvestLevel(baseOreState);
+  }
+
   @Override
   public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
     return baseOre.removedByPlayer(baseOreState, world, pos, player, willHarvest);
