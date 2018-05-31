@@ -27,12 +27,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class ModOreRegistrar implements UBModOreRegistrar {
 
   private static final UBLogger LOGGER = new UBLogger(OresRegistry.class, Level.INFO);
   private final File directory;
-  private ArrayList<ModOre> ores = new ArrayList<>();
+  private HashMap<String, ModOre> ores = new HashMap<>();
   private final Type jsonType = new TypeToken<ArrayList<ModOre>>() {
   }.getType();
 
@@ -59,8 +60,8 @@ public class ModOreRegistrar implements UBModOreRegistrar {
   }
 
   public void requestOreSetups(RegistryEvent.Register<Block> event) {
-    for (int i = 0; i < ores.size(); i++) {
-      requestOreSetup(event, ores.get(i));
+    for (ModOre ore : this.ores.values()) {
+      requestOreSetup(event, ore);
     }
   }
 
@@ -121,7 +122,22 @@ public class ModOreRegistrar implements UBModOreRegistrar {
       json = FileUtils.readFileToString(file, "UTF8");
       ArrayList<ModOre> ores = gson.fromJson(json, jsonType);
       if (ores != null) {
-        this.ores.addAll(ores);
+        for(int i = 0; i < ores.size(); i++) {
+          ModOre ore = ores.get(i);
+          if(ore.oreDirectories == null) {
+            ore.oreDirectories = new ArrayList<>();
+          }
+          if(this.ores.containsKey(ore.toKey())) {
+            String message = "Ore " + ore.toKey() + " has already been defined elsewhere!\nFound while checking: " + file.getAbsolutePath();
+            if(API.SETTINGS.crashOnProblems()) {
+              LOGGER.fatal(message);
+            }
+            else {
+              LOGGER.warn(message);
+            }
+          }
+          this.ores.put(ore.toKey(), ore);
+        }
       } else {
         LOGGER.warn("No ores found in " + file.getPath());
       }
@@ -345,6 +361,10 @@ public class ModOreRegistrar implements UBModOreRegistrar {
 
     public ModOre(String ore_name, String overlay, ArrayList<String> oreDirectories) {
       this(ore_name, UBOre.NO_METADATA, overlay, oreDirectories);
+    }
+
+    public String toKey() {
+      return internalOreName + ":" + meta;
     }
   }
 }
