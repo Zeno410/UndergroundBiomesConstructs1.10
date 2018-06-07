@@ -1,6 +1,7 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
 import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.api.common.IUBOreConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,8 +18,8 @@ import static exterminatorjeff.undergroundbiomes.api.enums.SedimentaryVariant.va
  */
 public class UBOreSedimentary extends UBOre {
 
-  public UBOreSedimentary(Block baseOre, int baseOreMeta) {
-    super(baseOre, baseOreMeta);
+  public UBOreSedimentary(Block baseOre, IUBOreConfig config) {
+    super(baseOre, config);
   }
 
   @Override

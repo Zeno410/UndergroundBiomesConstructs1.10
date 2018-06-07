@@ -51,7 +51,7 @@ public class UndergroundBiomes {
     LOGGER.info("Start Pre-init!");
     PROXY.preInit(event);
 
-    if (API.VERSION != "1.0.0")
+    if (API.VERSION != "2.0.0")
       throw new RuntimeException("Another mod has included an obsolete version of the Underground Biomes API.");
 
     LOGGER.info("Pre-init done!");

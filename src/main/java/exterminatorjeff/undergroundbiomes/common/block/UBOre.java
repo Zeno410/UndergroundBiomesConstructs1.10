@@ -1,6 +1,7 @@
 package exterminatorjeff.undergroundbiomes.common.block;
 
 import exterminatorjeff.undergroundbiomes.api.API;
+import exterminatorjeff.undergroundbiomes.api.common.IUBOreConfig;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.common.UBSubBlock;
 import net.minecraft.block.Block;
@@ -58,15 +59,17 @@ public abstract class UBOre extends Block implements UBSubBlock {
   public final int baseOreMeta;
   public final IBlockState baseOreState;
   protected final ItemBlock itemBlock;
+  public final IUBOreConfig config;
 
-  public UBOre(Block baseOre, int baseOreMeta) {
+  public UBOre(Block baseOre, IUBOreConfig config) {
     super(Material.ROCK);
     setHarvestLevel(baseOre.getHarvestTool(baseOre.getDefaultState()), baseOre.getHarvestLevel(baseOre.getDefaultState()));
     setCreativeTab(UBCreativeTab.UB_ORES_TAB);
     this.itemBlock = new UBItemOre(this);
     this.baseOre = baseOre;
-    this.baseOreMeta = baseOreMeta;
+    this.baseOreMeta = config.getMeta();
     this.baseOreState = baseOre.getStateFromMeta(baseOreMeta);
+    this.config = config;
   }
 
   @Override

@@ -2,6 +2,7 @@ package exterminatorjeff.undergroundbiomes.intermod;
 
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
+import exterminatorjeff.undergroundbiomes.api.common.IUBOreConfig;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
 import exterminatorjeff.undergroundbiomes.api.common.UBOresRegistry;
 import exterminatorjeff.undergroundbiomes.client.UBStateMappers;
@@ -117,21 +118,23 @@ public enum OresRegistry implements UBOresRegistry {
       Block baseOre = request.baseOre;
       int baseOreMeta = request.baseOreMeta;
       LOGGER.info("Registering ore: " + baseOre.getUnlocalizedName());
-      request.getIgneousOreEntry().registerBlock(event, new UBOreIgneous(baseOre, baseOreMeta));
-      request.getMetamorphicOreEntry().registerBlock(event, new UBOreMetamorphic(baseOre, baseOreMeta));
-      request.getSedimentraryOreEntry().registerBlock(event, new UBOreSedimentary(baseOre, baseOreMeta));
+      request.getIgneousOreEntry().registerBlock(event, new UBOreIgneous(baseOre, request.config));
+      request.getMetamorphicOreEntry().registerBlock(event, new UBOreMetamorphic(baseOre, request.config));
+      request.getSedimentraryOreEntry().registerBlock(event, new UBOreSedimentary(baseOre, request.config));
+      API.REGISTERED_ORES.add(request.getIgneousOreEntry().ore());
+      API.REGISTERED_ORES.add(request.getMetamorphicOreEntry().ore());
+      API.REGISTERED_ORES.add(request.getSedimentraryOreEntry().ore());
       ubifiedOres.put(toKey(baseOre, baseOreMeta, API.IGNEOUS_STONE.getBlock()), request.getIgneousOreEntry());
       ubifiedOres.put(toKey(baseOre, baseOreMeta, API.METAMORPHIC_STONE.getBlock()), request.getMetamorphicOreEntry());
       ubifiedOres.put(toKey(baseOre, baseOreMeta, API.SEDIMENTARY_STONE.getBlock()), request.getSedimentraryOreEntry());
-      oreDirectories.put(toKey(baseOre, baseOreMeta), request.oreDirectories);
     }
   }
 
   public void registerItems(RegistryEvent.Register<Item> event) {
     for (UBifyRequest request : requests) {
-      request.getIgneousOreEntry().registerItem(event, new UBOreIgneous(request.baseOre, request.baseOreMeta));
-      request.getMetamorphicOreEntry().registerItem(event, new UBOreMetamorphic(request.baseOre, request.baseOreMeta));
-      request.getSedimentraryOreEntry().registerItem(event, new UBOreSedimentary(request.baseOre, request.baseOreMeta));
+      request.getIgneousOreEntry().registerItem(event, new UBOreIgneous(request.baseOre, request.config));
+      request.getMetamorphicOreEntry().registerItem(event, new UBOreMetamorphic(request.baseOre, request.config));
+      request.getSedimentraryOreEntry().registerItem(event, new UBOreSedimentary(request.baseOre, request.config));
     }
   }
 
@@ -144,42 +147,12 @@ public enum OresRegistry implements UBOresRegistry {
   }
 
   @Override
-  public void requestOreSetup(Block baseOre) {
+  public void requestOreSetup(Block baseOre, IUBOreConfig config) {
     if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
-      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre));
+      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, config.getMeta()));
     else {
-      requests.add(new UBifyRequest(baseOre));
-      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre));
-    }
-  }
-
-  @Override
-  public void requestOreSetup(Block baseOre, ArrayList<String> oreDirectories) {
-    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
-      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre));
-    else {
-      requests.add(new UBifyRequest(baseOre, oreDirectories));
-      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre));
-    }
-  }
-
-  @Override
-  public void requestOreSetup(Block baseOre, int baseOreMeta) {
-    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
-      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, baseOreMeta));
-    else {
-      requests.add(new UBifyRequest(baseOre, baseOreMeta));
-      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre, baseOreMeta));
-    }
-  }
-
-  @Override
-  public void requestOreSetup(Block baseOre, int baseOreMeta, ArrayList<String> oreDirectories) {
-    if (UndergroundBiomes.areBlocksAlreadyRegistered || alreadySetup)
-      throw new RuntimeException(format(REQUEST_ERROR_MSG, baseOre, baseOreMeta));
-    else {
-      requests.add(new UBifyRequest(baseOre, baseOreMeta, oreDirectories));
-      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre, baseOreMeta));
+      requests.add(new UBifyRequest(baseOre, config));
+      LOGGER.debug(format(REQUEST_INFO_MSG, baseOre, config.getMeta()));
     }
   }
 
@@ -189,25 +162,13 @@ public enum OresRegistry implements UBOresRegistry {
     protected OreEntry igneousOreEntry;
     protected OreEntry metamorphicOreEntry;
     protected OreEntry sedimentraryOreEntry;
-    protected ArrayList<String> oreDirectories;
+    protected IUBOreConfig config;
 
-    UBifyRequest(Block baseOre) {
-      this(baseOre, UBOre.NO_METADATA);
-    }
-
-    UBifyRequest(Block baseOre, ArrayList<String> oreDirectories) {
-      this(baseOre, UBOre.NO_METADATA, oreDirectories);
-    }
-
-    UBifyRequest(Block baseOre, int baseOreMeta) {
-      this(baseOre, baseOreMeta, new ArrayList<String>());
-    }
-
-    UBifyRequest(Block baseOre, int baseOreMeta, ArrayList<String> oreDirectories) {
+    UBifyRequest(Block baseOre, IUBOreConfig config) {
       if (baseOre == null) throw new RuntimeException();
       this.baseOre = baseOre;
-      this.baseOreMeta = baseOreMeta;
-      this.oreDirectories = oreDirectories;
+      this.baseOreMeta = config.getMeta();
+      this.config = config;
     }
 
     public OreEntry getIgneousOreEntry() {
@@ -226,10 +187,6 @@ public enum OresRegistry implements UBOresRegistry {
       if (sedimentraryOreEntry == null)
         this.sedimentraryOreEntry = new OreEntry(API.SEDIMENTARY_STONE.getBlock(), baseOre, baseOreMeta);
       return sedimentraryOreEntry;
-    }
-
-    public ArrayList<String> getOreDirectories() {
-      return oreDirectories;
     }
   }
 
@@ -322,7 +279,7 @@ public enum OresRegistry implements UBOresRegistry {
       LOGGER.info(baseOre.getLocalizedName() + " " + registrationName + " " + block.getLocalizedName());
       registerOreDirctionary(registrationName, block);
     }
-    for(String oreDictionary : oreDirectories.get(toKey(baseOre, baseOreMeta))){
+    for(String oreDictionary : oreEntry.ore().config.getOreDirectories()){
       registerOreDirctionary(oreDictionary, block);
     };
   }

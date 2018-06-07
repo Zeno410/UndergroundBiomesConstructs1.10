@@ -24,40 +24,13 @@ public interface UBOresRegistry {
   public void registerRecipes(RegistryEvent.Register<IRecipe> event);
 
   /**
-   * Request creation of UBified versions for the given ore.
-   *
-   * @param baseOre
-   */
-  void requestOreSetup(Block baseOre);
-
-  /**
-   * Request creation of UBified versions for the given ore.
-   * Adds created ore to given OreDirectories
-   *
-   * @param baseOre
-   * @param oreDirectories
-   */
-  void requestOreSetup(Block baseOre, ArrayList<String> oreDirectories);
-
-  /**
    * Request creation of UBified versions for the given ore with the given
    * metadata value.
    *
    * @param baseOre
-   * @param baseOreMeta
+   * @param config
    */
-  void requestOreSetup(Block baseOre, int baseOreMeta);
-
-  /**
-   * Request creation of UBified versions for the given ore with the given
-   * metadata value.
-   * Adds created ore to given OreDirectories
-   *
-   * @param baseOre
-   * @param baseOreMeta
-   * @param oreDirectories
-   */
-  void requestOreSetup(Block baseOre, int baseOreMeta, ArrayList<String> oreDirectories);
+  void requestOreSetup(Block baseOre, IUBOreConfig config);
 
   /**
    * Register an overlay for the given ore.

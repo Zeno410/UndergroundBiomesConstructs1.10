@@ -1,11 +1,11 @@
 package exterminatorjeff.undergroundbiomes.api;
 
-import exterminatorjeff.undergroundbiomes.api.common.UBDropsRegistry;
-import exterminatorjeff.undergroundbiomes.api.common.UBOresRegistry;
-import exterminatorjeff.undergroundbiomes.api.common.UBSettings;
-import exterminatorjeff.undergroundbiomes.api.common.UBStonesRegistry;
+import exterminatorjeff.undergroundbiomes.api.common.*;
 import exterminatorjeff.undergroundbiomes.api.names.*;
+import exterminatorjeff.undergroundbiomes.common.block.UBOre;
 import exterminatorjeff.undergroundbiomes.intermod.ModOreRegistrar;
+
+import java.util.ArrayList;
 
 /**
  * Static access to Underground Biomes API.
@@ -14,7 +14,7 @@ import exterminatorjeff.undergroundbiomes.intermod.ModOreRegistrar;
  */
 public final class API {
 
-  public static String VERSION = "1.0.0";
+  public static String VERSION = "2.0.0";
 
   public static UBStonesRegistry STONES_REGISTRY;
   public static UBOresRegistry ORES_REGISTRY;
@@ -22,6 +22,7 @@ public final class API {
   public static UBDimensionalStrataColumnProvider STRATA_COLUMN_PROVIDER;
   public static UBSettings SETTINGS;
   public static ModOreRegistrar MOD_ORE_REGISTRAR;
+  public static ArrayList<UBOre> REGISTERED_ORES = new ArrayList<>();
 
   /*
    * Stones
