@@ -124,6 +124,14 @@ public abstract class UBStone extends Block implements UBBlock {
   }
 
   @Override
+  public void getDrops(NonNullList<ItemStack> stacks, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    NonNullList<ItemStack> drops = NonNullList.create();
+    super.getDrops(drops, world, pos, state, fortune);
+    DropsRegistry.INSTANCE.addDrops(drops, this, world, pos, state, fortune);
+    super.getDrops(stacks, world, pos, state, fortune);
+  }
+
+  @Override
   public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
     Block targetBlock = state.getBlock();
     if (targetBlock instanceof UBStone) {

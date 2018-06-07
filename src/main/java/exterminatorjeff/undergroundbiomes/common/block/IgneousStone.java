@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static exterminatorjeff.undergroundbiomes.api.enums.IgneousVariant.*;
 
@@ -82,7 +84,15 @@ public class IgneousStone extends UBStone {
     result.add(itemStack);
     DropsRegistry.INSTANCE.addDrops(result, this, world, pos, state, fortune);
     return result;
-    //return super.getDrops(world, pos, state, fortune); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public void getDrops(NonNullList<ItemStack> stacks, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    Item cobbleBlock = API.IGNEOUS_COBBLE.getItemBlock();
+    int meta = state.getBlock().getMetaFromState(state);
+    ItemStack itemStack = new ItemStack(cobbleBlock, 1, meta);
+    stacks.add(itemStack);
+    DropsRegistry.INSTANCE.addDrops(stacks, this, world, pos, state, fortune);
   }
 
   @Override
