@@ -28,8 +28,16 @@ public class UBOreConfig implements IUBOreConfig {
     this(internalOreName, meta, overlay, new ArrayList<String>());
   }
 
+  public UBOreConfig(String internalOreName, int meta, String overlay, String color) {
+    this(internalOreName, meta, overlay, new ArrayList<String>(), color);
+  }
+
   public UBOreConfig(String ore_name, String overlay) {
     this(ore_name, UBOre.NO_METADATA, overlay, new ArrayList<String>());
+  }
+
+  public UBOreConfig(String ore_name, String overlay, String color) {
+    this(ore_name, UBOre.NO_METADATA, overlay, new ArrayList<String>(), color);
   }
 
   public UBOreConfig(String ore_name, String overlay, ArrayList<String> oreDirectories) {
