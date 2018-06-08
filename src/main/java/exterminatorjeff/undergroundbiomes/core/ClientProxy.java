@@ -4,8 +4,13 @@ import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.client.UBCreativeTab;
 import exterminatorjeff.undergroundbiomes.client.UBOreModelLoader;
 import exterminatorjeff.undergroundbiomes.client.UBStateMappers;
+import exterminatorjeff.undergroundbiomes.common.block.UBOre;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.OresRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +35,7 @@ public final class ClientProxy extends CommonProxy {
   public void init(FMLInitializationEvent e) {
     super.init(e);
 
+    colorizeOres();
     UBCreativeTab.UB_BLOCKS_TAB.setTabIconItem(API.IGNEOUS_STONE.getItemBlock());
     UBCreativeTab.UB_ITEMS_TAB.setTabIconItem(API.LIGNITE_COAL.getItem());
     UBCreativeTab.UB_ORES_TAB.setTabIconItem(OresRegistry.INSTANCE.getUBOresTabIcon());
@@ -101,4 +107,15 @@ public final class ClientProxy extends CommonProxy {
     API.FOSSIL_PIECE.registerModel();
   }
 
+  public void colorizeOres() {
+    BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+    ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+    for(UBOre ore : API.REGISTERED_ORES){
+      if(ore.config.getColor() != null) {
+        int color = Integer.decode(ore.config.getColor());
+        blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> color, ore);
+        itemColors.registerItemColorHandler((stack, tintIndex) -> color, Item.getItemFromBlock(ore));
+      }
+    }
+  }
 }

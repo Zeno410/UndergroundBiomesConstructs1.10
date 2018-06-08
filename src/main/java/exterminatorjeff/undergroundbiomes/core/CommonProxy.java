@@ -21,9 +21,6 @@ import exterminatorjeff.undergroundbiomes.config.ConfigManager;
 import exterminatorjeff.undergroundbiomes.config.UBConfig;
 import exterminatorjeff.undergroundbiomes.intermod.*;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -72,7 +69,6 @@ public class CommonProxy {
     DropsRegistry.INSTANCE.init();
 
     addOreDicts();
-    colorizeOres();
     GameRegistry.registerFuelHandler(UBFuelHandler.INSTANCE);
   }
 
@@ -132,18 +128,6 @@ public class CommonProxy {
 
   public void registerModels(ModelRegistryEvent event) {
     // Only used in Client, overwritten there
-  }
-
-  public void colorizeOres() {
-    BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
-    ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-    for(UBOre ore : API.REGISTERED_ORES){
-      if(ore.config.getColor() != null) {
-        int color = Integer.decode(ore.config.getColor());
-        blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> color, ore);
-        itemColors.registerItemColorHandler((stack, tintIndex) -> color, Item.getItemFromBlock(ore));
-      }
-    }
   }
 
   public void registerBlocks(RegistryEvent.Register<Block> event) {
