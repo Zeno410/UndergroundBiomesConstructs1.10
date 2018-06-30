@@ -202,16 +202,6 @@ public abstract class UBOre extends Block implements UBSubBlock {
   }
 
   @Override
-  public float getExplosionResistance(Entity exploder) {
-    return baseOre.getExplosionResistance(exploder);
-  }
-
-  @Override
-  public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
-    return baseOre.getExplosionResistance(world, pos, exploder, explosion);
-  }
-
-  @Override
   public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
     return true;
   }
