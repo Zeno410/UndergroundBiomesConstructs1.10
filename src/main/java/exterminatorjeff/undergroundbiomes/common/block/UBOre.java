@@ -74,6 +74,9 @@ public abstract class UBOre extends Block implements UBSubBlock {
 
   @Override
   public int getLightValue(IBlockState state, IBlockAccess access, BlockPos pos) {
+    if(config.getLightValue() > -1) {
+      return config.getLightValue();
+    }
     return baseOre.getLightValue(baseOreState, access, pos);
   }
 

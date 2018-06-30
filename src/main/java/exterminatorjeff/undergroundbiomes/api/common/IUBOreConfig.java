@@ -14,5 +14,7 @@ public interface IUBOreConfig {
 
   public String getColor();
 
+  public int getLightValue();
+
   public ArrayList<String> getOreDirectories();
 }

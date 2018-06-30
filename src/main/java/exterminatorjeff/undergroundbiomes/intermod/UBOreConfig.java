@@ -10,6 +10,7 @@ public class UBOreConfig implements IUBOreConfig {
   private int meta = UBOre.NO_METADATA;
   private String overlay;
   private String color;
+  private Integer lightValue = -1;
   private ArrayList<String> oreDirectories;
 
   public UBOreConfig(String internalOreName, int meta, String overlay, ArrayList<String> oreDirectories, String color) {
@@ -68,5 +69,12 @@ public class UBOreConfig implements IUBOreConfig {
     if(oreDirectories == null)
       return new ArrayList<>();
     return oreDirectories;
+  }
+
+  @Override
+  public int getLightValue() {
+    if(lightValue == null)
+      return -1;
+    return lightValue;
   }
 }
