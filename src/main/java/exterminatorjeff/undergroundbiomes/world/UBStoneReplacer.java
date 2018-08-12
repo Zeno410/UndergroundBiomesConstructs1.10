@@ -17,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
@@ -79,10 +80,10 @@ public abstract class UBStoneReplacer implements UBStrataColumnProvider {
               if (currentBlock == Blocks.STONE) {
                 // Replace with UBified version
                 storage.set(x, y, z, currentBiome.getStrataBlockAtLayer(yPos + y + variation));
-              } else if (currentBlock == Blocks.COBBLESTONE && API.SETTINGS.replaceCobblestone()) {
+              } else if (currentBlock == Blocks.COBBLESTONE && API.SETTINGS.replaceCobblestone())  {
                 // Replace with UBified version
                 IBlockState strata = currentBiome.getStrataBlockAtLayer(yPos + y + variation);
-                if(strata.getBlock().getClass().isInstance(UBStone.class)) {
+                if(strata.getBlock() instanceof UBStone) {
                   UBStone block = (UBStone) strata.getBlock();
                   storage.set(x, y, z, (StonesRegistry.INSTANCE.stoneFor(block.getStoneType(), UBStoneStyle.COBBLE).getBlock()).getStateFromMeta(block.getMetaFromState(strata)));
                 }

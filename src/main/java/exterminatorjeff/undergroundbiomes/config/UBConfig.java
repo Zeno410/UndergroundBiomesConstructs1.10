@@ -153,7 +153,7 @@ public class UBConfig implements UBSettings {
     excludedDimensions.initProperty(configuration, "-1,1", "Comma-separated list of dimension IDs, used only if include list is *");
     dimensionSpecificSeeds.initProperty(configuration, false, "Use a different seed for each dimensions");
     ubifyVillages.initProperty(configuration, true, "Use UB stones in villages structures");
-    replaceCobblestone.initProperty(configuration, false, "Replace vanilla cobblestone with UB variants");
+    replaceCobblestone.initProperty(configuration, true, "Replace vanilla cobblestone with UB variants, helps with RTG mountains compat for example");
 
     plainSlabTextures.initProperty(configuration, false, "Use normal stone textures for slabs");
 
