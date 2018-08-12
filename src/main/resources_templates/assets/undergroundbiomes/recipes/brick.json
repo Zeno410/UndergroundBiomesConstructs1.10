@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "undergroundbiomes:${input}",
+      "data": ${meta}
+    }
+  },
+  "result": {
+    "item": "undergroundbiomes:${output}",
+    "data": ${meta},
+    "count": 4
+  }
+}

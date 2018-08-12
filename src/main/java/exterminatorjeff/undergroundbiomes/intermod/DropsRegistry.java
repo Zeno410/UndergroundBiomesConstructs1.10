@@ -1,11 +1,5 @@
 package exterminatorjeff.undergroundbiomes.intermod;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import exterminatorjeff.undergroundbiomes.api.API;
 import exterminatorjeff.undergroundbiomes.api.common.DropSource;
 import exterminatorjeff.undergroundbiomes.api.common.UBDropsRegistry;
@@ -20,45 +14,46 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.*;
+
 /**
  * Rare drops for {@link UBStone}s.
- * 
- * @author CurtisA, LouisDB
  *
+ * @author CurtisA, LouisDB
  */
 public enum DropsRegistry implements UBDropsRegistry {
-	INSTANCE;
+  INSTANCE;
 
-	/**
-	 * Should not be accessed directly.
-	 * 
-	 * @see #addSourceFor(Block, DropSource)
-	 * @see #getSourcesFor(Block)
-	 */
-	private final Map<Block, List<DropSource>> dropsSources = new HashMap<>();
+  /**
+   * Should not be accessed directly.
+   *
+   * @see #addSourceFor(Block, DropSource)
+   * @see #getSourcesFor(Block)
+   */
+  private final Map<Block, List<DropSource>> dropsSources = new HashMap<>();
 
-	private void addSourceFor(Block stone, DropSource source) {
-		if (!dropsSources.containsKey(stone))
-			dropsSources.put(stone, new ArrayList<>());
-		dropsSources.get(stone).add(source);
-	}
+  private void addSourceFor(Block stone, DropSource source) {
+    if (!dropsSources.containsKey(stone))
+      dropsSources.put(stone, new ArrayList<>());
+    dropsSources.get(stone).add(source);
+  }
 
-	private List<DropSource> getSourcesFor(Block stone) {
-		List<DropSource> sources = dropsSources.get(stone);
-		if (sources == null)
-			return Collections.emptyList();
-		return sources;
-	}
+  private List<DropSource> getSourcesFor(Block stone) {
+    List<DropSource> sources = dropsSources.get(stone);
+    if (sources == null)
+      return Collections.emptyList();
+    return sources;
+  }
 
-	@Override
-	public void registerDropSourceFor(Block stone, DropSource source) {
-		addSourceFor(stone, source);
-	}
+  @Override
+  public void registerDropSourceFor(Block stone, DropSource source) {
+    addSourceFor(stone, source);
+  }
 
-	/**
-	 * Must be called during pre-init, after blocks and items have been created.
-	 */
-	public void init() {
+  /**
+   * Must be called during pre-init, after blocks and items have been created.
+   */
+  public void init() {
 		addSourceFor(API.IGNEOUS_STONE.getBlock(), (drops, world, pos, state, fortune) -> {
 			if (pos.getY() <= 32 && world.rand.nextInt(100) <= fortune)
 				drops.add(new ItemStack(Items.GOLD_NUGGET));
@@ -96,21 +91,21 @@ public enum DropsRegistry implements UBDropsRegistry {
 				}
 			}
 		});
-	}
+  }
 
-	/**
-	 * Add random drops for the given stone into the {@code drops} list.
-	 * 
-	 * @param drops
-	 * @param stone
-	 * @param world
-	 * @param pos
-	 * @param state
-	 * @param fortune
-	 */
-	public void addDrops(List<ItemStack> drops, Block stone, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		for (DropSource source : getSourcesFor(stone))
-			source.addDrops(drops, (World) world, pos, state, fortune);
-	}
+  /**
+   * Add random drops for the given stone into the {@code drops} list.
+   *
+   * @param drops
+   * @param stone
+   * @param world
+   * @param pos
+   * @param state
+   * @param fortune
+   */
+  public void addDrops(List<ItemStack> drops, Block stone, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    for (DropSource source : getSourcesFor(stone))
+      source.addDrops(drops, (World) world, pos, state, fortune);
+  }
 
 }

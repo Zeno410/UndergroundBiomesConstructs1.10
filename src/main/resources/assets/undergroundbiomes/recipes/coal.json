@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "undergroundbiomes:lignite_coal"
+    }
+  },
+  "result": {
+    "item": "minecraft:coal",
+    "data": 0
+  }
+}

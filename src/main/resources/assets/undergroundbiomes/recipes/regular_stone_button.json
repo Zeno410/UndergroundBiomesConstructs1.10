@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone",
+      "data": 32767
+}
+},
+"result": {
+"item": "minecraft:stone_button",
+"data": 0
+}
+}

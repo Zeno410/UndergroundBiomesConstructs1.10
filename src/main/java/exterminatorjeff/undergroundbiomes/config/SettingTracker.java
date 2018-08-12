@@ -1,19 +1,15 @@
 package exterminatorjeff.undergroundbiomes.config;
 
 /**
- * 
- * @author LouisDB
- *
  * @param <T>
+ * @author LouisDB
  */
 @FunctionalInterface
 public interface SettingTracker<T> {
 
-	/**
-	 * 
-	 * @param value
-	 *            The new value
-	 */
-	void update(T value);
+  /**
+   * @param value The new value
+   */
+  void update(T value);
 
 }

@@ -6,19 +6,17 @@ import exterminatorjeff.undergroundbiomes.common.itemblock.ButtonItemBlock;
 import net.minecraft.util.EnumFacing;
 
 /**
- * 
  * @author CurtisA, LouisDB
- *
  */
 public class UBButtonIgneousBrick extends UBButtonIgneous {
 
-	public UBButtonIgneousBrick(EnumFacing facing, ButtonItemBlock itemBlock) {
-		super(facing, itemBlock);
-	}
+  public UBButtonIgneousBrick(EnumFacing facing, ButtonItemBlock itemBlock) {
+    super(facing, itemBlock);
+  }
 
-	@Override
-	public UBStone baseStone() {
-		return (UBStone) API.IGNEOUS_BRICK.getBlock();
-	}
+  @Override
+  public UBStone baseStone() {
+    return (UBStone) API.IGNEOUS_BRICK.getBlock();
+  }
 
 }

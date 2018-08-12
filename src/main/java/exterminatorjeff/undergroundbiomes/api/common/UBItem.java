@@ -1,16 +1,15 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 /**
  * Common interface for UB items.
- * 
- * @author LouisDB
  *
+ * @author LouisDB
  */
 public interface UBItem extends IForgeRegistryEntry<Item> {
 
-	Item toItem();
+  Item toItem();
 
 }
