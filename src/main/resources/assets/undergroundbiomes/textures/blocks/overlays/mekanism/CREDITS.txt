@@ -1,0 +1,3 @@
+These assets were taken from Mekanism, I only removed the stone backgrounds.
+
+Original source: https://github.com/aidancbrady/Mekanism

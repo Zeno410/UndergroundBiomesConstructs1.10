@@ -7,11 +7,10 @@ import net.minecraft.block.Block;
  */
 
 /**
- *
  * @author curtisadams
  */
 public interface BlockAccess {
-    
-    public Block getBlock();
-    
+
+  public Block getBlock();
+
 }

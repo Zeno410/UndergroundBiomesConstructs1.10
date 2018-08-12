@@ -7,19 +7,17 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 
 /**
- * 
  * @author CurtisA, LouisDB
- *
  */
 public class UBStairsMetamorphicCobble extends UBStairsMetamorphic {
 
-	public UBStairsMetamorphicCobble(IBlockState modelState, EnumFacing facing, StairsItemBlock itemBlock) {
-		super(modelState, facing, itemBlock);
-	}
+  public UBStairsMetamorphicCobble(IBlockState modelState, EnumFacing facing, StairsItemBlock itemBlock) {
+    super(modelState, facing, itemBlock);
+  }
 
-	@Override
-	public UBStone baseStone() {
-		return (UBStone) API.METAMORPHIC_COBBLE.getBlock();
-	}
+  @Override
+  public UBStone baseStone() {
+    return (UBStone) API.METAMORPHIC_COBBLE.getBlock();
+  }
 
 }

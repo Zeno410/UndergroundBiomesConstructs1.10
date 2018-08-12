@@ -1,106 +1,114 @@
 package exterminatorjeff.undergroundbiomes.api.common;
 
-import java.util.Set;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+
+import java.util.Set;
 
 /**
  * Underground Biomes settings.<br>
  * See the UB configuration file for more information.
- * 
- * @author LouisDB
  *
+ * @author LouisDB
  */
 public interface UBSettings {
 
-	/*
-	 * General
-	 */
+  /*
+   * General
+   */
 
-	boolean crashOnProblems();
+  boolean crashOnProblems();
 
-	boolean realistic();
+  boolean realistic();
 
-	boolean ubifyRecipes();
+  boolean ubifyRecipes();
 
-	boolean ubifyOres();
+  boolean ubifyOres();
 
-	int regularStoneCrafting();
+  int regularStoneCrafting();
 
-	float hardnessModifier();
+  float hardnessModifier();
 
-	float resistanceModifier();
+  float resistanceModifier();
 
-	int biomeSize();
+  int biomeSize();
 
-	int generationHeight();
+  int generationHeight();
 
-	boolean regularStoneBiomes();
+  boolean regularStoneBiomes();
 
-	boolean harmoniousStrata();
+  boolean harmoniousStrata();
 
-	Set<Integer> includedDimensions();
+  Set<Integer> includedDimensions();
 
-	Set<Integer> excludedDimensions();
+  Set<Integer> excludedDimensions();
 
-	boolean dimensionSpecificSeeds();
+  boolean dimensionSpecificSeeds();
 
-	boolean ubifyVillages();
+  boolean ubifyVillages();
 
-	boolean buttonsOn();
+  boolean replaceCobblestone();
 
-	boolean igneousButtonsOn();
+  boolean buttonsOn();
 
-	boolean metamorphicButtonsOn();
+  boolean igneousButtonsOn();
 
-	boolean sedimentaryButtonsOn();
+  boolean metamorphicButtonsOn();
 
-	boolean stoneButtonsOn();
+  boolean sedimentaryButtonsOn();
 
-	boolean cobbleButtonsOn();
+  boolean stoneButtonsOn();
 
-	boolean brickButtonsOn();
+  boolean cobbleButtonsOn();
 
-	boolean stairsOn();
+  boolean brickButtonsOn();
 
-	boolean igneousStairsOn();
+  boolean stairsOn();
 
-	boolean metamorphicStairsOn();
+  boolean igneousStairsOn();
 
-	boolean sedimentaryStairsOn();
+  boolean metamorphicStairsOn();
 
-	boolean stoneStairsOn();
+  boolean sedimentaryStairsOn();
 
-	boolean cobbleStairsOn();
+  boolean stoneStairsOn();
 
-	boolean brickStairsOn();
+  boolean cobbleStairsOn();
 
-	boolean wallsOn();
+  boolean brickStairsOn();
 
-	boolean igneousWallsOn();
+  boolean wallsOn();
 
-	boolean metamorphicWallsOn();
+  boolean igneousWallsOn();
 
-	boolean sedimentaryWallsOn();
+  boolean metamorphicWallsOn();
 
-	boolean stoneWallsOn();
+  boolean sedimentaryWallsOn();
 
-	boolean cobbleWallsOn();
+  boolean stoneWallsOn();
 
-	boolean brickWallsOn();
+  boolean cobbleWallsOn();
 
-	int buttonRecipeResult();
+  boolean brickWallsOn();
 
-	boolean disableVanillaStoneVariants();
+  int buttonRecipeResult();
 
-	/*
-	 * Client
-	 */
+  boolean disableVanillaStoneVariants();
 
-	boolean plainSlabTextures();
-        
-        boolean alternativeSlabTextures();
-        
-        boolean generationAllowed(IBlockState block);
+  /*
+   * Client
+   */
+
+  boolean plainSlabTextures();
+
+  boolean alternativeSlabTextures();
+
+  boolean generationAllowed(IBlockState block);
+
+  boolean displayTooltipModName();
+  String getTooltipModNamePreText();
+  String getTooltipModNamePreTextFormatting();
+  String getTooltipModNameFormatting();
+  String getTooltipModNamePostText();
+  String getTooltipModNamePostTextFormatting();
 
 }

@@ -1,0 +1,342 @@
+# Underground Biomes localization
+# ===============================
+# Blocs
+
+tile.igneous_stone.red_granite.name=Granite rouge
+tile.igneous_stone.black_granite.name=Granite noir
+tile.igneous_stone.rhyolite.name=Rhyolite
+tile.igneous_stone.andesite.name=Andésite
+tile.igneous_stone.gabbro.name=Gabbro
+tile.igneous_stone.basalt.name=Basalte
+tile.igneous_stone.komatiite.name=Komatiite
+tile.igneous_stone.dacite.name=Dacite
+
+tile.igneous_cobble.red_granite.name=Pierre de granite rouge
+tile.igneous_cobble.black_granite.name=Pierre de granite noir
+tile.igneous_cobble.rhyolite.name=Pierre de rhyolite
+tile.igneous_cobble.andesite.name=Pierre d'andésite
+tile.igneous_cobble.gabbro.name=Pierre de gabbro
+tile.igneous_cobble.basalt.name=Pierre de basalte
+tile.igneous_cobble.komatiite.name=Pierre de komatiite
+tile.igneous_cobble.dacite.name=Pierre de dacite
+
+tile.igneous_brick.red_granite.name=Brique de granite rouge
+tile.igneous_brick.black_granite.name=Brique de granite noir
+tile.igneous_brick.rhyolite.name=Brique de rhyolite
+tile.igneous_brick.andesite.name=Brique d'andésite
+tile.igneous_brick.gabbro.name=Brique de gabbro
+tile.igneous_brick.basalt.name=Brique de basalte
+tile.igneous_brick.komatiite.name=Brique de komatiite
+tile.igneous_brick.dacite.name=Brique de dacite
+
+tile.metamorphic_stone.gneiss.name=Gneiss
+tile.metamorphic_stone.eclogite.name=Éclogite
+tile.metamorphic_stone.marble.name=Marbre
+tile.metamorphic_stone.quartzite.name=Quartzite
+tile.metamorphic_stone.blueschist.name=Schiste bleu
+tile.metamorphic_stone.greenschist.name=Schiste vert
+tile.metamorphic_stone.soapstone.name=Stéatite
+tile.metamorphic_stone.migmatite.name=Migmatite
+
+tile.metamorphic_cobble.gneiss.name=Pierre de gneiss
+tile.metamorphic_cobble.eclogite.name=Pierre d'éclogite
+tile.metamorphic_cobble.marble.name=Pierre de marbre
+tile.metamorphic_cobble.quartzite.name=Pierre de quartzite
+tile.metamorphic_cobble.blueschist.name=Pierre de schiste bleu
+tile.metamorphic_cobble.greenschist.name=Pierre de schiste vert
+tile.metamorphic_cobble.soapstone.name=Pierre de stéatite
+tile.metamorphic_cobble.migmatite.name=Pierre de migmatite
+
+tile.metamorphic_brick.gneiss.name=Brique de gneiss
+tile.metamorphic_brick.eclogite.name=Brique d'éclogite
+tile.metamorphic_brick.marble.name=Brique de marbre
+tile.metamorphic_brick.quartzite.name=Brique de quartzite
+tile.metamorphic_brick.blueschist.name=Brique de schiste bleu
+tile.metamorphic_brick.greenschist.name=Brique de schiste vert
+tile.metamorphic_brick.soapstone.name=Brique de stéatite
+tile.metamorphic_brick.migmatite.name=Brique de migmatite
+
+tile.sedimentary_stone.limestone.name=Calcaire
+tile.sedimentary_stone.chalk.name=Craie
+tile.sedimentary_stone.shale.name=Argilite
+tile.sedimentary_stone.siltstone.name=Siltite
+tile.sedimentary_stone.lignite.name=Bloc de lignite
+tile.sedimentary_stone.dolomite.name=Dolomite
+tile.sedimentary_stone.greywacke.name=Grauwacke
+tile.sedimentary_stone.chert.name=Chaille
+
+# Dalles
+
+tile.igneous_brick_halfslab.red_granite.name=Dalle en brique de granite rouge
+tile.igneous_brick_halfslab.black_granite.name=Dalle en brique de granite noir
+tile.igneous_brick_halfslab.rhyolite.name=Dalle en brique de rhyolite
+tile.igneous_brick_halfslab.andesite.name=Dalle en brique d'andésite
+tile.igneous_brick_halfslab.gabbro.name=Dalle en brique de gabbro
+tile.igneous_brick_halfslab.basalt.name=Dalle en brique de basalte
+tile.igneous_brick_halfslab.komatiite.name=Dalle en brique de komatiite
+tile.igneous_brick_halfslab.dacite.name=Dalle en brique de dacite
+
+tile.metamorphic_brick_halfslab.gneiss.name=Dalle en brique de gneiss
+tile.metamorphic_brick_halfslab.eclogite.name=Dalle en brique d'éclogite
+tile.metamorphic_brick_halfslab.marble.name=Dalle en brique de marbre
+tile.metamorphic_brick_halfslab.quartzite.name=Dalle en brique de quartzite
+tile.metamorphic_brick_halfslab.blueschist.name=Dalle en brique de schiste bleu
+tile.metamorphic_brick_halfslab.greenschist.name=Dalle en brique de schiste vert
+tile.metamorphic_brick_halfslab.soapstone.name=Dalle en brique de stéatite
+tile.metamorphic_brick_halfslab.migmatite.name=Dalle en brique de migmatite
+
+tile.igneous_stone_halfslab.red_granite.name=Dalle en granite rouge
+tile.igneous_stone_halfslab.black_granite.name=Dalle en granite noir
+tile.igneous_stone_halfslab.rhyolite.name=Dalle en rhyolite
+tile.igneous_stone_halfslab.andesite.name=Dalle en andésite
+tile.igneous_stone_halfslab.gabbro.name=Dalle en gabbro
+tile.igneous_stone_halfslab.basalt.name=Dalle en basalte
+tile.igneous_stone_halfslab.komatiite.name=Dalle en komatiite
+tile.igneous_stone_halfslab.dacite.name=Dalle en dacite
+
+tile.metamorphic_stone_halfslab.gneiss.name=Dalle en gneiss
+tile.metamorphic_stone_halfslab.eclogite.name=Dalle en éclogite
+tile.metamorphic_stone_halfslab.marble.name=Dalle en marbre
+tile.metamorphic_stone_halfslab.quartzite.name=Dalle en quartzite
+tile.metamorphic_stone_halfslab.blueschist.name=Dalle en schiste bleu
+tile.metamorphic_stone_halfslab.greenschist.name=Dalle en schiste vert
+tile.metamorphic_stone_halfslab.soapstone.name=Dalle en stéatite
+tile.metamorphic_stone_halfslab.migmatite.name=Dalle en migmatite
+
+tile.igneous_cobble_halfslab.red_granite.name=Dalle en pierre de granite rouge
+tile.igneous_cobble_halfslab.black_granite.name=Dalle en pierre de granite noir
+tile.igneous_cobble_halfslab.rhyolite.name=Dalle en pierre de rhyolite
+tile.igneous_cobble_halfslab.andesite.name=Dalle en pierre d'andésite
+tile.igneous_cobble_halfslab.gabbro.name=Dalle en pierre de gabbro
+tile.igneous_cobble_halfslab.basalt.name=Dalle en pierre de basalte
+tile.igneous_cobble_halfslab.komatiite.name=Dalle en pierre de komatiite
+tile.igneous_cobble_halfslab.dacite.name=Dalle en pierre de dacite
+
+tile.metamorphic_cobble_halfslab.gneiss.name=Dalle en pierre de gneiss
+tile.metamorphic_cobble_halfslab.eclogite.name=Dalle en pierre d'éclogite
+tile.metamorphic_cobble_halfslab.marble.name=Dalle en pierre de marbre
+tile.metamorphic_cobble_halfslab.quartzite.name=Dalle en pierre de quartzite
+tile.metamorphic_cobble_halfslab.blueschist.name=Dalle en pierre de schiste bleu
+tile.metamorphic_cobble_halfslab.greenschist.name=Dalle en pierre de schiste vert
+tile.metamorphic_cobble_halfslab.soapstone.name=Dalle en pierre de stéatite
+tile.metamorphic_cobble_halfslab.migmatite.name=Dalle en pierre de migmatite
+
+tile.sedimentary_stone_halfslab.limestone.name=Dalle en calcaire
+tile.sedimentary_stone_halfslab.chalk.name=Dalle en craie
+tile.sedimentary_stone_halfslab.shale.name=Dalle en argilite
+tile.sedimentary_stone_halfslab.siltstone.name=Dalle en siltite
+tile.sedimentary_stone_halfslab.lignite.name=Dalle en lignite
+tile.sedimentary_stone_halfslab.dolomite.name=Dalle en dolomite
+tile.sedimentary_stone_halfslab.greywacke.name=Dalle en grauwacke
+tile.sedimentary_stone_halfslab.chert.name=Dalle en chaille
+
+# Escaliers
+
+tile.igneous_stone_stairs.red_granite.name=Escaliers en granite rouge
+tile.igneous_stone_stairs.black_granite.name=Escaliers en granite noir
+tile.igneous_stone_stairs.rhyolite.name=Escaliers en rhyolite
+tile.igneous_stone_stairs.andesite.name=Escaliers en andésite
+tile.igneous_stone_stairs.gabbro.name=Escaliers en gabbro
+tile.igneous_stone_stairs.basalt.name=Escaliers en basalte
+tile.igneous_stone_stairs.komatiite.name=Escaliers en komatiite
+tile.igneous_stone_stairs.dacite.name=Escaliers en dacite
+
+tile.igneous_cobble_stairs.red_granite.name=Escaliers en pierre de granite rouge
+tile.igneous_cobble_stairs.black_granite.name=Escaliers en pierre de granite noir
+tile.igneous_cobble_stairs.rhyolite.name=Escaliers en pierre de rhyolite
+tile.igneous_cobble_stairs.andesite.name=Escaliers en pierre d'andésite
+tile.igneous_cobble_stairs.gabbro.name=Escaliers en pierre de gabbro
+tile.igneous_cobble_stairs.basalt.name=Escaliers en pierre de basalte
+tile.igneous_cobble_stairs.komatiite.name=Escaliers en pierre de komatiite
+tile.igneous_cobble_stairs.dacite.name=Escaliers en pierre de dacite
+
+tile.igneous_brick_stairs.red_granite.name=Escaliers en brique de granite rouge
+tile.igneous_brick_stairs.black_granite.name=Escaliers en brique de granite noir
+tile.igneous_brick_stairs.rhyolite.name=Escaliers en brique de rhyolite
+tile.igneous_brick_stairs.andesite.name=Escaliers en brique d'andésite
+tile.igneous_brick_stairs.gabbro.name=Escaliers en brique de gabbro
+tile.igneous_brick_stairs.basalt.name=Escaliers en brique de basalte
+tile.igneous_brick_stairs.komatiite.name=Escaliers en brique komatiite
+tile.igneous_brick_stairs.dacite.name=Escaliers en brique de dacite
+
+tile.metamorphic_stone_stairs.gneiss.name=Escaliers en gneiss
+tile.metamorphic_stone_stairs.eclogite.name=Escaliers en éclogite
+tile.metamorphic_stone_stairs.marble.name=Escaliers en marbre
+tile.metamorphic_stone_stairs.quartzite.name=Escaliers en quartzite
+tile.metamorphic_stone_stairs.blueschist.name=Escaliers en schiste bleu
+tile.metamorphic_stone_stairs.greenschist.name=Escaliers en schiste vert
+tile.metamorphic_stone_stairs.soapstone.name=Escaliers en stéatite
+tile.metamorphic_stone_stairs.migmatite.name=Escaliers en migmatite
+
+tile.metamorphic_cobble_stairs.gneiss.name=Escaliers en pierre de gneiss
+tile.metamorphic_cobble_stairs.eclogite.name=Escaliers en pierre d'éclogite
+tile.metamorphic_cobble_stairs.marble.name=Escaliers en pierre de marbre
+tile.metamorphic_cobble_stairs.quartzite.name=Escaliers en pierre de quartzite
+tile.metamorphic_cobble_stairs.blueschist.name=Escaliers en pierre de schiste bleu
+tile.metamorphic_cobble_stairs.greenschist.name=Escaliers en pierre de schiste vert
+tile.metamorphic_cobble_stairs.soapstone.name=Escaliers en pierre de stéatite
+tile.metamorphic_cobble_stairs.migmatite.name=Escaliers en pierre de migmatite
+
+tile.metamorphic_brick_stairs.gneiss.name=Escaliers en brique de gneiss
+tile.metamorphic_brick_stairs.eclogite.name=Escaliers en brique d'éclogite
+tile.metamorphic_brick_stairs.marble.name=Escaliers en brique de marbre
+tile.metamorphic_brick_stairs.quartzite.name=Escaliers en brique quartzite
+tile.metamorphic_brick_stairs.blueschist.name=Escaliers en brique de schiste bleu
+tile.metamorphic_brick_stairs.greenschist.name=Escaliers en brique de schiste vert
+tile.metamorphic_brick_stairs.soapstone.name=Escaliers en brique de stéatite
+tile.metamorphic_brick_stairs.migmatite.name=Escaliers en brique de migmatite
+
+tile.sedimentary_stone_stairs.limestone.name=Escaliers en calcaire
+tile.sedimentary_stone_stairs.chalk.name=Escaliers en craie
+tile.sedimentary_stone_stairs.shale.name=Escaliers en argilite
+tile.sedimentary_stone_stairs.siltstone.name=Escaliers en siltite
+tile.sedimentary_stone_stairs.lignite.name=Escaliers en lignite
+tile.sedimentary_stone_stairs.dolomite.name=Escaliers en dolomite
+tile.sedimentary_stone_stairs.greywacke.name=Escaliers en grauwacke
+tile.sedimentary_stone_stairs.chert.name=Escaliers en chaille
+
+# Murets
+
+tile.igneous_stone_wall.red_granite.name=Muret en granite rouge
+tile.igneous_stone_wall.black_granite.name=Muret en granite noir
+tile.igneous_stone_wall.rhyolite.name=Muret en rhyolite
+tile.igneous_stone_wall.andesite.name=Muret en andésite
+tile.igneous_stone_wall.gabbro.name=Muret en gabbro
+tile.igneous_stone_wall.basalt.name=Muret en basalte
+tile.igneous_stone_wall.komatiite.name=Muret en komatiite
+tile.igneous_stone_wall.dacite.name=Muret en dacite
+
+tile.igneous_cobble_wall.red_granite.name=Muret en pierres de granite rouge
+tile.igneous_cobble_wall.black_granite.name=Muret en pierres de granite noir
+tile.igneous_cobble_wall.rhyolite.name=Muret en pierres de rhyolite
+tile.igneous_cobble_wall.andesite.name=Muret en pierres d'andésite
+tile.igneous_cobble_wall.gabbro.name=Muret en pierres de gabbro
+tile.igneous_cobble_wall.basalt.name=Muret en pierres de basalte
+tile.igneous_cobble_wall.komatiite.name=Muret en pierres de komatiite
+tile.igneous_cobble_wall.dacite.name=Muret en pierres de dacite
+
+tile.igneous_brick_wall.red_granite.name=Muret en brique de granite rouge
+tile.igneous_brick_wall.black_granite.name=Muret en brique de granite noir
+tile.igneous_brick_wall.rhyolite.name=Muret en brique de rhyolite
+tile.igneous_brick_wall.andesite.name=Muret en brique d'andésite
+tile.igneous_brick_wall.gabbro.name=Muret en brique de gabbro
+tile.igneous_brick_wall.basalt.name=Muret en brique de basalte
+tile.igneous_brick_wall.komatiite.name=Muret en brique de komatiite
+tile.igneous_brick_wall.dacite.name=Muret en brique de dacite
+
+tile.metamorphic_stone_wall.gneiss.name=Muret en gneiss
+tile.metamorphic_stone_wall.eclogite.name=Muret en éclogite
+tile.metamorphic_stone_wall.marble.name=Muret en marbre
+tile.metamorphic_stone_wall.quartzite.name=Muret en quartzite
+tile.metamorphic_stone_wall.blueschist.name=Muret en schiste bleu
+tile.metamorphic_stone_wall.greenschist.name=Muret en schiste vert
+tile.metamorphic_stone_wall.soapstone.name=Muret en stéatite
+tile.metamorphic_stone_wall.migmatite.name=Muret en migmatite
+
+tile.metamorphic_cobble_wall.gneiss.name=Muret en pierres de gneiss
+tile.metamorphic_cobble_wall.eclogite.name=Muret en pierres d'éclogite
+tile.metamorphic_cobble_wall.marble.name=Muret en pierres de marbre
+tile.metamorphic_cobble_wall.quartzite.name=Muret en pierres de quartzite
+tile.metamorphic_cobble_wall.blueschist.name=Muret en pierres de schiste bleu
+tile.metamorphic_cobble_wall.greenschist.name=Muret en pierres de schiste vert
+tile.metamorphic_cobble_wall.soapstone.name=Muret en pierres de stéatite
+tile.metamorphic_cobble_wall.migmatite.name=Muret en pierres de migmatite
+
+tile.metamorphic_brick_wall.gneiss.name=Muret en brique de gneiss
+tile.metamorphic_brick_wall.eclogite.name=Muret en brique d'éclogite
+tile.metamorphic_brick_wall.marble.name=Muret en brique de marbre
+tile.metamorphic_brick_wall.quartzite.name=Muret en brique de quartzite
+tile.metamorphic_brick_wall.blueschist.name=Muret en brique de schiste bleu
+tile.metamorphic_brick_wall.greenschist.name=Muret en brique de schiste vert
+tile.metamorphic_brick_wall.soapstone.name=Muret en brique de stéatite
+tile.metamorphic_brick_wall.migmatite.name=Muret en brique de migmatite
+
+tile.sedimentary_stone_wall.limestone.name=Muret en calcaire
+tile.sedimentary_stone_wall.chalk.name=Muret en craie
+tile.sedimentary_stone_wall.shale.name=Muret en argilite
+tile.sedimentary_stone_wall.siltstone.name=Muret en siltite
+tile.sedimentary_stone_wall.lignite.name=Muret en lignite
+tile.sedimentary_stone_wall.dolomite.name=Muret en dolomite
+tile.sedimentary_stone_wall.greywacke.name=Muret en grauwacke
+tile.sedimentary_stone_wall.chert.name=Muret en chaille
+
+# Boutons
+
+tile.igneous_stone_button.red_granite.name=Bouton en granite rouge
+tile.igneous_stone_button.black_granite.name=Bouton en granite noir
+tile.igneous_stone_button.rhyolite.name=Bouton en rhyolite
+tile.igneous_stone_button.andesite.name=Bouton en andésite
+tile.igneous_stone_button.gabbro.name=Bouton en gabbro
+tile.igneous_stone_button.basalt.name=Bouton en basalte
+tile.igneous_stone_button.komatiite.name=Bouton en komatiite
+tile.igneous_stone_button.dacite.name=Bouton en dacite
+
+tile.igneous_cobble_button.red_granite.name=Bouton en pierres de granite rouge
+tile.igneous_cobble_button.black_granite.name=Bouton en pierres de granite noir
+tile.igneous_cobble_button.rhyolite.name=Bouton en pierres de rhyolite
+tile.igneous_cobble_button.andesite.name=Bouton en pierres d'andésite
+tile.igneous_cobble_button.gabbro.name=Bouton en pierres de gabbro
+tile.igneous_cobble_button.basalt.name=Bouton en pierres de basalte
+tile.igneous_cobble_button.komatiite.name=Bouton en pierres de komatiite
+tile.igneous_cobble_button.dacite.name=Bouton en pierres de dacite
+
+tile.igneous_brick_button.red_granite.name=Bouton en brique de granite rouge
+tile.igneous_brick_button.black_granite.name=Bouton en brique de granite noir
+tile.igneous_brick_button.rhyolite.name=Bouton en brique de rhyolite
+tile.igneous_brick_button.andesite.name=Bouton en brique d'andésite
+tile.igneous_brick_button.gabbro.name=Bouton en brique de gabbro
+tile.igneous_brick_button.basalt.name=Bouton en brique de basalte
+tile.igneous_brick_button.komatiite.name=Bouton en brique de komatiite
+tile.igneous_brick_button.dacite.name=Bouton en brique de dacite
+
+tile.metamorphic_stone_button.gneiss.name=Bouton en gneiss
+tile.metamorphic_stone_button.eclogite.name=Bouton en éclogite
+tile.metamorphic_stone_button.marble.name=Bouton en marbre
+tile.metamorphic_stone_button.quartzite.name=Bouton en quartzite
+tile.metamorphic_stone_button.blueschist.name=Bouton en schiste bleu
+tile.metamorphic_stone_button.greenschist.name=Bouton en schiste vert
+tile.metamorphic_stone_button.soapstone.name=Bouton en stéatite
+tile.metamorphic_stone_button.migmatite.name=Bouton en migmatite
+
+tile.metamorphic_cobble_button.gneiss.name=Bouton en pierres de gneiss
+tile.metamorphic_cobble_button.eclogite.name=Bouton en pierres d'éclogite
+tile.metamorphic_cobble_button.marble.name=Bouton en pierres de marbre
+tile.metamorphic_cobble_button.quartzite.name=Bouton en pierres de quartzite
+tile.metamorphic_cobble_button.blueschist.name=Bouton en pierres de schiste bleu
+tile.metamorphic_cobble_button.greenschist.name=Bouton en pierres de schiste vert
+tile.metamorphic_cobble_button.soapstone.name=Bouton en pierres de stéatite
+tile.metamorphic_cobble_button.migmatite.name=Bouton en pierres de migmatite
+
+tile.metamorphic_brick_button.gneiss.name=Bouton en brique de gneiss
+tile.metamorphic_brick_button.eclogite.name=Bouton en brique d'éclogite
+tile.metamorphic_brick_button.marble.name=Bouton en brique de marbre
+tile.metamorphic_brick_button.quartzite.name=Bouton en brique de quartzite
+tile.metamorphic_brick_button.blueschist.name=Bouton en brique de schiste bleu
+tile.metamorphic_brick_button.greenschist.name=Bouton en brique de schiste vert
+tile.metamorphic_brick_button.soapstone.name=Bouton en brique de stéatite
+tile.metamorphic_brick_button.migmatite.name=Bouton en brique de migmatite
+
+tile.sedimentary_stone_button.limestone.name=Bouton en calcaire
+tile.sedimentary_stone_button.chalk.name=Bouton en craie
+tile.sedimentary_stone_button.shale.name=Bouton en argilite
+tile.sedimentary_stone_button.siltstone.name=Bouton en siltite
+tile.sedimentary_stone_button.lignite.name=Bouton en lignite
+tile.sedimentary_stone_button.dolomite.name=Bouton en dolomite
+tile.sedimentary_stone_button.greywacke.name=Bouton en grauwacke
+tile.sedimentary_stone_button.chert.name=Bouton en chaille
+
+# Objets
+
+item.ligniteCoal.name=Lignite
+item.fossil_piece.ammonite.name=Ammonite fossilisée
+item.fossil_piece.shell.name=Coquille fossilisée
+item.fossil_piece.bone.name=Os fossilisé
+item.fossil_piece.boneshard.name=Fragments osseux
+item.fossil_piece.rib.name=Côte fossilisée
+item.fossil_piece.skull.name=Crâne fossilisé
+
+# Onglets créatifs
+
+itemGroup.undergroundbiomesblocks=Blocs de Underground Biomes
+itemGroup.undergroundbiomesitems=Objets de Underground Biomes
+itemGroup.undergroundbiomesitems=Minerais de Underground Biomes

@@ -1,0 +1,17 @@
+[
+{
+  "modid": "undergroundbiomes",
+  "name": "Underground Biomes",
+  "description": "24 different kinds of stones with slabs, stairs, walls, and buttons",
+  "version": "1.2.1",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["exterminatorJeff", "Zeno410", "kyeiti"],
+  "credits": "The Forge and FML guys, for providing the API to make all of this possible",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["actuallyadditions","forestry", "ic2"],
+    "useDependencyInformation": true
+}
+]
