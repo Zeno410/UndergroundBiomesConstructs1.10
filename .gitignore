@@ -1,2 +1,23 @@
-/Zeno410Utils/
-.DS_Store
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+.gradletasknamecache
+
+# other
+eclipse
+run

@@ -1,0 +1,19 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+    "model": "cube_column",
+		"uvlock": true
+	},
+	"variants": {
+    "type": {<%
+      for (i=0; i < types.size; i++) { %>
+      "${types[i]}": {
+        "textures": {
+          "end": "undergroundbiomes:blocks/${types[i]}<% if(texture_name) { %>_$texture_name<% } %>_slab_top",
+          "side": "undergroundbiomes:blocks/${types[i]}<% if(texture_name) { %>_$texture_name<% } %>_slab_side"
+        }
+      }<% if(i < types.size - 1) { %>, <% }
+      } %>
+    }
+	}
+}

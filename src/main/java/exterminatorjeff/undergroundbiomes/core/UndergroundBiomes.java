@@ -1,10 +1,13 @@
 package exterminatorjeff.undergroundbiomes.core;
 
 import exterminatorjeff.undergroundbiomes.api.API;
-import org.apache.logging.log4j.Level;
-
 import exterminatorjeff.undergroundbiomes.api.ModInfo;
 import exterminatorjeff.undergroundbiomes.api.common.UBLogger;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -12,64 +15,88 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.Level;
 
 /**
  * The main class
- * 
- * @author CurtisA, LouisDB
  *
+ * @author CurtisA, LouisDB
  */
 @Mod(modid = ModInfo.MODID, name = ModInfo.NAME, version = ModInfo.VERSION)
+@Mod.EventBusSubscriber
 public class UndergroundBiomes {
 
-	@Instance
-	public static UndergroundBiomes INSTANCE;
+  @Instance
+  public static UndergroundBiomes INSTANCE;
 
-	@SidedProxy(serverSide = "exterminatorjeff.undergroundbiomes.core.ServerProxy", clientSide = "exterminatorjeff.undergroundbiomes.core.ClientProxy")
-	public static CommonProxy PROXY;
+  @SidedProxy(serverSide = "exterminatorjeff.undergroundbiomes.core.ServerProxy", clientSide = "exterminatorjeff.undergroundbiomes.core.ClientProxy")
+  public static CommonProxy PROXY;
 
-	public UndergroundBiomes() {
-	}
+  public UndergroundBiomes() {
+  }
 
-	/*
-	 * 
-	 */
+  /*
+   *
+   */
 
-	private static final UBLogger LOGGER = new UBLogger(UndergroundBiomes.class, Level.INFO);
+  private static final UBLogger LOGGER = new UBLogger(UndergroundBiomes.class, Level.INFO);
 
-	public static boolean isPreInitDone = false;
+  public static boolean areBlocksAlreadyRegistered = false;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		PROXY.preInit(event);
+  @EventHandler
+  public void preInit(FMLPreInitializationEvent event) {
+    LOGGER.info("Start Pre-init!");
+    PROXY.preInit(event);
 
-		if (API.VERSION != "1.0.0")
-			throw new RuntimeException("Another mod has included an obsolete version of the Underground Biomes API.");
+    if (API.VERSION != "2.0.0")
+      throw new RuntimeException("Another mod has included an obsolete version of the Underground Biomes API.");
 
-		isPreInitDone = true;
-		LOGGER.info("Pre-init done!");
-	}
+    LOGGER.info("Pre-init done!");
+  }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		PROXY.init(event);
+  // Ensure all other mods have their blocks registered, so ores can be referenced
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public static void registerBlocks(RegistryEvent.Register<Block> event) {
+    PROXY.registerBlocks(event);
 
-		LOGGER.info("Init done!");
-	}
+    areBlocksAlreadyRegistered = true;
+  }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) throws Exception {
-		PROXY.postInit(event);
+  @SubscribeEvent
+  public static void registerItems(RegistryEvent.Register<Item> event) {
+    PROXY.registerItems(event);
+  }
 
-		LOGGER.info("Post-init done!");
-	}
-        
-        @EventHandler
-        public void serverStopped(FMLServerStoppedEvent event) {
-            PROXY.onServerStopped(event);
-	    LOGGER.info("Server Stopped");
-        }
+  @SubscribeEvent
+  public static void registerModels(ModelRegistryEvent event) {
+    PROXY.registerModels(event);
+  }
+
+  // Ensure all other mods have their smelting recipes registered, so they can be referenced
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+      PROXY.createRecipes(event);
+  }
+
+  @EventHandler
+  public  void init(FMLInitializationEvent event) {
+    PROXY.init(event);
+    LOGGER.info("Init done!");
+  }
+
+  @EventHandler
+  public void postInit(FMLPostInitializationEvent event) throws Exception {
+    PROXY.postInit(event);
+    LOGGER.info("Post-init done!");
+  }
+
+  @EventHandler
+  public void serverStopped(FMLServerStoppedEvent event) {
+    PROXY.onServerStopped(event);
+    LOGGER.info("Server Stopped");
+  }
 
 }

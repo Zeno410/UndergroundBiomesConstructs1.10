@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "${input[item]}",
+    "data": "${input[meta]}"
+  },
+  "result": {
+    "item": "${result[item]}",
+    "data": "${result[meta]}"
+  },
+  "cookingtime": 20,
+  "experience": 0.4
+}

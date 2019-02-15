@@ -5,12 +5,11 @@ import net.minecraft.util.EnumFacing;
 
 /**
  * Common interface for UB stairs.
- * 
- * @author LouisDB
  *
+ * @author LouisDB
  */
 public interface UBStairs extends UBItem, Variable {
 
-	Block getBlock(EnumFacing facing);
+  Block getBlock(EnumFacing facing);
 
 }

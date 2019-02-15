@@ -1,0 +1,51 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+    "model": "builtin/generated",
+    "uvlock": true
+	},
+	"variants": {
+		"up": {
+			"true": {
+				"submodel": { "wall_up": { "model": "wall_post" } }
+			},
+			"false": {}
+		},
+		"north": {
+			"true": {
+				"submodel": { "wall_north": { "model": "wall_side" } }
+			},
+			"false": {}
+		},
+		"east": {
+			"true": {
+				"submodel": { "wall_east": { "model": "wall_side", "y": 90 } }
+			},
+			"false": {}
+		},
+		"south": {
+			"true": {
+				"submodel": { "wall_south": { "model": "wall_side", "y": 180 } }
+			},
+			"false": {}
+		},
+		"west": {
+			"true": {
+				"submodel": { "wall_west": { "model": "wall_side", "y": 270 } }
+			},
+			"false": {}
+		},
+    "type": {<%
+      for (i=0; i < types.size; i++) { %>
+        "${types[i]}": {
+          "textures": {
+            "wall": "undergroundbiomes:blocks/${types[i]}<% if(texture_name) { %>_$texture_name<% } %>"
+          }
+      }<% if(i < types.size - 1) { %>, <% }
+      } %>
+    }<%
+    for (i=0; i < types.size; i++) { %>,
+    "type=${types[i]}": [{ "model": "wall_inventory", "textures": { "wall": "undergroundbiomes:blocks/${types[i]}<% if(texture_name) { %>_$texture_name<% } %>" } }]<%
+    } %>
+	}
+}

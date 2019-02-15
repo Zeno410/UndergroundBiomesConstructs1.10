@@ -1,0 +1,3 @@
+Textures here belong to the creators of Ender Ore, I merly removed the stone background.
+
+Source: https://github.com/thehobojoe/EnderOre
